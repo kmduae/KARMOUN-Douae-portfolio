@@ -43,7 +43,7 @@
         }
 
         nav ul li a {
-            color: white;
+            color: black;
             text-decoration: none;
             font-size: 16px;
         }
