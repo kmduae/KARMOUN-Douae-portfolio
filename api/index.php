@@ -16,7 +16,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: url('pink-bg.png') center center / cover no-repeat fixed;
             color: #222;
         }
 
@@ -59,7 +59,14 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: white;
+            background: transparent;
+        }
+
+        #home > div {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(6px);
+            padding: 50px 60px;
+            border-radius: 16px;
         }
 
         #home h1 {
@@ -115,10 +122,10 @@
         }
 
         .skill {
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
             padding: 25px 40px;
             border-radius: 10px;
-            box-shadow: 0 3px 10px #f5c2d6;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
             border: 1px solid #111;
         }
 
@@ -131,11 +138,11 @@
         }
 
         .project {
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
             width: 300px;
             padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 3px 10px #f5c2d6;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
             border: 1px solid #111;
         }
 
@@ -162,6 +169,7 @@
             margin-bottom: 15px;
             border: 1px solid #111;
             border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .contact textarea {
