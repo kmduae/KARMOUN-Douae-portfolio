@@ -17,12 +17,12 @@
         body {
             font-family: Arial, sans-serif;
             background: url('/public/images/km.jpg') center center / cover no-repeat fixed;
-            color: #ff00b7;
+            color: #ffaae7;
         }
 
         /* NAVBAR */
         nav {
-            background: #ff00b7;
+            background: #ffaae7;
             padding: 20px 8%;
             display: flex;
             justify-content: space-between;
@@ -75,7 +75,7 @@
         }
 
         #home span {
-            color: #ff4d8d;
+            color: #ffaae7;
         }
 
         #home p {
@@ -86,7 +86,7 @@
 
         .btn {
             display: inline-block;
-            background: #ff4d8d;
+            background: #ffaae7;
             color: white;
             padding: 12px 25px;
             text-decoration: none;
@@ -177,7 +177,7 @@
         }
 
         .contact button {
-            background: #ff4d8d;
+            background: #ffaae7;
             color: white;
             border: none;
             padding: 12px 25px;
@@ -187,7 +187,7 @@
 
         /* FOOTER */
         footer {
-            background: #ff00b7;
+            background: #ffaae7;
             color: white;
             text-align: center;
             padding: 20px;
