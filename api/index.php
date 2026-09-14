@@ -16,7 +16,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: url('images/km.png') center center / cover no-repeat fixed;
+            background: url('/public/images/km.avif') center center / cover no-repeat fixed;
             color: #222;
         }
 
