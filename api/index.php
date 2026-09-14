@@ -17,7 +17,7 @@
         body {
             font-family: Arial, sans-serif;
             background: url('/public/images/km.jpg') center center / cover no-repeat fixed;
-            color: #ffaae7;
+            color: #212021;
         }
 
         /* NAVBAR */
