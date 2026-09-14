@@ -49,7 +49,7 @@
         }
 
         nav ul li a:hover {
-            color: rgb(255, 77, 141);
+            color: rgb(146, 146, 146);
         }
 
         /* HOME */
@@ -126,7 +126,7 @@
             padding: 25px 40px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-            border: 1px solid #111;
+            border: 1px solid #ffffff;
         }
 
         /* PROJECTS */
@@ -188,7 +188,7 @@
 
         /* FOOTER */
         footer {
-            background: #111;
+            background: #ff00b7;
             color: white;
             text-align: center;
             padding: 20px;
