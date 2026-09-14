@@ -6,57 +6,66 @@ session_start();
 ------------------------------------------------------------------- */
 
 $owner = [
-    'name'    => 'Maya Okafor',
-    'role'    => 'Full-stack developer',
-    'tagline' => 'I build fast, unglamorous software that holds up under real use.',
-    'email'   => 'hello@mayaokafor.dev',
-    'location'=> 'Lagos, Nigeria — works remote',
+    'name'    => 'Théo Bassong',
+    'role'    => 'Brand & visual designer',
+    'tagline' => 'Identity systems for restaurants, record labels, and small manufacturers.',
+    'email'   => 'theo@basson-studio.com',
+    'location'=> 'Marseille, France',
 ];
 
 $socials = [
-    'GitHub'   => 'https://github.com/',
-    'LinkedIn' => 'https://linkedin.com/',
-    'Twitter'  => 'https://twitter.com/',
+    'Instagram' => 'https://instagram.com/',
+    'Are.na'    => 'https://are.na/',
+    'LinkedIn'  => 'https://linkedin.com/',
 ];
 
+// Each project gets a generated gradient thumbnail (no external images needed).
 $projects = [
     [
+        'title' => 'Fournil Lucie',
+        'client' => 'Independent bakery, Marseille',
         'year' => '2025',
-        'title' => 'Ledgerline',
-        'role' => 'Sole developer',
-        'description' => 'A reconciliation tool for small finance teams. Imports bank CSVs, matches them against invoices, and flags what doesn\'t add up — used daily by three accounting firms.',
-        'stack' => ['PHP', 'MySQL', 'htmx'],
-        'link' => '#',
+        'category' => 'Identity, packaging',
+        'description' => 'A mark and packaging system built around the bakery\'s wood-fired oven — warm, a little uneven, printed in two colors to keep costs low for a single storefront.',
+        'hue1' => 24, 'hue2' => 4,
     ],
     [
+        'title' => 'Nocturne Records',
+        'client' => 'Independent label',
         'year' => '2024',
-        'title' => 'Harbor',
-        'role' => 'Lead engineer, team of 3',
-        'description' => 'Internal shipping-logistics dashboard for a freight startup. Rebuilt their route-planning view from a spreadsheet into a live map with load constraints.',
-        'stack' => ['Laravel', 'Vue', 'PostgreSQL'],
-        'link' => '#',
+        'category' => 'Identity, sleeve system',
+        'description' => 'A modular sleeve grid that lets each release look distinct while staying recognizably part of the same catalogue. Built for a label putting out six records a year on a tight budget.',
+        'hue1' => 250, 'hue2' => 210,
     ],
     [
+        'title' => 'Atelier Ferrand',
+        'client' => 'Furniture workshop',
+        'year' => '2024',
+        'category' => 'Identity, signage',
+        'description' => 'Signage and stationery for a three-person furniture workshop, drawn from the joinery marks they already stamped into their own work.',
+        'hue1' => 40, 'hue2' => 85,
+    ],
+    [
+        'title' => 'Radis',
+        'client' => 'Neighbourhood grocer',
         'year' => '2023',
-        'title' => 'Recede',
-        'role' => 'Sole developer',
-        'description' => 'A habit tracker that deliberately has no streaks, badges, or notifications. Built after getting tired of apps designed to make me anxious about missing a day.',
-        'stack' => ['PHP', 'SQLite', 'Vanilla JS'],
-        'link' => '#',
+        'category' => 'Identity, wayfinding',
+        'description' => 'A produce-forward identity and in-store wayfinding system for a small grocer competing directly against a supermarket chain that moved in next door.',
+        'hue1' => 140, 'hue2' => 95,
     ],
     [
-        'year' => '2022',
-        'title' => 'Field Notes API',
-        'role' => 'Sole developer',
-        'description' => 'A small, opinionated API for field researchers to log observations offline and sync later. Adopted by two university ecology departments.',
-        'stack' => ['Node', 'Express', 'MongoDB'],
-        'link' => '#',
+        'title' => 'Périphérique',
+        'client' => 'Design conference',
+        'year' => '2023',
+        'category' => 'Identity, print',
+        'description' => 'Poster and program design for a two-day conference on design outside major cities. The system reused a single road-marking motif across every touchpoint.',
+        'hue1' => 355, 'hue2' => 330,
     ],
 ];
 
-$skills = [
-    'PHP', 'Laravel', 'MySQL', 'PostgreSQL', 'JavaScript', 'Vue',
-    'REST APIs', 'Docker', 'Linux server admin', 'Git',
+$capabilities = [
+    'Brand identity', 'Packaging', 'Signage & wayfinding',
+    'Editorial & print', 'Art direction', 'Typeface pairing',
 ];
 
 /* ------------------------------------------------------------------
@@ -71,20 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
     $email   = trim($_POST['email'] ?? '');
     $message = trim($_POST['message'] ?? '');
 
-    if ($name === '') {
-        $errors[] = 'Enter your name.';
-    }
-    if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = 'Enter a valid email address.';
-    }
-    if ($message === '') {
-        $errors[] = 'Write a message before sending.';
-    }
+    if ($name === '') $errors[] = 'Enter your name.';
+    if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Enter a valid email address.';
+    if ($message === '') $errors[] = 'Write a message before sending.';
 
     if (empty($errors)) {
         // Wire this up to mail(), a mailer library, or a database insert.
         // mail($owner['email'], "Portfolio contact from $name", $message, "From: $email");
-
         $_SESSION['flash_success'] = true;
         header('Location: ' . $_SERVER['PHP_SELF'] . '#contact');
         exit;
@@ -99,6 +101,12 @@ if (isset($_SESSION['flash_success'])) {
 function e($value) {
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
+
+// Builds a CSS gradient string from two hues so each project gets a
+// distinct generated thumbnail without needing image assets.
+function thumb_gradient($hue1, $hue2) {
+    return "linear-gradient(135deg, hsl({$hue1}, 62%, 52%), hsl({$hue2}, 70%, 38%))";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,283 +117,247 @@ function e($value) {
 <meta name="description" content="<?= e($owner['tagline']) ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #14181c;
-    --ink-soft: #3c4650;
-    --paper: #f6f4ee;
-    --paper-dim: #eae7dd;
-    --rule: #d8d3c4;
-    --cobalt: #2b3fe0;
-    --gold: #a9791f;
-    --font-display: 'Fraunces', Georgia, serif;
+    --bg: #12131a;
+    --bg-raised: #191b24;
+    --paper: #eeece6;
+    --dim: #9296a3;
+    --line: #2a2c38;
+    --accent: #6c7bff;
+    --accent-warm: #e2a83c;
+    --font-display: 'Space Grotesk', 'Arial Narrow', sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   * { box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
     margin: 0;
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--paper);
     font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
 
   a { color: inherit; }
 
   .wrap {
-    max-width: 920px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 0 32px;
   }
 
-  /* ---------- Header ---------- */
+  /* ---------- Layout shell: sidebar + content ---------- */
 
-  header.site {
-    padding: 28px 0 0;
-    border-bottom: 1px solid var(--rule);
+  .shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    max-width: 1300px;
+    margin: 0 auto;
   }
 
-  header.site .wrap {
+  @media (max-width: 880px) {
+    .shell { grid-template-columns: 1fr; }
+  }
+
+  aside.side {
+    padding: 48px 32px;
+    border-right: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 12px;
   }
 
-  .mark {
+  @media (max-width: 880px) {
+    aside.side {
+      position: static;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+
+  .side-top .mark {
     font-family: var(--font-display);
     font-size: 1.15rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 700;
     text-decoration: none;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .side-top .role {
+    font-size: 0.85rem;
+    color: var(--dim);
+    margin: 0 0 40px;
   }
 
   nav.primary {
     display: flex;
-    gap: 24px;
-    font-size: 0.9rem;
+    flex-direction: column;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
   }
 
   nav.primary a {
     text-decoration: none;
-    color: var(--ink-soft);
-    border-bottom: 1px solid transparent;
-    padding-bottom: 2px;
+    color: var(--paper);
+    opacity: 0.6;
   }
 
   nav.primary a:hover,
   nav.primary a:focus-visible {
-    color: var(--ink);
-    border-bottom-color: var(--cobalt);
+    opacity: 1;
+    color: var(--accent);
   }
+
+  .side-bottom {
+    font-size: 0.8rem;
+    color: var(--dim);
+  }
+
+  main.content { min-width: 0; }
 
   /* ---------- Hero ---------- */
 
   .hero {
-    padding: 88px 0 96px;
+    padding: 80px 0 64px;
+    border-bottom: 1px solid var(--line);
   }
 
   .hero h1 {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    line-height: 1.08;
-    margin: 0 0 28px;
-    max-width: 14ch;
-    letter-spacing: -0.01em;
+    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+    line-height: 1.25;
+    margin: 0 0 20px;
+    max-width: 22ch;
   }
 
-  .hero .role {
-    font-size: 1.05rem;
-    color: var(--ink-soft);
-    margin: 0 0 8px;
-  }
-
-  .hero .tagline {
-    font-size: 1.05rem;
-    max-width: 46ch;
-    color: var(--ink-soft);
+  .hero p.loc {
+    font-size: 0.85rem;
+    color: var(--dim);
     margin: 0;
   }
 
-  /* ---------- Section shell ---------- */
+  /* ---------- Work grid ---------- */
 
-  section {
-    padding: 64px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
   section:last-of-type { border-bottom: none; }
 
   .section-head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 40px;
-    gap: 16px;
+    margin-bottom: 36px;
   }
 
   .section-head h2 {
     font-family: var(--font-display);
-    font-size: 1.5rem;
     font-weight: 500;
+    font-size: 1.3rem;
     margin: 0;
   }
 
   .section-head .count {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    font-variant-numeric: tabular-nums;
+    font-size: 0.8rem;
+    color: var(--dim);
   }
 
-  /* ---------- Project index ---------- */
-
-  .project {
+  .grid {
     display: grid;
-    grid-template-columns: 3.5rem 1fr auto;
-    gap: 6px 24px;
-    padding: 28px 0;
-    border-top: 1px solid var(--rule);
-    align-items: start;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
   }
 
-  .project:first-child { border-top: none; }
-
-  .project .year {
-    font-size: 0.85rem;
-    color: var(--gold);
-    font-variant-numeric: tabular-nums;
-    padding-top: 4px;
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
   }
 
-  .project .title-row {
-    grid-column: 2;
+  .card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
   }
 
-  .project h3 {
+  .thumb {
+    aspect-ratio: 4 / 3;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
     font-family: var(--font-display);
-    font-size: 1.25rem;
     font-weight: 500;
+    font-size: 1.1rem;
     margin: 0 0 4px;
   }
 
-  .project .role {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    margin: 0 0 12px;
+  .card .meta {
+    font-size: 0.78rem;
+    color: var(--dim);
+    margin: 0 0 10px;
   }
 
-  .project p.desc {
-    margin: 0 0 14px;
-    max-width: 58ch;
-    color: var(--ink-soft);
+  .card p.desc {
+    font-size: 0.9rem;
+    color: var(--dim);
+    margin: 0;
+    max-width: 42ch;
   }
 
-  .stack {
+  /* ---------- Capabilities ---------- */
+
+  .capabilities {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .stack li {
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-  }
-
-  .stack li:not(:last-child)::after {
-    content: '·';
-    margin-left: 8px;
-    color: var(--rule);
-  }
-
-  .project .visit {
-    grid-column: 3;
-    align-self: start;
+  .capabilities li {
     font-size: 0.85rem;
-    text-decoration: none;
-    color: var(--cobalt);
-    white-space: nowrap;
-    padding-top: 4px;
-  }
-
-  .project .visit:hover,
-  .project .visit:focus-visible {
-    text-decoration: underline;
-  }
-
-  @media (max-width: 640px) {
-    .project {
-      grid-template-columns: 1fr;
-    }
-    .project .title-row,
-    .project .visit {
-      grid-column: 1;
-    }
-    .project .visit { padding-top: 0; }
-  }
-
-  /* ---------- About / skills ---------- */
-
-  .about p {
-    max-width: 62ch;
-    color: var(--ink-soft);
-    margin: 0 0 20px;
-    font-size: 1.02rem;
-  }
-
-  .skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 12px;
-    padding: 0;
-    margin: 28px 0 0;
-    list-style: none;
-  }
-
-  .skills li {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    color: var(--ink-soft);
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    color: var(--dim);
   }
 
   /* ---------- Contact ---------- */
 
   .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 48px;
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 700px) {
     .contact-grid { grid-template-columns: 1fr; }
   }
 
   .contact-info p {
-    color: var(--ink-soft);
-    max-width: 32ch;
+    color: var(--dim);
+    max-width: 34ch;
     margin: 0 0 20px;
   }
 
   .contact-info .email {
     display: inline-block;
     font-family: var(--font-display);
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     text-decoration: none;
-    border-bottom: 1px solid var(--ink);
+    color: var(--accent-warm);
     margin-bottom: 24px;
   }
 
@@ -395,87 +367,78 @@ function e($value) {
     margin: 0;
     display: flex;
     gap: 18px;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
   }
 
-  .contact-info ul.social a { text-decoration: none; color: var(--ink-soft); }
-  .contact-info ul.social a:hover { color: var(--cobalt); }
+  .contact-info ul.social a { text-decoration: none; color: var(--dim); }
+  .contact-info ul.social a:hover { color: var(--accent); }
 
   form.contact-form label {
     display: block;
-    font-size: 0.82rem;
-    color: var(--ink-soft);
+    font-size: 0.8rem;
+    color: var(--dim);
     margin-bottom: 6px;
   }
 
-  form.contact-form .field { margin-bottom: 20px; }
+  form.contact-form .field { margin-bottom: 18px; }
 
   form.contact-form input,
   form.contact-form textarea {
     width: 100%;
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    padding: 10px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    background: #fff;
-    color: var(--ink);
+    font-size: 0.92rem;
+    padding: 11px 13px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--bg-raised);
+    color: var(--paper);
   }
 
   form.contact-form input:focus-visible,
   form.contact-form textarea:focus-visible {
-    outline: 2px solid var(--cobalt);
+    outline: 2px solid var(--accent);
     outline-offset: 1px;
   }
 
-  form.contact-form textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
+  form.contact-form textarea { min-height: 120px; resize: vertical; }
 
   form.contact-form button {
-    font-family: var(--font-body);
+    font-family: var(--font-display);
     font-size: 0.9rem;
-    font-weight: 600;
-    background: var(--ink);
-    color: var(--paper);
+    font-weight: 500;
+    background: var(--accent);
+    color: #0d0e14;
     border: none;
     padding: 12px 22px;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
   }
 
-  form.contact-form button:hover { background: var(--cobalt); }
+  form.contact-form button:hover { background: var(--accent-warm); }
 
   .notice {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     padding: 12px 14px;
-    border-radius: 3px;
-    margin-bottom: 20px;
+    border-radius: 4px;
+    margin-bottom: 18px;
   }
 
   .notice.success {
-    background: #e5efe1;
-    color: #2f5c25;
-    border: 1px solid #c4dab8;
+    background: rgba(108,123,255,0.12);
+    color: #b7bfff;
+    border: 1px solid rgba(108,123,255,0.35);
   }
 
   .notice.error {
-    background: #f6e6e3;
-    color: #8a3a2a;
-    border: 1px solid #e3c3ba;
+    background: rgba(226,90,90,0.1);
+    color: #f0a5a5;
+    border: 1px solid rgba(226,90,90,0.3);
   }
 
-  /* ---------- Footer ---------- */
-
   footer.site {
-    padding: 32px 0 48px;
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
+    padding: 28px 0 48px;
+    font-size: 0.78rem;
+    color: var(--dim);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -485,121 +448,115 @@ function e($value) {
 </head>
 <body>
 
-<header class="site">
-  <div class="wrap">
-    <a class="mark" href="#top"><?= e($owner['name']) ?></a>
-    <nav class="primary">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+<div class="shell">
 
-<main id="top">
+  <aside class="side">
+    <div class="side-top">
+      <a class="mark" href="#top"><?= e($owner['name']) ?></a>
+      <p class="role"><?= e($owner['role']) ?></p>
+      <nav class="primary">
+        <a href="#work">Work</a>
+        <a href="#about">Capabilities</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="side-bottom">
+      <?= e($owner['location']) ?>
+    </div>
+  </aside>
 
-  <div class="wrap">
-    <section class="hero">
-      <p class="role"><?= e($owner['role']) ?> — <?= e($owner['location']) ?></p>
-      <h1><?= e($owner['tagline']) ?></h1>
-    </section>
-  </div>
+  <main class="content" id="top">
 
-  <section id="work">
     <div class="wrap">
-      <div class="section-head">
-        <h2>Selected work</h2>
-        <span class="count"><?= count($projects) ?> projects</span>
+      <div class="hero">
+        <h1><?= e($owner['tagline']) ?></h1>
+        <p class="loc">Available for new projects, Q1 2027</p>
       </div>
+    </div>
 
-      <?php foreach ($projects as $p): ?>
-        <div class="project">
-          <div class="year"><?= e($p['year']) ?></div>
-          <div class="title-row">
-            <h3><?= e($p['title']) ?></h3>
-            <p class="role"><?= e($p['role']) ?></p>
-            <p class="desc"><?= e($p['description']) ?></p>
-            <ul class="stack">
-              <?php foreach ($p['stack'] as $tech): ?>
-                <li><?= e($tech) ?></li>
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Selected work</h2>
+          <span class="count"><?= count($projects) ?> case studies</span>
+        </div>
+
+        <div class="grid">
+          <?php foreach ($projects as $p): ?>
+            <a class="card" href="#">
+              <div class="thumb" style="background: <?= thumb_gradient($p['hue1'], $p['hue2']) ?>;"></div>
+              <h3><?= e($p['title']) ?></h3>
+              <p class="meta"><?= e($p['client']) ?> · <?= e($p['year']) ?> · <?= e($p['category']) ?></p>
+              <p class="desc"><?= e($p['description']) ?></p>
+            </a>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Capabilities</h2>
+        </div>
+        <ul class="capabilities">
+          <?php foreach ($capabilities as $skill): ?>
+            <li><?= e($skill) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Contact</h2>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p>Working on an identity, packaging, or signage project? Send a few details and I'll reply within a couple of days.</p>
+            <a class="email" href="mailto:<?= e($owner['email']) ?>"><?= e($owner['email']) ?></a>
+            <ul class="social">
+              <?php foreach ($socials as $label => $url): ?>
+                <li><a href="<?= e($url) ?>"><?= e($label) ?></a></li>
               <?php endforeach; ?>
             </ul>
           </div>
-          <a class="visit" href="<?= e($p['link']) ?>">View ↗</a>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  </section>
 
-  <section id="about" class="about">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>About</h2>
-      </div>
-      <p>I've spent the last several years building web applications for small teams who need something reliable more than something flashy — accounting tools, internal dashboards, the occasional API that just needs to work at 3am.</p>
-      <p>Most of my work is in PHP and Laravel, though I reach for whatever fits the problem. I care more about a codebase someone else can pick up in six months than about using the newest framework.</p>
-      <ul class="skills">
-        <?php foreach ($skills as $skill): ?>
-          <li><?= e($skill) ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  </section>
+          <form class="contact-form" method="post" action="#contact">
+            <?php if ($success): ?>
+              <div class="notice success">Thanks — your message is in. I'll reply soon.</div>
+            <?php endif; ?>
 
-  <section id="contact">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Contact</h2>
-      </div>
+            <?php if (!empty($errors)): ?>
+              <div class="notice error"><?= e(implode(' ', $errors)) ?></div>
+            <?php endif; ?>
 
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p>Have a project in mind, or just want to talk shop? I read everything that comes through here.</p>
-          <a class="email" href="mailto:<?= e($owner['email']) ?>"><?= e($owner['email']) ?></a>
-          <ul class="social">
-            <?php foreach ($socials as $label => $url): ?>
-              <li><a href="<?= e($url) ?>"><?= e($label) ?></a></li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-
-        <form class="contact-form" method="post" action="#contact">
-          <?php if ($success): ?>
-            <div class="notice success">Thanks — your message is in. I'll get back to you soon.</div>
-          <?php endif; ?>
-
-          <?php if (!empty($errors)): ?>
-            <div class="notice error">
-              <?= e(implode(' ', $errors)) ?>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" value="<?= e($_POST['name'] ?? '') ?>" required>
             </div>
-          <?php endif; ?>
-
-          <div class="field">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" value="<?= e($_POST['name'] ?? '') ?>" required>
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="<?= e($_POST['email'] ?? '') ?>" required>
-          </div>
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required><?= e($_POST['message'] ?? '') ?></textarea>
-          </div>
-          <button type="submit" name="contact_submit" value="1">Send message</button>
-        </form>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" value="<?= e($_POST['email'] ?? '') ?>" required>
+            </div>
+            <div class="field">
+              <label for="message">Project details</label>
+              <textarea id="message" name="message" required><?= e($_POST['message'] ?? '') ?></textarea>
+            </div>
+            <button type="submit" name="contact_submit" value="1">Send message</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <footer class="site">
+      <div class="wrap">&copy; <?= date('Y') ?> <?= e($owner['name']) ?> — Built with PHP</div>
+    </footer>
 
-<footer class="site">
-  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
-    <span>&copy; <?= date('Y') ?> <?= e($owner['name']) ?></span>
-    <span>Built with PHP</span>
-  </div>
-</footer>
+  </main>
+</div>
 
 </body>
 </html>
