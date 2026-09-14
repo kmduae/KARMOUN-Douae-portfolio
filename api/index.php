@@ -6,67 +6,51 @@ session_start();
 ------------------------------------------------------------------- */
 
 $owner = [
-    'name'    => 'Théo Bassong',
-    'role'    => 'Brand & visual designer',
-    'tagline' => 'Identity systems for restaurants, record labels, and small manufacturers.',
-    'email'   => 'theo@basson-studio.com',
-    'location'=> 'Marseille, France',
+    'name'    => 'Sofia Marchetti',
+    'role'    => 'Stylist & content creator',
+    'tagline' => 'Quiet, wearable style for people who don\'t want to think about it every morning.',
+    'email'   => 'hello@sofiamarchetti.com',
+    'location'=> 'Milan, Italy',
 ];
 
 $socials = [
     'Instagram' => 'https://instagram.com/',
-    'Are.na'    => 'https://are.na/',
-    'LinkedIn'  => 'https://linkedin.com/',
+    'TikTok'    => 'https://tiktok.com/',
+    'Pinterest' => 'https://pinterest.com/',
 ];
 
-// Each project gets a generated gradient thumbnail (no external images needed).
-$projects = [
+$collaborations = [
     [
-        'title' => 'Fournil Lucie',
-        'client' => 'Independent bakery, Marseille',
+        'brand' => 'Loro & Co.',
+        'type' => 'Capsule collection',
         'year' => '2025',
-        'category' => 'Identity, packaging',
-        'description' => 'A mark and packaging system built around the bakery\'s wood-fired oven — warm, a little uneven, printed in two colors to keep costs low for a single storefront.',
-        'hue1' => 24, 'hue2' => 4,
+        'description' => 'Co-designed a six-piece capsule of everyday basics, sized and priced to actually be worn — not just photographed.',
+        'hue' => 350,
     ],
     [
-        'title' => 'Nocturne Records',
-        'client' => 'Independent label',
+        'brand' => 'Maren Studio',
+        'type' => 'Campaign styling',
+        'year' => '2025',
+        'description' => 'Styled the spring campaign around one idea: clothes that still look good after the third wear of the week.',
+        'hue' => 20,
+    ],
+    [
+        'brand' => 'Ferro Denim',
+        'type' => 'Brand partnership',
         'year' => '2024',
-        'category' => 'Identity, sleeve system',
-        'description' => 'A modular sleeve grid that lets each release look distinct while staying recognizably part of the same catalogue. Built for a label putting out six records a year on a tight budget.',
-        'hue1' => 250, 'hue2' => 210,
+        'description' => 'Ongoing partnership documenting how one pair of jeans actually ages over a year of daily wear.',
+        'hue' => 200,
     ],
     [
-        'title' => 'Atelier Ferrand',
-        'client' => 'Furniture workshop',
+        'brand' => 'Bellalana',
+        'type' => 'Editorial feature',
         'year' => '2024',
-        'category' => 'Identity, signage',
-        'description' => 'Signage and stationery for a three-person furniture workshop, drawn from the joinery marks they already stamped into their own work.',
-        'hue1' => 40, 'hue2' => 85,
-    ],
-    [
-        'title' => 'Radis',
-        'client' => 'Neighbourhood grocer',
-        'year' => '2023',
-        'category' => 'Identity, wayfinding',
-        'description' => 'A produce-forward identity and in-store wayfinding system for a small grocer competing directly against a supermarket chain that moved in next door.',
-        'hue1' => 140, 'hue2' => 95,
-    ],
-    [
-        'title' => 'Périphérique',
-        'client' => 'Design conference',
-        'year' => '2023',
-        'category' => 'Identity, print',
-        'description' => 'Poster and program design for a two-day conference on design outside major cities. The system reused a single road-marking motif across every touchpoint.',
-        'hue1' => 355, 'hue2' => 330,
+        'description' => 'A knitwear editorial shot in a working wool mill outside Biella, tracing the yarn from sheep to sweater.',
+        'hue' => 15,
     ],
 ];
 
-$capabilities = [
-    'Brand identity', 'Packaging', 'Signage & wayfinding',
-    'Editorial & print', 'Art direction', 'Typeface pairing',
-];
+$now_wearing = ['Wide-leg trousers', 'Boiled wool coats', 'One good white shirt', 'Loafers, always'];
 
 /* ------------------------------------------------------------------
    CONTACT FORM HANDLING
@@ -85,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
     if ($message === '') $errors[] = 'Write a message before sending.';
 
     if (empty($errors)) {
-        // Wire this up to mail(), a mailer library, or a database insert.
         // mail($owner['email'], "Portfolio contact from $name", $message, "From: $email");
         $_SESSION['flash_success'] = true;
         header('Location: ' . $_SERVER['PHP_SELF'] . '#contact');
@@ -102,10 +85,8 @@ function e($value) {
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
-// Builds a CSS gradient string from two hues so each project gets a
-// distinct generated thumbnail without needing image assets.
-function thumb_gradient($hue1, $hue2) {
-    return "linear-gradient(135deg, hsl({$hue1}, 62%, 52%), hsl({$hue2}, 70%, 38%))";
+function swatch($hue) {
+    return "linear-gradient(160deg, hsl({$hue}, 55%, 88%), hsl({$hue}, 45%, 72%))";
 }
 ?>
 <!DOCTYPE html>
@@ -117,18 +98,17 @@ function thumb_gradient($hue1, $hue2) {
 <meta name="description" content="<?= e($owner['tagline']) ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #12131a;
-    --bg-raised: #191b24;
-    --paper: #eeece6;
-    --dim: #9296a3;
-    --line: #2a2c38;
-    --accent: #6c7bff;
-    --accent-warm: #e2a83c;
-    --font-display: 'Space Grotesk', 'Arial Narrow', sans-serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --cream: #fbf6f1;
+    --blush: #f1ded6;
+    --rose: #b4555f;
+    --ink: #322722;
+    --ink-soft: #6f6259;
+    --line: #e6d9cf;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   * { box-sizing: border-box; }
@@ -136,202 +116,200 @@ function thumb_gradient($hue1, $hue2) {
 
   body {
     margin: 0;
-    background: var(--bg);
-    color: var(--paper);
+    background: var(--cream);
+    color: var(--ink);
     font-family: var(--font-body);
-    line-height: 1.55;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
   a { color: inherit; }
 
   .wrap {
-    max-width: 1100px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 0 28px;
   }
 
-  /* ---------- Layout shell: sidebar + content ---------- */
+  /* ---------- Header ---------- */
 
-  .shell {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    max-width: 1300px;
-    margin: 0 auto;
+  header.site {
+    padding: 24px 0;
   }
 
-  @media (max-width: 880px) {
-    .shell { grid-template-columns: 1fr; }
-  }
-
-  aside.side {
-    padding: 48px 32px;
-    border-right: 1px solid var(--line);
-    position: sticky;
-    top: 0;
-    align-self: start;
-    height: 100vh;
+  header.site .wrap {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
-  @media (max-width: 880px) {
-    aside.side {
-      position: static;
-      height: auto;
-      border-right: none;
-      border-bottom: 1px solid var(--line);
-    }
-  }
-
-  .side-top .mark {
+  .mark {
     font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.3rem;
     text-decoration: none;
-    display: block;
-    margin-bottom: 6px;
-  }
-
-  .side-top .role {
-    font-size: 0.85rem;
-    color: var(--dim);
-    margin: 0 0 40px;
   }
 
   nav.primary {
     display: flex;
-    flex-direction: column;
-    gap: 14px;
-    font-family: var(--font-display);
-    font-size: 0.95rem;
+    gap: 28px;
+    font-size: 0.88rem;
   }
 
   nav.primary a {
     text-decoration: none;
-    color: var(--paper);
-    opacity: 0.6;
+    color: var(--ink-soft);
   }
 
   nav.primary a:hover,
   nav.primary a:focus-visible {
-    opacity: 1;
-    color: var(--accent);
+    color: var(--rose);
   }
 
-  .side-bottom {
-    font-size: 0.8rem;
-    color: var(--dim);
-  }
-
-  main.content { min-width: 0; }
-
-  /* ---------- Hero ---------- */
+  /* ---------- Hero: collage + text ---------- */
 
   .hero {
-    padding: 80px 0 64px;
-    border-bottom: 1px solid var(--line);
+    padding: 40px 0 80px;
+  }
+
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  @media (max-width: 780px) {
+    .hero .wrap { grid-template-columns: 1fr; }
   }
 
   .hero h1 {
     font-family: var(--font-display);
+    font-style: italic;
     font-weight: 500;
-    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
-    line-height: 1.25;
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    line-height: 1.3;
     margin: 0 0 20px;
-    max-width: 22ch;
   }
 
-  .hero p.loc {
-    font-size: 0.85rem;
-    color: var(--dim);
+  .hero p.sub {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 40ch;
     margin: 0;
   }
 
-  /* ---------- Work grid ---------- */
+  .collage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 120px 90px;
+    gap: 14px;
+  }
 
-  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
-  section:last-of-type { border-bottom: none; }
+  .collage .block {
+    border-radius: 18px;
+  }
+
+  .collage .block:nth-child(1) { grid-row: 1 / 3; border-radius: 22px; }
+
+  /* ---------- Section shell ---------- */
+
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
 
   .section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
     margin-bottom: 36px;
+  }
+
+  .section-head .eyebrow {
+    font-size: 0.8rem;
+    color: var(--rose);
+    display: block;
+    margin-bottom: 8px;
   }
 
   .section-head h2 {
     font-family: var(--font-display);
+    font-style: italic;
     font-weight: 500;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     margin: 0;
   }
 
-  .section-head .count {
-    font-size: 0.8rem;
-    color: var(--dim);
+  /* ---------- Collaborations ---------- */
+
+  .collab-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .grid {
+  .collab {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
+    grid-template-columns: 90px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
   }
 
-  @media (max-width: 640px) {
-    .grid { grid-template-columns: 1fr; }
+  .collab:first-child { border-top: 1px solid var(--line); }
+
+  @media (max-width: 620px) {
+    .collab { grid-template-columns: 60px 1fr; }
+    .collab .year { display: none; }
   }
 
-  .card {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+  .collab .swatch {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
   }
 
-  .thumb {
-    aspect-ratio: 4 / 3;
-    border-radius: 4px;
-    margin-bottom: 16px;
-  }
-
-  .card h3 {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 1.1rem;
+  .collab h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.02rem;
     margin: 0 0 4px;
   }
 
-  .card .meta {
-    font-size: 0.78rem;
-    color: var(--dim);
-    margin: 0 0 10px;
+  .collab .type {
+    font-size: 0.82rem;
+    color: var(--rose);
+    margin: 0 0 6px;
   }
 
-  .card p.desc {
-    font-size: 0.9rem;
-    color: var(--dim);
+  .collab p.desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
     margin: 0;
-    max-width: 42ch;
+    max-width: 46ch;
   }
 
-  /* ---------- Capabilities ---------- */
+  .collab .year {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
 
-  .capabilities {
+  /* ---------- Now wearing ---------- */
+
+  .now-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .capabilities li {
-    font-size: 0.85rem;
-    padding: 8px 14px;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    color: var(--dim);
+  .now-list li {
+    font-size: 0.88rem;
+    padding: 10px 18px;
+    background: var(--blush);
+    border-radius: 30px;
+    color: var(--ink);
   }
 
   /* ---------- Contact ---------- */
@@ -342,22 +320,23 @@ function thumb_gradient($hue1, $hue2) {
     gap: 48px;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 720px) {
     .contact-grid { grid-template-columns: 1fr; }
   }
 
   .contact-info p {
-    color: var(--dim);
-    max-width: 34ch;
+    color: var(--ink-soft);
+    max-width: 32ch;
     margin: 0 0 20px;
   }
 
   .contact-info .email {
     display: inline-block;
     font-family: var(--font-display);
-    font-size: 1.15rem;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--rose);
     text-decoration: none;
-    color: var(--accent-warm);
     margin-bottom: 24px;
   }
 
@@ -370,13 +349,13 @@ function thumb_gradient($hue1, $hue2) {
     font-size: 0.85rem;
   }
 
-  .contact-info ul.social a { text-decoration: none; color: var(--dim); }
-  .contact-info ul.social a:hover { color: var(--accent); }
+  .contact-info ul.social a { text-decoration: none; color: var(--ink-soft); }
+  .contact-info ul.social a:hover { color: var(--rose); }
 
   form.contact-form label {
     display: block;
     font-size: 0.8rem;
-    color: var(--dim);
+    color: var(--ink-soft);
     margin-bottom: 6px;
   }
 
@@ -387,58 +366,61 @@ function thumb_gradient($hue1, $hue2) {
     width: 100%;
     font-family: var(--font-body);
     font-size: 0.92rem;
-    padding: 11px 13px;
+    padding: 12px 16px;
     border: 1px solid var(--line);
-    border-radius: 4px;
-    background: var(--bg-raised);
-    color: var(--paper);
+    border-radius: 30px;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  form.contact-form textarea {
+    border-radius: 18px;
+    min-height: 120px;
+    resize: vertical;
   }
 
   form.contact-form input:focus-visible,
   form.contact-form textarea:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--rose);
     outline-offset: 1px;
   }
 
-  form.contact-form textarea { min-height: 120px; resize: vertical; }
-
   form.contact-form button {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 0.9rem;
-    font-weight: 500;
-    background: var(--accent);
-    color: #0d0e14;
+    font-weight: 700;
+    background: var(--rose);
+    color: #fff;
     border: none;
-    padding: 12px 22px;
-    border-radius: 4px;
+    padding: 13px 26px;
+    border-radius: 30px;
     cursor: pointer;
   }
 
-  form.contact-form button:hover { background: var(--accent-warm); }
+  form.contact-form button:hover { background: #9a4249; }
 
   .notice {
     font-size: 0.85rem;
-    padding: 12px 14px;
-    border-radius: 4px;
+    padding: 12px 16px;
+    border-radius: 14px;
     margin-bottom: 18px;
   }
 
   .notice.success {
-    background: rgba(108,123,255,0.12);
-    color: #b7bfff;
-    border: 1px solid rgba(108,123,255,0.35);
+    background: #eaf1e3;
+    color: #4c6b3c;
   }
 
   .notice.error {
-    background: rgba(226,90,90,0.1);
-    color: #f0a5a5;
-    border: 1px solid rgba(226,90,90,0.3);
+    background: #f7e3e1;
+    color: #96453c;
   }
 
   footer.site {
-    padding: 28px 0 48px;
-    font-size: 0.78rem;
-    color: var(--dim);
+    padding: 32px 0 48px;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    text-align: center;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -448,115 +430,125 @@ function thumb_gradient($hue1, $hue2) {
 </head>
 <body>
 
-<div class="shell">
+<header class="site">
+  <div class="wrap">
+    <a class="mark" href="#top"><?= e($owner['name']) ?></a>
+    <nav class="primary">
+      <a href="#work">Collaborations</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  <aside class="side">
-    <div class="side-top">
-      <a class="mark" href="#top"><?= e($owner['name']) ?></a>
-      <p class="role"><?= e($owner['role']) ?></p>
-      <nav class="primary">
-        <a href="#work">Work</a>
-        <a href="#about">Capabilities</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-    <div class="side-bottom">
-      <?= e($owner['location']) ?>
-    </div>
-  </aside>
+<main id="top">
 
-  <main class="content" id="top">
+  <div class="wrap hero-wrap">
+    <section class="hero" style="border-top:none; padding-top:20px;">
+      <div class="wrap" style="padding:0;">
+        <div>
+          <h1><?= e($owner['tagline']) ?></h1>
+          <p class="sub"><?= e($owner['role']) ?> — <?= e($owner['location']) ?></p>
+        </div>
+        <div class="collage">
+          <div class="block" style="background: <?= swatch(350) ?>;"></div>
+          <div class="block" style="background: <?= swatch(30) ?>;"></div>
+          <div class="block" style="background: <?= swatch(200) ?>;"></div>
+        </div>
+      </div>
+    </section>
+  </div>
 
+  <section id="work">
     <div class="wrap">
-      <div class="hero">
-        <h1><?= e($owner['tagline']) ?></h1>
-        <p class="loc">Available for new projects, Q1 2027</p>
+      <div class="section-head">
+        <span class="eyebrow">Selected work</span>
+        <h2>Collaborations</h2>
+      </div>
+
+      <div class="collab-list">
+        <?php foreach ($collaborations as $c): ?>
+          <div class="collab">
+            <div class="swatch" style="background: <?= swatch($c['hue']) ?>;"></div>
+            <div>
+              <h3><?= e($c['brand']) ?></h3>
+              <p class="type"><?= e($c['type']) ?></p>
+              <p class="desc"><?= e($c['description']) ?></p>
+            </div>
+            <div class="year"><?= e($c['year']) ?></div>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
+  </section>
 
-    <section id="work">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Selected work</h2>
-          <span class="count"><?= count($projects) ?> case studies</span>
-        </div>
-
-        <div class="grid">
-          <?php foreach ($projects as $p): ?>
-            <a class="card" href="#">
-              <div class="thumb" style="background: <?= thumb_gradient($p['hue1'], $p['hue2']) ?>;"></div>
-              <h3><?= e($p['title']) ?></h3>
-              <p class="meta"><?= e($p['client']) ?> · <?= e($p['year']) ?> · <?= e($p['category']) ?></p>
-              <p class="desc"><?= e($p['description']) ?></p>
-            </a>
-          <?php endforeach; ?>
-        </div>
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">A little about me</span>
+        <h2>Style should be easy</h2>
       </div>
-    </section>
+      <p style="max-width:56ch; color:var(--ink-soft); margin:0 0 28px;">
+        I spent four years as an assistant stylist before going independent, and I still build every wardrobe the same way I learned back then: start with what someone already owns and wears often, then fill the real gaps — not the aspirational ones.
+      </p>
+      <ul class="now-list">
+        <?php foreach ($now_wearing as $item): ?>
+          <li><?= e($item) ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </section>
 
-    <section id="about">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Capabilities</h2>
-        </div>
-        <ul class="capabilities">
-          <?php foreach ($capabilities as $skill): ?>
-            <li><?= e($skill) ?></li>
-          <?php endforeach; ?>
-        </ul>
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Let's work together</h2>
       </div>
-    </section>
 
-    <section id="contact">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>For collaborations, styling requests, or press — send a note and I'll get back to you within a few days.</p>
+          <a class="email" href="mailto:<?= e($owner['email']) ?>"><?= e($owner['email']) ?></a>
+          <ul class="social">
+            <?php foreach ($socials as $label => $url): ?>
+              <li><a href="<?= e($url) ?>"><?= e($label) ?></a></li>
+            <?php endforeach; ?>
+          </ul>
         </div>
 
-        <div class="contact-grid">
-          <div class="contact-info">
-            <p>Working on an identity, packaging, or signage project? Send a few details and I'll reply within a couple of days.</p>
-            <a class="email" href="mailto:<?= e($owner['email']) ?>"><?= e($owner['email']) ?></a>
-            <ul class="social">
-              <?php foreach ($socials as $label => $url): ?>
-                <li><a href="<?= e($url) ?>"><?= e($label) ?></a></li>
-              <?php endforeach; ?>
-            </ul>
+        <form class="contact-form" method="post" action="#contact">
+          <?php if ($success): ?>
+            <div class="notice success">Thanks — your message is in. I'll be in touch soon.</div>
+          <?php endif; ?>
+
+          <?php if (!empty($errors)): ?>
+            <div class="notice error"><?= e(implode(' ', $errors)) ?></div>
+          <?php endif; ?>
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="<?= e($_POST['name'] ?? '') ?>" required>
           </div>
-
-          <form class="contact-form" method="post" action="#contact">
-            <?php if ($success): ?>
-              <div class="notice success">Thanks — your message is in. I'll reply soon.</div>
-            <?php endif; ?>
-
-            <?php if (!empty($errors)): ?>
-              <div class="notice error"><?= e(implode(' ', $errors)) ?></div>
-            <?php endif; ?>
-
-            <div class="field">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" value="<?= e($_POST['name'] ?? '') ?>" required>
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" value="<?= e($_POST['email'] ?? '') ?>" required>
-            </div>
-            <div class="field">
-              <label for="message">Project details</label>
-              <textarea id="message" name="message" required><?= e($_POST['message'] ?? '') ?></textarea>
-            </div>
-            <button type="submit" name="contact_submit" value="1">Send message</button>
-          </form>
-        </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="<?= e($_POST['email'] ?? '') ?>" required>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required><?= e($_POST['message'] ?? '') ?></textarea>
+          </div>
+          <button type="submit" name="contact_submit" value="1">Send message</button>
+        </form>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="site">
-      <div class="wrap">&copy; <?= date('Y') ?> <?= e($owner['name']) ?> — Built with PHP</div>
-    </footer>
+</main>
 
-  </main>
-</div>
+<footer class="site">
+  &copy; <?= date('Y') ?> <?= e($owner['name']) ?> — Built with PHP
+</footer>
 
 </body>
 </html>
