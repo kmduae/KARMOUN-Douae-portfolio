@@ -33,7 +33,7 @@
         }
 
         nav h2 {
-            color: white;
+            color: black;
         }
 
         nav ul {
