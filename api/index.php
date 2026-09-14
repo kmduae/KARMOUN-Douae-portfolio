@@ -143,7 +143,6 @@
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-            border: 1px solid #111;
         }
 
         .project h3 {
