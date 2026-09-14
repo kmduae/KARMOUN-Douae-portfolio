@@ -17,12 +17,12 @@
         body {
             font-family: Arial, sans-serif;
             background: url('/public/images/km.jpg') center center / cover no-repeat fixed;
-            color: #222;
+            color: #ff00b7;
         }
 
         /* NAVBAR */
         nav {
-            background: #111;
+            background: #ff00b7;
             padding: 20px 8%;
             display: flex;
             justify-content: space-between;
@@ -49,7 +49,7 @@
         }
 
         nav ul li a:hover {
-            color: #ff4d8d;
+            color: rgb(255, 77, 141);
         }
 
         /* HOME */
@@ -238,7 +238,7 @@
 
             <h1>Hello, I'm <span>Douae</span></h1>
 
-            <p>Web Developer</p>
+            <p>Web Developer Full Stack Developer</p>
 
             <a href="#projects" class="btn">
                 View My Work
