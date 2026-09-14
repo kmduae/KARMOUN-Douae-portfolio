@@ -16,7 +16,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: url('/public/images/km.avif') center center / cover no-repeat fixed;
+            background: url('/public/images/km.jpg') center center / cover no-repeat fixed;
             color: #222;
         }
 
@@ -218,7 +218,7 @@
     <!-- NAVBAR -->
     <nav>
 
-        <h2>PHMR</h2>
+        <h2>Douae</h2>
 
         <ul>
             <li><a href="#home">Home</a></li>
@@ -236,7 +236,7 @@
 
         <div>
 
-            <h1>Hello, I'm <span>PHMR</span></h1>
+            <h1>Hello, I'm <span>Douae</span></h1>
 
             <p>Web Developer</p>
 
