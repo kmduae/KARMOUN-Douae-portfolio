@@ -6,51 +6,51 @@ session_start();
 ------------------------------------------------------------------- */
 
 $owner = [
-    'name'    => 'Sofia Marchetti',
-    'role'    => 'Stylist & content creator',
-    'tagline' => 'Quiet, wearable style for people who don\'t want to think about it every morning.',
-    'email'   => 'hello@sofiamarchetti.com',
-    'location'=> 'Milan, Italy',
+    'name'    => 'Elena Voss',
+    'role'    => 'Product designer & front-end developer',
+    'tagline' => 'I design and build interfaces that feel obvious in hindsight.',
+    'email'   => 'hello@elenavoss.com',
+    'location'=> 'Lisbon, Portugal',
 ];
 
 $socials = [
-    'Instagram' => 'https://instagram.com/',
-    'TikTok'    => 'https://tiktok.com/',
-    'Pinterest' => 'https://pinterest.com/',
+    'GitHub'    => 'https://github.com/',
+    'Dribbble'  => 'https://dribbble.com/',
+    'LinkedIn'  => 'https://linkedin.com/',
 ];
 
-$collaborations = [
+$projects = [
     [
-        'brand' => 'Loro & Co.',
-        'type' => 'Capsule collection',
+        'title' => 'Almanac',
+        'type' => 'Product design, front-end',
         'year' => '2025',
-        'description' => 'Co-designed a six-piece capsule of everyday basics, sized and priced to actually be worn — not just photographed.',
+        'description' => 'A scheduling tool for small clinics. Redesigned the booking flow from an 11-step form down to 3, and built the front end in Vue.',
         'hue' => 350,
     ],
     [
-        'brand' => 'Maren Studio',
-        'type' => 'Campaign styling',
+        'title' => 'Pebble Notes',
+        'type' => 'Design system, dev',
         'year' => '2025',
-        'description' => 'Styled the spring campaign around one idea: clothes that still look good after the third wear of the week.',
-        'hue' => 20,
+        'description' => 'A component library and design system shared across four internal tools, cutting new-feature build time roughly in half.',
+        'hue' => 25,
     ],
     [
-        'brand' => 'Ferro Denim',
-        'type' => 'Brand partnership',
+        'title' => 'Riverside Bank',
+        'type' => 'UX research, design',
         'year' => '2024',
-        'description' => 'Ongoing partnership documenting how one pair of jeans actually ages over a year of daily wear.',
+        'description' => 'Led research and redesign of the mobile transfer flow for a regional bank, reducing failed-transfer support tickets by a third.',
         'hue' => 200,
     ],
     [
-        'brand' => 'Bellalana',
-        'type' => 'Editorial feature',
+        'title' => 'Loop',
+        'type' => 'Personal project',
         'year' => '2024',
-        'description' => 'A knitwear editorial shot in a working wool mill outside Biella, tracing the yarn from sheep to sweater.',
-        'hue' => 15,
+        'description' => 'A minimal habit tracker built to learn Svelte, now used daily by a few hundred people who found it on Product Hunt.',
+        'hue' => 150,
     ],
 ];
 
-$now_wearing = ['Wide-leg trousers', 'Boiled wool coats', 'One good white shirt', 'Loafers, always'];
+$skills = ['Figma', 'Vue & React', 'Design systems', 'User research', 'HTML/CSS', 'Prototyping'];
 
 /* ------------------------------------------------------------------
    CONTACT FORM HANDLING
@@ -133,9 +133,7 @@ function swatch($hue) {
 
   /* ---------- Header ---------- */
 
-  header.site {
-    padding: 24px 0;
-  }
+  header.site { padding: 24px 0; }
 
   header.site .wrap {
     display: flex;
@@ -153,27 +151,14 @@ function swatch($hue) {
     text-decoration: none;
   }
 
-  nav.primary {
-    display: flex;
-    gap: 28px;
-    font-size: 0.88rem;
-  }
-
-  nav.primary a {
-    text-decoration: none;
-    color: var(--ink-soft);
-  }
-
+  nav.primary { display: flex; gap: 28px; font-size: 0.88rem; }
+  nav.primary a { text-decoration: none; color: var(--ink-soft); }
   nav.primary a:hover,
-  nav.primary a:focus-visible {
-    color: var(--rose);
-  }
+  nav.primary a:focus-visible { color: var(--rose); }
 
   /* ---------- Hero: collage + text ---------- */
 
-  .hero {
-    padding: 40px 0 80px;
-  }
+  .hero { padding: 40px 0 80px; }
 
   .hero .wrap {
     display: grid;
@@ -209,19 +194,14 @@ function swatch($hue) {
     gap: 14px;
   }
 
-  .collage .block {
-    border-radius: 18px;
-  }
-
+  .collage .block { border-radius: 18px; }
   .collage .block:nth-child(1) { grid-row: 1 / 3; border-radius: 22px; }
 
   /* ---------- Section shell ---------- */
 
   section { padding: 56px 0; border-top: 1px solid var(--line); }
 
-  .section-head {
-    margin-bottom: 36px;
-  }
+  .section-head { margin-bottom: 36px; }
 
   .section-head .eyebrow {
     font-size: 0.8rem;
@@ -238,15 +218,11 @@ function swatch($hue) {
     margin: 0;
   }
 
-  /* ---------- Collaborations ---------- */
+  /* ---------- Projects ---------- */
 
-  .collab-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
+  .project-list { display: flex; flex-direction: column; }
 
-  .collab {
+  .project {
     display: grid;
     grid-template-columns: 90px 1fr auto;
     gap: 20px;
@@ -255,47 +231,36 @@ function swatch($hue) {
     border-bottom: 1px solid var(--line);
   }
 
-  .collab:first-child { border-top: 1px solid var(--line); }
+  .project:first-child { border-top: 1px solid var(--line); }
 
   @media (max-width: 620px) {
-    .collab { grid-template-columns: 60px 1fr; }
-    .collab .year { display: none; }
+    .project { grid-template-columns: 60px 1fr; }
+    .project .year { display: none; }
   }
 
-  .collab .swatch {
-    width: 64px;
-    height: 64px;
-    border-radius: 14px;
-  }
+  .project .swatch { width: 64px; height: 64px; border-radius: 14px; }
 
-  .collab h3 {
+  .project h3 {
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 1.02rem;
     margin: 0 0 4px;
   }
 
-  .collab .type {
-    font-size: 0.82rem;
-    color: var(--rose);
-    margin: 0 0 6px;
-  }
+  .project .type { font-size: 0.82rem; color: var(--rose); margin: 0 0 6px; }
 
-  .collab p.desc {
+  .project p.desc {
     font-size: 0.88rem;
     color: var(--ink-soft);
     margin: 0;
     max-width: 46ch;
   }
 
-  .collab .year {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-  }
+  .project .year { font-size: 0.85rem; color: var(--ink-soft); }
 
-  /* ---------- Now wearing ---------- */
+  /* ---------- Skills ---------- */
 
-  .now-list {
+  .skill-list {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
@@ -304,7 +269,7 @@ function swatch($hue) {
     margin: 0;
   }
 
-  .now-list li {
+  .skill-list li {
     font-size: 0.88rem;
     padding: 10px 18px;
     background: var(--blush);
@@ -406,15 +371,8 @@ function swatch($hue) {
     margin-bottom: 18px;
   }
 
-  .notice.success {
-    background: #eaf1e3;
-    color: #4c6b3c;
-  }
-
-  .notice.error {
-    background: #f7e3e1;
-    color: #96453c;
-  }
+  .notice.success { background: #eaf1e3; color: #4c6b3c; }
+  .notice.error { background: #f7e3e1; color: #96453c; }
 
   footer.site {
     padding: 32px 0 48px;
@@ -434,7 +392,7 @@ function swatch($hue) {
   <div class="wrap">
     <a class="mark" href="#top"><?= e($owner['name']) ?></a>
     <nav class="primary">
-      <a href="#work">Collaborations</a>
+      <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -463,19 +421,19 @@ function swatch($hue) {
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Selected work</span>
-        <h2>Collaborations</h2>
+        <h2>Projects</h2>
       </div>
 
-      <div class="collab-list">
-        <?php foreach ($collaborations as $c): ?>
-          <div class="collab">
-            <div class="swatch" style="background: <?= swatch($c['hue']) ?>;"></div>
+      <div class="project-list">
+        <?php foreach ($projects as $p): ?>
+          <div class="project">
+            <div class="swatch" style="background: <?= swatch($p['hue']) ?>;"></div>
             <div>
-              <h3><?= e($c['brand']) ?></h3>
-              <p class="type"><?= e($c['type']) ?></p>
-              <p class="desc"><?= e($c['description']) ?></p>
+              <h3><?= e($p['title']) ?></h3>
+              <p class="type"><?= e($p['type']) ?></p>
+              <p class="desc"><?= e($p['description']) ?></p>
             </div>
-            <div class="year"><?= e($c['year']) ?></div>
+            <div class="year"><?= e($p['year']) ?></div>
           </div>
         <?php endforeach; ?>
       </div>
@@ -486,14 +444,14 @@ function swatch($hue) {
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">A little about me</span>
-        <h2>Style should be easy</h2>
+        <h2>Design that gets built</h2>
       </div>
       <p style="max-width:56ch; color:var(--ink-soft); margin:0 0 28px;">
-        I spent four years as an assistant stylist before going independent, and I still build every wardrobe the same way I learned back then: start with what someone already owns and wears often, then fill the real gaps — not the aspirational ones.
+        I started as a front-end developer before moving into design, which means I still think in components and edge cases. I like projects where I can carry an idea from a rough sketch all the way to shipped code.
       </p>
-      <ul class="now-list">
-        <?php foreach ($now_wearing as $item): ?>
-          <li><?= e($item) ?></li>
+      <ul class="skill-list">
+        <?php foreach ($skills as $skill): ?>
+          <li><?= e($skill) ?></li>
         <?php endforeach; ?>
       </ul>
     </div>
@@ -508,7 +466,7 @@ function swatch($hue) {
 
       <div class="contact-grid">
         <div class="contact-info">
-          <p>For collaborations, styling requests, or press — send a note and I'll get back to you within a few days.</p>
+          <p>Have a project in mind, or just want to say hi? Send a note and I'll get back to you within a few days.</p>
           <a class="email" href="mailto:<?= e($owner['email']) ?>"><?= e($owner['email']) ?></a>
           <ul class="social">
             <?php foreach ($socials as $label => $url): ?>
