@@ -4,264 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Web Developer Portfolio</title>
+    <title>Douae Karmoun | Portfolio</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: url('/public/images/km.jpg') center center / cover no-repeat fixed;
-            color: #212021;
-        }
-
-        /* NAVBAR */
-        nav {
-            background: #ffaae7;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav h2 {
-            color: black;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        nav ul li a {
-            color: black;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        nav ul li a:hover {
-            color: rgb(146, 146, 146);
-        }
-
-        /* HOME */
-        #home {
-            min-height: 90vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: transparent;
-        }
-
-        #home > div {
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(6px);
-            padding: 50px 60px;
-            border-radius: 16px;
-        }
-
-        #home h1 {
-            font-size: 50px;
-            margin-bottom: 15px;
-        }
-
-        #home span {
-            color: #ffaae7;
-        }
-
-        #home p {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #ffaae7;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 80px 8%;
-        }
-
-        section h2 {
-            text-align: center;
-            font-size: 35px;
-            margin-bottom: 40px;
-        }
-
-        /* ABOUT */
-        .about {
-            max-width: 800px;
-            margin: auto;
-            text-align: center;
-            line-height: 1.8;
-            font-size: 18px;
-            color: #000000;
-        }
-
-        /* SKILLS */
-        .skills {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .skill {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 25px 40px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-            border: 1px solid #ffffff;
-        }
-
-        /* PROJECTS */
-        .projects {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        .project {
-            background: rgba(255, 255, 255, 0.85);
-            width: 300px;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-        }
-
-        .project h3 {
-            margin-bottom: 10px;
-            color: #111;
-        }
-
-        .project p {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        /* CONTACT */
-        .contact {
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .contact input,
-        .contact textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #111;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .contact textarea {
-            height: 150px;
-            resize: none;
-        }
-
-        .contact button {
-            background: #ffaae7;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* FOOTER */
-        footer {
-            background: #ffaae7;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* MOBILE */
-        @media (max-width: 700px) {
-
-            nav {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav ul {
-                gap: 12px;
-            }
-
-            #home h1 {
-                font-size: 35px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <!-- NAVBAR -->
-    <nav>
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">Douae<span>.</span></h2>
 
-        <h2>Douae</h2>
-
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-    </nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
 
     <!-- HOME -->
-    <section id="home">
+    <section id="home" class="hero">
 
-        <div>
+        <div class="hero-text">
 
-            <h1>Hello, I'm <span>Douae</span></h1>
+            <p class="hello">Hello, I'm</p>
 
-            <p>Web Developer Full Stack Developer</p>
+            <h1>Douae Karmoun</h1>
 
-            <a href="#projects" class="btn">
-                View My Work
-            </a>
+            <h2>Web Developer</h2>
 
+            <p>
+                I am a web development student passionate about
+                creating modern and responsive websites.
+            </p>
+
+            <div class="buttons">
+                <a href="#projects" class="btn">View My Projects</a>
+                <a href="#contact" class="btn secondary">Contact Me</a>
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            <div class="circle">
+                👩‍💻
+            </div>
         </div>
 
     </section>
 
 
     <!-- ABOUT -->
-    <section id="about">
+    <section id="about" class="section">
 
-        <h2>About Me</h2>
+        <h2 class="section-title">About Me</h2>
 
         <div class="about">
 
-            <p>
-                Hello! I'm a passionate Web Developer interested in
-                creating modern, responsive and user-friendly websites.
-                I enjoy developing web applications and learning new
-                technologies.
-            </p>
+            <div class="about-card">
+                <h3>Who Am I?</h3>
+
+                <p>
+                    My name is Douae Karmoun. I am a web development
+                    student interested in creating websites and
+                    applications.
+                </p>
+
+                <p>
+                    I am currently learning HTML, CSS, JavaScript,
+                    PHP and MySQL. My goal is to become a professional
+                    full-stack developer.
+                </p>
+            </div>
+
+            <div class="about-info">
+
+                <div>
+                    <strong>Name:</strong>
+                    <span>Douae Karmoun</span>
+                </div>
+
+                <div>
+                    <strong>Profession:</strong>
+                    <span>Web Developer</span>
+                </div>
+
+                <div>
+                    <strong>Location:</strong>
+                    <span>Morocco</span>
+                </div>
+
+                <div>
+                    <strong>Email:</strong>
+                    <span>douae@example.com</span>
+                </div>
+
+            </div>
 
         </div>
 
@@ -269,30 +112,50 @@
 
 
     <!-- SKILLS -->
-    <section id="skills">
+    <section id="skills" class="section skills-section">
 
-        <h2>My Skills</h2>
+        <h2 class="section-title">My Skills</h2>
 
         <div class="skills">
 
             <div class="skill">
                 <h3>HTML</h3>
+                <div class="progress">
+                    <span style="width: 90%;"></span>
+                </div>
+                <p>90%</p>
             </div>
 
             <div class="skill">
                 <h3>CSS</h3>
-            </div>
-
-            <div class="skill">
-                <h3>PHP</h3>
+                <div class="progress">
+                    <span style="width: 85%;"></span>
+                </div>
+                <p>85%</p>
             </div>
 
             <div class="skill">
                 <h3>JavaScript</h3>
+                <div class="progress">
+                    <span style="width: 75%;"></span>
+                </div>
+                <p>75%</p>
+            </div>
+
+            <div class="skill">
+                <h3>PHP</h3>
+                <div class="progress">
+                    <span style="width: 70%;"></span>
+                </div>
+                <p>70%</p>
             </div>
 
             <div class="skill">
                 <h3>MySQL</h3>
+                <div class="progress">
+                    <span style="width: 70%;"></span>
+                </div>
+                <p>70%</p>
             </div>
 
         </div>
@@ -301,44 +164,68 @@
 
 
     <!-- PROJECTS -->
-    <section id="projects">
+    <section id="projects" class="section">
 
-        <h2>My Projects</h2>
+        <h2 class="section-title">My Projects</h2>
 
         <div class="projects">
 
-            <div class="project">
+            <div class="project-card">
 
-                <h3>Portfolio Website</h3>
+                <div class="project-icon">📅</div>
+
+                <h3>Calendar Application</h3>
 
                 <p>
-                    A personal portfolio website developed using
-                    HTML, CSS and PHP.
+                    A PHP and MySQL calendar application for
+                    managing events and planning.
                 </p>
+
+                <div class="tags">
+                    <span>PHP</span>
+                    <span>MySQL</span>
+                    <span>CSS</span>
+                </div>
 
             </div>
 
 
-            <div class="project">
+            <div class="project-card">
 
-                <h3>Web Application</h3>
+                <div class="project-icon">🖼️</div>
+
+                <h3>Responsive Gallery</h3>
 
                 <p>
-                    A web application developed using PHP,
-                    MySQL, HTML and CSS.
+                    A modern responsive image gallery designed
+                    for desktop and mobile devices.
                 </p>
+
+                <div class="tags">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>Bootstrap</span>
+                </div>
 
             </div>
 
 
-            <div class="project">
+            <div class="project-card">
 
-                <h3>Responsive Website</h3>
+                <div class="project-icon">👨‍💼</div>
+
+                <h3>Employee Management</h3>
 
                 <p>
-                    A responsive website designed to work on
-                    computers, tablets and mobile devices.
+                    A CRUD application for adding, editing,
+                    deleting and displaying employees.
                 </p>
+
+                <div class="tags">
+                    <span>PHP</span>
+                    <span>MySQL</span>
+                    <span>JavaScript</span>
+                </div>
 
             </div>
 
@@ -348,13 +235,28 @@
 
 
     <!-- CONTACT -->
-    <section id="contact">
+    <section id="contact" class="section contact-section">
 
-        <h2>Contact Me</h2>
+        <h2 class="section-title">Contact Me</h2>
 
-        <div class="contact">
+        <div class="contact-container">
 
-            <form action="" method="POST">
+            <div class="contact-info">
+
+                <h3>Let's Talk</h3>
+
+                <p>
+                    Do you have a project or a question?
+                    Feel free to contact me.
+                </p>
+
+                <p>📧 douae@example.com</p>
+                <p>📍 Morocco</p>
+
+            </div>
+
+
+            <form action="contact.php" method="POST">
 
                 <input
                     type="text"
@@ -370,9 +272,17 @@
                     required
                 >
 
+                <input
+                    type="text"
+                    name="subject"
+                    placeholder="Subject"
+                    required
+                >
+
                 <textarea
                     name="message"
                     placeholder="Your Message"
+                    rows="6"
                     required
                 ></textarea>
 
@@ -391,10 +301,11 @@
     <footer>
 
         <p>
-            © <?php echo date("Y"); ?> PHMR. All rights reserved.
+            © 2026 Douae Karmoun. All Rights Reserved.
         </p>
 
     </footer>
+
 
 </body>
 </html>
