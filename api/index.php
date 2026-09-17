@@ -111,6 +111,7 @@
             text-align: center;
             line-height: 1.8;
             font-size: 18px;
+            color: #000000;
         }
 
         /* SKILLS */
