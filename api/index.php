@@ -1,401 +1,250 @@
 <?php
-session_start();
-
 /* =========================================================
    DOUAE KARMOUN - PORTFOLIO
    Single PHP File
    ========================================================= */
 
+session_start();
+
 /* =========================
    CONFIGURATION
-   ========================= */
+========================= */
 $config = [
-    'name'      => 'DOUAE KARMOUN',
-    'role'      => 'Stagiaire en développement web',
-    'email'     => 'karmoundouae2007@gmail.com',
-    'phone'     => '+212 6 98 65 80 64',
-    'country'   => 'Morocco',
-    'github'    => 'https://github.com/',
-    'linkedin'  => 'https://www.linkedin.com/',
-    'instagram' => 'https://www.instagram.com/km_duae?stkn=ZGd4N3Y1ZDJ4amZn',
+    'name'       => 'DOUAE KARMOUN',
+    'role'       => 'Stagiaire en développement web',
+    'email'      => 'douae.karmoun@example.com',
+    'phone'      => '+212 6 00 00 00 00',
+    'country'    => 'Morocco',
+    'github'     => 'https://github.com/',
+    'linkedin'   => 'https://www.linkedin.com/',
+    'instagram'  => 'https://www.instagram.com/'
 ];
 
-/* =========================
-   SECURITY HELPER
-   ========================= */
-function e($value): string
-{
-    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
-}
+/*
+|--------------------------------------------------------------------------
+| PDF DES ATELIERS
+|--------------------------------------------------------------------------
+| Mets tes fichiers PDF dans un dossier "pdf" à côté de index.php.
+|
+| Exemple :
+| pdf/
+|   M201_Atelier_1.pdf
+|   M201_Atelier_2.pdf
+|   M202_Atelier_1.pdf
+|
+| Ensuite, remplace simplement les liens ci-dessous.
+|--------------------------------------------------------------------------
+*/
 
-/* =========================
-   CONTACT FORM
-   ========================= */
-$formErrors = [];
-$formSuccess = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
-
-    $name    = trim($_POST['name'] ?? '');
-    $email   = trim($_POST['email'] ?? '');
-    $subject = trim($_POST['subject'] ?? '');
-    $message = trim($_POST['message'] ?? '');
-
-    if ($name === '' || mb_strlen($name) < 2) {
-        $formErrors[] = "Veuillez entrer un nom valide.";
-    }
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $formErrors[] = "Veuillez entrer une adresse email valide.";
-    }
-
-    if ($subject === '' || mb_strlen($subject) < 3) {
-        $formErrors[] = "Veuillez entrer un sujet.";
-    }
-
-    if ($message === '' || mb_strlen($message) < 10) {
-        $formErrors[] = "Le message doit contenir au moins 10 caractères.";
-    }
-
-    if (empty($formErrors)) {
-
-        /*
-         * Le formulaire est sécurisé côté serveur.
-         * Pour un vrai envoi email sur serveur configuré :
-         *
-         * $headers = "From: " . $email . "\r\n";
-         * $headers .= "Reply-To: " . $email . "\r\n";
-         * $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-         * mail($config['email'], $subject, $message, $headers);
-         */
-
-        $formSuccess = "Merci ! Votre message a bien été validé.";
-    }
-}
-
-/* =========================
-   MODULES + ATELIERS
-   Minimum 2 ateliers par module
-   ========================= */
 $modules = [
 
     [
         'id' => 'M201',
-        'title' => "Préparation d'un projet web",
-        'icon' => 'fa-lightbulb',
-        'description' => "Analyse, préparation et organisation d'un projet web avant son développement.",
+        'title' => 'Préparation d’un projet web',
+        'icon' => 'fa-solid fa-lightbulb',
+        'description' => 'Ce module permet de préparer, analyser et organiser un projet web avant son développement.',
         'topics' => [
             'Analyse des besoins',
             'Cahier des charges',
             'Conception',
-            'Organisation d’un projet web',
-            'Ateliers / projets scolaires'
+            'Organisation d’un projet web'
         ],
         'projects' => [
-
             [
                 'atelier' => 'Atelier 1',
                 'name' => 'Agence immobilière',
-                'description' => "Création de la préparation d'un site web pour une agence immobilière moderne.",
-                'objectives' => [
-                    'Analyser les besoins du client',
-                    'Identifier les utilisateurs',
-                    'Préparer les fonctionnalités',
-                    'Organiser les différentes étapes du projet'
-                ],
-                'technologies' => ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-                'skills' => ['Analyse', 'Organisation', 'Conception', 'Gestion de projet'],
-                'image' => 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'description' => 'Conception d’un projet web pour une agence immobilière.',
+                'objectives' => 'Analyser les besoins du client et préparer les différentes étapes du projet.',
+                'technologies' => 'HTML, CSS, JavaScript, PHP, MySQL',
+                'skills' => 'Analyse, conception, organisation et préparation de projet',
+                'pdf' => 'pdf/M201_Atelier_1.pdf'
             ],
-
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'Cahier des charges - Boutique web',
-                'description' => "Préparation d'un cahier des charges pour une boutique en ligne.",
-                'objectives' => [
-                    'Définir les objectifs du projet',
-                    'Identifier les fonctionnalités',
-                    'Définir les contraintes',
-                    'Planifier les étapes du développement'
-                ],
-                'technologies' => ['Analyse', 'UML', 'Cahier des charges'],
-                'skills' => ['Analyse des besoins', 'Planification', 'Documentation'],
-                'image' => 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Site vitrine professionnel',
+                'description' => 'Préparation d’un site vitrine moderne pour une entreprise.',
+                'objectives' => 'Identifier les besoins et organiser la structure générale du site.',
+                'technologies' => 'HTML, CSS, JavaScript',
+                'skills' => 'Cahier des charges, wireframe et organisation',
+                'pdf' => 'pdf/M201_Atelier_2.pdf'
             ]
-
         ]
     ],
 
     [
         'id' => 'M202',
         'title' => 'Approche agile',
-        'icon' => 'fa-people-group',
-        'description' => "Découverte des méthodes agiles et du travail collaboratif dans les projets web.",
+        'icon' => 'fa-solid fa-arrows-rotate',
+        'description' => 'Découverte des méthodes agiles et du travail collaboratif dans les projets web.',
         'topics' => [
             'Méthodes agiles',
             'Travail en équipe',
             'Scrum',
-            'Gestion de projet',
-            'Ateliers / projets scolaires'
+            'Gestion de projet'
         ],
         'projects' => [
-
             [
                 'atelier' => 'Atelier 1',
-                'name' => 'Organisation Scrum',
-                'description' => "Mise en place d'une organisation Scrum pour gérer un projet web en équipe.",
-                'objectives' => [
-                    'Comprendre Scrum',
-                    'Créer un backlog',
-                    'Organiser les tâches',
-                    'Répartir le travail entre les membres'
-                ],
-                'technologies' => ['Scrum', 'Trello', 'Git'],
-                'skills' => ['Travail en équipe', 'Organisation', 'Communication'],
-                'image' => 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Gestion de projet Scrum',
+                'description' => 'Mise en place d’une organisation de projet selon Scrum.',
+                'objectives' => 'Comprendre les rôles, les tâches et les différentes étapes d’un projet agile.',
+                'technologies' => 'Trello, GitHub, Documentation',
+                'skills' => 'Travail en équipe, Scrum, organisation',
+                'pdf' => 'pdf/M202_Atelier_1.pdf'
             ],
-
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'Gestion d’un projet en équipe',
-                'description' => "Simulation d'un projet web avec répartition des tâches et suivi de l'avancement.",
-                'objectives' => [
-                    'Créer les tâches du projet',
-                    'Attribuer les responsabilités',
-                    'Suivre l’avancement',
-                    'Présenter les résultats'
-                ],
-                'technologies' => ['Scrum', 'Trello', 'GitHub'],
-                'skills' => ['Collaboration', 'Gestion de projet', 'Communication'],
-                'image' => 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Planification d’un projet web',
+                'description' => 'Création d’un planning pour organiser le développement d’une application.',
+                'objectives' => 'Découper le projet en tâches et suivre son avancement.',
+                'technologies' => 'Trello, GitHub',
+                'skills' => 'Planification, communication et gestion des tâches',
+                'pdf' => 'pdf/M202_Atelier_2.pdf'
             ]
-
         ]
     ],
 
     [
         'id' => 'M203',
         'title' => 'Gestion des données',
-        'icon' => 'fa-database',
-        'description' => "Conception, organisation et manipulation des bases de données.",
+        'icon' => 'fa-solid fa-database',
+        'description' => 'Création, organisation et manipulation des bases de données utilisées dans les applications web.',
         'topics' => [
             'Conception de bases de données',
             'Modélisation',
             'SQL',
             'MySQL',
-            'Manipulation des données',
-            'Ateliers / projets scolaires'
+            'Manipulation des données'
         ],
         'projects' => [
-
             [
                 'atelier' => 'Atelier 1',
                 'name' => 'Gestion des employés',
-                'description' => "Création d'une base de données permettant de gérer les employés d'une entreprise.",
-                'objectives' => [
-                    'Créer les tables',
-                    'Définir les relations',
-                    'Insérer les données',
-                    'Effectuer des requêtes SQL'
-                ],
-                'technologies' => ['MySQL', 'SQL', 'PHPMyAdmin'],
-                'skills' => ['SQL', 'Modélisation', 'Base de données'],
-                'image' => 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'description' => 'Création d’une base de données permettant de gérer des employés.',
+                'objectives' => 'Créer les tables, les relations et manipuler les données avec SQL.',
+                'technologies' => 'MySQL, SQL',
+                'skills' => 'Base de données, requêtes SQL, relations',
+                'pdf' => 'pdf/M203_Atelier_1.pdf'
             ],
-
             [
                 'atelier' => 'Atelier 2',
                 'name' => 'Gestion des tâches',
-                'description' => "Base de données permettant de gérer des tâches, employés, durées et coûts.",
-                'objectives' => [
-                    'Créer les tables',
-                    'Ajouter des contraintes',
-                    'Utiliser les requêtes SELECT',
-                    'Modifier et supprimer les données'
-                ],
-                'technologies' => ['MySQL', 'SQL', 'PHP'],
-                'skills' => ['CRUD', 'SQL', 'Relations', 'Contraintes'],
-                'image' => 'https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'description' => 'Base de données permettant de gérer les tâches d’un projet.',
+                'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
+                'technologies' => 'MySQL, SQL',
+                'skills' => 'Modélisation, SELECT, INSERT, UPDATE, DELETE',
+                'pdf' => 'pdf/M203_Atelier_2.pdf'
             ]
-
         ]
     ],
 
     [
         'id' => 'M204',
         'title' => 'Développement Front-End',
-        'icon' => 'fa-code',
-        'description' => "Création d'interfaces web modernes, interactives et responsive.",
+        'icon' => 'fa-solid fa-code',
+        'description' => 'Développement d’interfaces web modernes, responsives et interactives.',
         'topics' => [
             'HTML',
             'CSS',
             'JavaScript',
-            'Interfaces web modernes',
             'Responsive Design',
-            'Interactivité',
-            'Ateliers / projets scolaires'
+            'Interactivité'
         ],
         'projects' => [
-
             [
                 'atelier' => 'Atelier 1',
-                'name' => 'Galerie photos responsive',
-                'description' => "Création d'une galerie d'images moderne et responsive.",
-                'objectives' => [
-                    'Créer une interface responsive',
-                    'Utiliser Bootstrap',
-                    'Organiser les images',
-                    'Adapter le design au mobile'
-                ],
-                'technologies' => ['HTML', 'CSS', 'Bootstrap 5'],
-                'skills' => ['Responsive Design', 'UI Design', 'HTML/CSS'],
-                'image' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Galerie d’images responsive',
+                'description' => 'Création d’une galerie d’images moderne adaptée aux différents écrans.',
+                'objectives' => 'Créer une interface responsive avec des interactions JavaScript.',
+                'technologies' => 'HTML, CSS, JavaScript, Bootstrap',
+                'skills' => 'Responsive Design, DOM, événements JavaScript',
+                'pdf' => 'pdf/M204_Atelier_1.pdf'
             ],
-
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'Application Calendar',
-                'description' => "Création d'une interface de calendrier moderne pour organiser les événements.",
-                'objectives' => [
-                    'Créer une grille calendrier',
-                    'Manipuler le DOM',
-                    'Ajouter des interactions',
-                    'Créer une interface mobile'
-                ],
-                'technologies' => ['HTML', 'CSS', 'JavaScript'],
-                'skills' => ['DOM', 'JavaScript', 'Responsive Design'],
-                'image' => 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Application calendrier',
+                'description' => 'Création d’une interface calendrier moderne et responsive.',
+                'objectives' => 'Afficher les informations dans une interface organisée et interactive.',
+                'technologies' => 'HTML, CSS, JavaScript, Bootstrap',
+                'skills' => 'UI Design, JavaScript, responsive design',
+                'pdf' => 'pdf/M204_Atelier_2.pdf'
             ]
-
         ]
     ],
 
     [
         'id' => 'M205',
         'title' => 'Développement Back-End',
-        'icon' => 'fa-server',
-        'description' => "Développement de fonctionnalités serveur avec PHP et bases de données.",
+        'icon' => 'fa-solid fa-server',
+        'description' => 'Développement de la logique serveur et connexion des applications web aux bases de données.',
         'topics' => [
             'PHP',
             'Serveur',
             'Logique métier',
             'Connexion à une base de données',
-            'API',
-            'Fonctionnalités d’une application web',
-            'Ateliers / projets scolaires'
+            'API'
         ],
         'projects' => [
-
             [
                 'atelier' => 'Atelier 1',
-                'name' => 'CRUD Gestion des stagiaires',
-                'description' => "Application PHP permettant d'ajouter, modifier, afficher et supprimer des stagiaires.",
-                'objectives' => [
-                    'Créer un formulaire',
-                    'Connecter PHP à MySQL',
-                    'Créer les opérations CRUD',
-                    'Afficher les données dynamiquement'
-                ],
-                'technologies' => ['PHP', 'MySQL', 'HTML', 'CSS'],
-                'skills' => ['PHP', 'CRUD', 'MySQL', 'Backend'],
-                'image' => 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Application CRUD PHP',
+                'description' => 'Application permettant d’ajouter, modifier, supprimer et afficher des données.',
+                'objectives' => 'Comprendre le fonctionnement d’une application PHP connectée à MySQL.',
+                'technologies' => 'PHP, MySQL, HTML, CSS',
+                'skills' => 'CRUD, PHP, SQL, formulaires',
+                'pdf' => 'pdf/M205_Atelier_1.pdf'
             ],
-
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'Application de gestion',
-                'description' => "Développement d'une application web avec authentification et gestion des données.",
-                'objectives' => [
-                    'Créer une connexion utilisateur',
-                    'Gérer les sessions',
-                    'Sécuriser les formulaires',
-                    'Manipuler une base de données'
-                ],
-                'technologies' => ['PHP', 'MySQL', 'PDO', 'JavaScript'],
-                'skills' => ['Backend', 'Sessions', 'Sécurité', 'PDO'],
-                'image' => 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Gestion des stagiaires',
+                'description' => 'Application web permettant de gérer les informations des stagiaires.',
+                'objectives' => 'Créer une application complète avec formulaires et base de données.',
+                'technologies' => 'PHP, MySQL, HTML, CSS, JavaScript',
+                'skills' => 'PHP, PDO, MySQL, validation des formulaires',
+                'pdf' => 'pdf/M205_Atelier_2.pdf'
             ]
-
         ]
     ],
 
     [
         'id' => 'M206',
         'title' => 'Création d’une application Cloud Native',
-        'icon' => 'fa-cloud',
-        'description' => "Découverte des technologies Cloud et des applications web modernes.",
+        'icon' => 'fa-solid fa-cloud',
+        'description' => 'Découverte des technologies modernes permettant de développer et déployer des applications web dans le Cloud.',
         'topics' => [
             'Technologies Cloud',
             'Applications Cloud Native',
             'Déploiement',
             'Services web',
-            'Outils modernes du développement web',
-            'Ateliers / projets scolaires'
+            'Outils modernes'
         ],
         'projects' => [
-
             [
                 'atelier' => 'Atelier 1',
-                'name' => 'Déploiement d’un site web',
-                'description' => "Préparation et déploiement d'un site web sur une plateforme Cloud.",
-                'objectives' => [
-                    'Préparer une application',
-                    'Découvrir le Cloud',
-                    'Déployer un site',
-                    'Tester l’application en ligne'
-                ],
-                'technologies' => ['Cloud', 'Git', 'GitHub'],
-                'skills' => ['Déploiement', 'Cloud', 'Git'],
-                'image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Application web Cloud',
+                'description' => 'Conception d’une petite application web pensée pour être déployée en ligne.',
+                'objectives' => 'Comprendre les principes de base du Cloud et du déploiement.',
+                'technologies' => 'HTML, CSS, JavaScript, PHP',
+                'skills' => 'Déploiement, environnement web et services Cloud',
+                'pdf' => 'pdf/M206_Atelier_1.pdf'
             ],
-
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'Application Cloud Native',
-                'description' => "Conception d'une petite application web pensée pour un environnement Cloud.",
-                'objectives' => [
-                    'Comprendre le fonctionnement Cloud',
-                    'Structurer une application',
-                    'Utiliser des services web',
-                    'Préparer le déploiement'
-                ],
-                'technologies' => ['Cloud', 'Web Services', 'GitHub'],
-                'skills' => ['Cloud Native', 'Déploiement', 'Architecture web'],
-                'image' => 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Déploiement d’un site web',
+                'description' => 'Préparation et mise en ligne d’un projet web.',
+                'objectives' => 'Découvrir les étapes nécessaires pour rendre une application accessible en ligne.',
+                'technologies' => 'Git, GitHub, Hosting',
+                'skills' => 'Déploiement, versioning et configuration',
+                'pdf' => 'pdf/M206_Atelier_2.pdf'
             ]
-
         ]
     ],
 
     [
         'id' => 'M207',
         'title' => 'Projet de synthèse',
-        'icon' => 'fa-rocket',
-        'description' => "Mise en pratique de toutes les compétences dans un projet web complet.",
+        'icon' => 'fa-solid fa-laptop-code',
+        'description' => 'Réalisation d’un projet web complet réunissant les compétences acquises durant la formation.',
         'topics' => [
             'Projet web complet',
             'Analyse',
@@ -403,211 +252,268 @@ $modules = [
             'Front-End',
             'Back-End',
             'Base de données',
-            'Déploiement',
-            'Présentation du projet final'
+            'Déploiement'
         ],
         'projects' => [
-
             [
                 'atelier' => 'Atelier 1',
-                'name' => 'Application web complète',
-                'description' => "Réalisation d'une application web intégrant Front-End, Back-End et base de données.",
-                'objectives' => [
-                    'Analyser le besoin',
-                    'Concevoir l’interface',
-                    'Développer le Front-End',
-                    'Développer le Back-End',
-                    'Connecter la base de données'
-                ],
-                'technologies' => ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-                'skills' => ['Full Stack', 'Gestion de projet', 'Base de données'],
-                'image' => 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Projet web complet',
+                'description' => 'Réalisation d’une application web complète avec plusieurs fonctionnalités.',
+                'objectives' => 'Mettre en pratique les compétences Front-End, Back-End et base de données.',
+                'technologies' => 'HTML, CSS, JavaScript, PHP, MySQL',
+                'skills' => 'Gestion complète d’un projet web',
+                'pdf' => 'pdf/M207_Atelier_1.pdf'
             ],
-
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'Portfolio professionnel',
-                'description' => "Création d'un portfolio personnel moderne pour présenter les compétences et les projets.",
-                'objectives' => [
-                    'Créer une identité visuelle',
-                    'Présenter les compétences',
-                    'Présenter les projets',
-                    'Créer un site responsive'
-                ],
-                'technologies' => ['PHP', 'HTML', 'CSS', 'JavaScript'],
-                'skills' => ['Portfolio', 'UI/UX', 'Responsive', 'Animation'],
-                'image' => 'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'Projet final',
+                'description' => 'Projet de synthèse présentant l’ensemble des compétences développées.',
+                'objectives' => 'Concevoir, développer et présenter une application web fonctionnelle.',
+                'technologies' => 'HTML, CSS, JavaScript, PHP, MySQL',
+                'skills' => 'Analyse, développement, base de données et présentation',
+                'pdf' => 'pdf/M207_Atelier_2.pdf'
             ]
-
         ]
     ],
 
     [
         'id' => 'M208',
         'title' => 'Communication professionnelle',
-        'icon' => 'fa-comments',
-        'description' => "Développement des compétences de communication et préparation à l'insertion professionnelle.",
+        'icon' => 'fa-solid fa-comments',
+        'description' => 'Développement des compétences de communication nécessaires dans le monde professionnel.',
         'topics' => [
             'Communication professionnelle',
             'Présentation',
             'Travail en équipe',
-            'Préparation à l’insertion professionnelle',
             'CV',
             'Entretien',
-            'Ateliers / projets scolaires'
+            'Insertion professionnelle'
         ],
         'projects' => [
-
             [
                 'atelier' => 'Atelier 1',
                 'name' => 'Présentation professionnelle',
-                'description' => "Préparation et présentation orale d'un projet web devant un groupe.",
-                'objectives' => [
-                    'Préparer une présentation',
-                    'Présenter un projet clairement',
-                    'Améliorer la communication orale',
-                    'Répondre aux questions'
-                ],
-                'technologies' => ['PowerPoint', 'Canva'],
-                'skills' => ['Communication', 'Présentation', 'Confiance en soi'],
-                'image' => 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'description' => 'Préparation et réalisation d’une présentation professionnelle.',
+                'objectives' => 'Apprendre à présenter un sujet clairement devant un public.',
+                'technologies' => 'PowerPoint, Canva',
+                'skills' => 'Communication, présentation et prise de parole',
+                'pdf' => 'pdf/M208_Atelier_1.pdf'
             ],
-
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'CV et entretien professionnel',
-                'description' => "Création d'un CV professionnel et préparation à un entretien d'embauche.",
-                'objectives' => [
-                    'Créer un CV moderne',
-                    'Présenter ses compétences',
-                    'Préparer les questions d’entretien',
-                    'Améliorer son expression professionnelle'
-                ],
-                'technologies' => ['Canva', 'Word'],
-                'skills' => ['CV', 'Entretien', 'Communication professionnelle'],
-                'image' => 'https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=900&q=80',
-                'github' => '#',
-                'link' => '#'
+                'name' => 'CV et entretien',
+                'description' => 'Préparation d’un CV professionnel et simulation d’un entretien.',
+                'objectives' => 'Se préparer à la recherche d’un stage ou d’un emploi.',
+                'technologies' => 'Canva, Word',
+                'skills' => 'CV, communication et entretien professionnel',
+                'pdf' => 'pdf/M208_Atelier_2.pdf'
             ]
-
         ]
     ]
 ];
 
-/* =========================
-   FLATTEN PROJECTS
-   ========================= */
-$allProjects = [];
 
-foreach ($modules as $module) {
-    foreach ($module['projects'] as $project) {
-        $project['module'] = $module['id'];
-        $project['moduleTitle'] = $module['title'];
-        $allProjects[] = $project;
+/* =========================
+   CONTACT FORM
+========================= */
+
+$formErrors = [];
+$formSuccess = '';
+
+function e($value)
+{
+    return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
+
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $subject = trim($_POST['subject'] ?? '');
+    $message = trim($_POST['message'] ?? '');
+
+    if ($name === '') {
+        $formErrors[] = 'Veuillez entrer votre nom.';
+    }
+
+    if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $formErrors[] = 'Veuillez entrer une adresse email valide.';
+    }
+
+    if ($subject === '') {
+        $formErrors[] = 'Veuillez entrer un sujet.';
+    }
+
+    if ($message === '' || strlen($message) < 10) {
+        $formErrors[] = 'Le message doit contenir au moins 10 caractères.';
+    }
+
+    if (empty($formErrors)) {
+
+        /*
+         * Protection de base :
+         * - trim()
+         * - htmlspecialchars()
+         * - validation email
+         * - aucune requête SQL directe avec les données utilisateur
+         */
+
+        $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $safeEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+        $safeSubject = htmlspecialchars($subject, ENT_QUOTES, 'UTF-8');
+        $safeMessage = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+
+        /*
+         * Pour utiliser mail() réellement, configurez votre serveur SMTP.
+         * Le formulaire reste fonctionnel côté validation même sur XAMPP.
+         */
+
+        $mailBody =
+            "Nom : " . $safeName . "\n" .
+            "Email : " . $safeEmail . "\n\n" .
+            "Message :\n" . $safeMessage;
+
+        /*
+         * Décommente si ton serveur mail est configuré :
+         *
+         * $headers = "From: " . $safeEmail . "\r\n";
+         * $headers .= "Reply-To: " . $safeEmail . "\r\n";
+         * mail($config['email'], $safeSubject, $mailBody, $headers);
+         */
+
+        $formSuccess = 'Votre message a été validé avec succès. Merci pour votre message !';
+
+        $name = '';
+        $email = '';
+        $subject = '';
+        $message = '';
     }
 }
 
-$projectJson = json_encode(
-    $allProjects,
-    JSON_UNESCAPED_UNICODE |
-    JSON_HEX_TAG |
-    JSON_HEX_APOS |
-    JSON_HEX_QUOT |
-    JSON_HEX_AMP
-);
 
+/* =========================
+   FLATTEN PROJECTS
+========================= */
+
+$allProjects = [];
+
+foreach ($modules as $module) {
+
+    foreach ($module['projects'] as $project) {
+
+        $project['module'] = $module['id'];
+        $project['moduleTitle'] = $module['title'];
+
+        $allProjects[] = $project;
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?= e($config['name']) ?> | Portfolio</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Portfolio professionnel de DOUAE KARMOUN - Stagiaire en développement web">
+    <meta name="description"
+          content="Portfolio de DOUAE KARMOUN - Stagiaire en développement web">
+
+    <title>DOUAE KARMOUN | Portfolio</title>
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
 
-        /* =========================================================
+        /* =====================================================
            ROOT
-           ========================================================= */
+        ===================================================== */
 
         :root {
+
             --pink: #d88b9b;
             --dark-pink: #b9677b;
             --light-pink: #f8e5e8;
-            --soft-pink: #fff0f3;
 
-            --purple: #b99be7;
+            --purple: #a98bd4;
             --light-purple: #eee7fa;
 
             --cream: #fffaf7;
-            --beige: #f3e5dc;
-
             --white: #ffffff;
-            --text: #4b3a3d;
-            --text-light: #806d72;
 
-            --border: rgba(216, 139, 155, .20);
+            --text: #4b3a3d;
+            --muted: #816f73;
+
+            --border: rgba(216, 139, 155, .18);
 
             --shadow:
-                0 15px 45px rgba(111, 75, 84, .10);
+                0 15px 45px rgba(85, 54, 63, .10);
 
             --shadow-hover:
-                0 25px 70px rgba(111, 75, 84, .18);
+                0 25px 70px rgba(185, 103, 123, .18);
 
             --gradient:
-                linear-gradient(135deg, #d88b9b, #b99be7);
+                linear-gradient(
+                    135deg,
+                    #d88b9b 0%,
+                    #c991b9 45%,
+                    #a98bd4 100%
+                );
 
             --gradient-soft:
-                linear-gradient(135deg, #fff0f3, #eee7fa);
+                linear-gradient(
+                    135deg,
+                    rgba(248,229,232,.95),
+                    rgba(238,231,250,.95)
+                );
 
             --radius: 24px;
 
-            --transition: .35s cubic-bezier(.4, 0, .2, 1);
+            --transition: .35s ease;
         }
 
-        [data-theme="dark"] {
-            --cream: #17141a;
-            --white: #211c25;
+
+        /* =====================================================
+           DARK MODE
+        ===================================================== */
+
+        body.dark {
+
+            --cream: #18151a;
+            --white: #211d23;
+
             --text: #f8eef1;
-            --text-light: #c9b8be;
+            --muted: #c5b5bb;
 
-            --light-pink: #36252c;
-            --soft-pink: #2b2027;
-            --light-purple: #2d2639;
-            --beige: #30272b;
+            --light-pink: #30232a;
+            --light-purple: #292331;
 
-            --border: rgba(255, 255, 255, .10);
+            --border: rgba(255,255,255,.08);
 
             --shadow:
-                0 15px 45px rgba(0, 0, 0, .30);
-
-            --shadow-hover:
-                0 25px 70px rgba(0, 0, 0, .45);
+                0 15px 45px rgba(0,0,0,.25);
         }
 
-        /* =========================================================
+
+        /* =====================================================
            RESET
-           ========================================================= */
+        ===================================================== */
 
         * {
             margin: 0;
@@ -617,20 +523,34 @@ $projectJson = json_encode(
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 90px;
         }
 
         body {
-            font-family: "DM Sans", sans-serif;
-            background: var(--cream);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-            transition: background .3s ease, color .3s ease;
-        }
 
-        body.loaded {
+            font-family: 'DM Sans', sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(216,139,155,.08),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(169,139,212,.10),
+                    transparent 30%
+                ),
+                var(--cream);
+
+            color: var(--text);
+
+            line-height: 1.7;
+
             overflow-x: hidden;
+
+            transition:
+                background .4s ease,
+                color .4s ease;
         }
 
         a {
@@ -638,10 +558,14 @@ $projectJson = json_encode(
             color: inherit;
         }
 
+        ul {
+            list-style: none;
+        }
+
         button,
         input,
         textarea {
-            font: inherit;
+            font-family: inherit;
         }
 
         img {
@@ -649,28 +573,31 @@ $projectJson = json_encode(
             display: block;
         }
 
-        .container {
-            width: min(1180px, calc(100% - 40px));
-            margin: auto;
+        ::selection {
+            background: var(--pink);
+            color: white;
         }
 
-        /* =========================================================
+
+        /* =====================================================
            LOADER
-           ========================================================= */
+        ===================================================== */
 
         #loader {
+
             position: fixed;
+
             inset: 0;
+
             z-index: 99999;
 
             display: flex;
-            align-items: center;
+
             justify-content: center;
 
-            background:
-                radial-gradient(circle at 30% 30%, rgba(216,139,155,.35), transparent 35%),
-                radial-gradient(circle at 70% 70%, rgba(185,155,231,.35), transparent 35%),
-                var(--cream);
+            align-items: center;
+
+            background: var(--cream);
 
             transition:
                 opacity .8s ease,
@@ -680,7 +607,6 @@ $projectJson = json_encode(
         #loader.hide {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
         }
 
         .loader-content {
@@ -688,57 +614,51 @@ $projectJson = json_encode(
         }
 
         .loader-logo {
-            width: 90px;
-            height: 90px;
-            margin: auto;
 
-            display: grid;
-            place-items: center;
+            width: 100px;
+            height: 100px;
 
             border-radius: 50%;
 
-            background: var(--gradient);
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            margin: auto;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 2.1rem;
+
+            font-weight: 700;
 
             color: white;
 
-            font-family: "Playfair Display", serif;
-            font-size: 34px;
-            font-weight: 700;
+            background: var(--gradient);
 
             box-shadow:
                 0 0 0 10px rgba(216,139,155,.08),
-                0 0 0 20px rgba(185,155,231,.06);
+                0 0 60px rgba(216,139,155,.3);
 
             animation:
-                loaderPulse 1.5s infinite ease-in-out;
+                loaderPulse 1.5s infinite;
         }
 
-        .loader-text {
-            margin-top: 25px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            font-size: 13px;
-        }
+        .loader-content p {
 
-        .loader-bar {
-            width: 180px;
-            height: 4px;
-            margin: 20px auto 0;
-            overflow: hidden;
-            border-radius: 10px;
-            background: var(--light-pink);
-        }
+            margin-top: 22px;
 
-        .loader-bar span {
-            display: block;
-            width: 50%;
-            height: 100%;
-            background: var(--gradient);
-            animation: loaderBar 1.2s infinite ease-in-out;
+            color: var(--muted);
+
+            font-size: .9rem;
+
+            letter-spacing: 2px;
         }
 
         @keyframes loaderPulse {
-            0%,100% {
+
+            0%, 100% {
                 transform: scale(1);
             }
 
@@ -747,97 +667,96 @@ $projectJson = json_encode(
             }
         }
 
-        @keyframes loaderBar {
-            0% {
-                transform: translateX(-100%);
-            }
 
-            100% {
-                transform: translateX(300%);
-            }
-        }
-
-        /* =========================================================
+        /* =====================================================
            BACKGROUND BLOBS
-           ========================================================= */
-
-        .background-decoration {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: -2;
-        }
+        ===================================================== */
 
         .blob {
-            position: absolute;
+
+            position: fixed;
+
+            width: 380px;
+            height: 380px;
+
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: .22;
-            animation: blobMove 12s ease-in-out infinite alternate;
+
+            filter: blur(70px);
+
+            opacity: .12;
+
+            pointer-events: none;
+
+            z-index: -2;
+
+            animation: blobMove 14s ease-in-out infinite alternate;
         }
 
-        .blob-1 {
-            width: 400px;
-            height: 400px;
-            background: #e9a4b3;
-            top: 0;
-            left: -150px;
+        .blob-one {
+
+            background: var(--pink);
+
+            top: 5%;
+            left: -180px;
         }
 
-        .blob-2 {
-            width: 350px;
-            height: 350px;
-            background: #c9afea;
-            right: -120px;
-            top: 35%;
-            animation-delay: -4s;
-        }
+        .blob-two {
 
-        .blob-3 {
-            width: 300px;
-            height: 300px;
-            background: #f4c7d0;
-            left: 30%;
-            bottom: -150px;
-            animation-delay: -7s;
+            background: var(--purple);
+
+            bottom: 0;
+            right: -180px;
+
+            animation-delay: -6s;
         }
 
         @keyframes blobMove {
+
             from {
-                transform: translate(0, 0) scale(1);
+                transform: translate(0,0) scale(1);
             }
 
             to {
-                transform: translate(60px, -50px) scale(1.15);
+                transform: translate(100px,70px) scale(1.25);
             }
         }
 
-        /* =========================================================
-           PARTICLES
-           ========================================================= */
 
-        #particles {
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        .particles {
+
             position: fixed;
+
             inset: 0;
+
             pointer-events: none;
+
             z-index: -1;
-            overflow: hidden;
         }
 
         .particle {
+
             position: absolute;
-            width: 6px;
-            height: 6px;
+
+            width: 5px;
+            height: 5px;
+
             border-radius: 50%;
+
             background: var(--pink);
-            opacity: .3;
-            animation: particleFloat linear infinite;
+
+            opacity: .25;
+
+            animation: particleFloat 8s linear infinite;
         }
 
         @keyframes particleFloat {
+
             from {
-                transform: translateY(110vh) rotate(0);
+                transform: translateY(110vh) rotate(0deg);
             }
 
             to {
@@ -845,388 +764,627 @@ $projectJson = json_encode(
             }
         }
 
-        /* =========================================================
-           NAVBAR
-           ========================================================= */
 
-        .navbar {
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        header {
+
             position: fixed;
+
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
+
             z-index: 1000;
 
-            padding: 20px 0;
+            padding: 18px 5%;
 
-            transition:
-                padding .3s ease,
-                background .3s ease,
-                box-shadow .3s ease;
+            transition: var(--transition);
         }
 
-        .navbar.scrolled {
-            padding: 12px 0;
+        header.scrolled {
 
-            background: rgba(255, 250, 247, .80);
+            padding: 10px 5%;
+
+            background:
+                rgba(255,255,255,.75);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 10px 40px rgba(75,58,61,.08);
+        }
+
+        body.dark header.scrolled {
+            background: rgba(25,21,28,.78);
+        }
+
+        .navbar {
+
+            max-width: 1250px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 12px 20px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 50px;
+
+            background:
+                rgba(255,255,255,.55);
 
             backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            box-shadow: 0 10px 30px rgba(70, 40, 50, .08);
         }
 
-        [data-theme="dark"] .navbar.scrolled {
-            background: rgba(23, 20, 26, .80);
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
+        body.dark .navbar {
+            background: rgba(33,29,35,.65);
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
 
-            font-family: "Playfair Display", serif;
-            font-size: 22px;
+            font-family: 'Playfair Display', serif;
+
+            font-size: 1.35rem;
+
             font-weight: 700;
-        }
 
-        .logo-mark {
-            width: 43px;
-            height: 43px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 14px;
-
-            color: white;
             background: var(--gradient);
 
-            box-shadow: 0 8px 25px rgba(216,139,155,.25);
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
         }
 
         .nav-links {
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
-            list-style: none;
         }
 
         .nav-links a {
+
             position: relative;
+
             padding: 9px 13px;
 
-            font-size: 14px;
-            font-weight: 600;
+            font-size: .9rem;
 
-            color: var(--text-light);
+            color: var(--text);
 
             transition: var(--transition);
         }
 
         .nav-links a::after {
-            content: "";
+
+            content: '';
+
             position: absolute;
+
             left: 13px;
             right: 13px;
-            bottom: 3px;
+
+            bottom: 2px;
 
             height: 2px;
+
+            border-radius: 20px;
 
             background: var(--gradient);
 
             transform: scaleX(0);
+
             transform-origin: center;
 
             transition: var(--transition);
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
+        .nav-links a:hover {
             color: var(--dark-pink);
         }
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
+        .nav-links a:hover::after {
             transform: scaleX(1);
         }
 
         .nav-actions {
+
             display: flex;
+
             align-items: center;
-            gap: 10px;
+
+            gap: 8px;
         }
 
-        .theme-btn,
-        .menu-btn {
-            width: 42px;
-            height: 42px;
+        .icon-btn {
+
+            width: 38px;
+            height: 38px;
 
             border: 1px solid var(--border);
+
             border-radius: 50%;
 
-            display: grid;
-            place-items: center;
-
             background: var(--white);
+
             color: var(--text);
 
             cursor: pointer;
 
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
             transition: var(--transition);
         }
 
-        .theme-btn:hover,
-        .menu-btn:hover {
-            transform: translateY(-3px);
-            color: white;
-            background: var(--gradient);
-            border-color: transparent;
+        .icon-btn:hover {
+
+            transform: translateY(-3px) rotate(5deg);
+
+            color: var(--dark-pink);
+
+            box-shadow: var(--shadow);
         }
 
-        .menu-btn {
+        .menu-toggle {
             display: none;
         }
 
-        /* =========================================================
-           HERO
-           ========================================================= */
 
-        .hero {
-            min-height: 100vh;
-            padding: 150px 0 90px;
+        /* =====================================================
+           GENERAL
+        ===================================================== */
 
-            display: flex;
-            align-items: center;
+        .container {
+
+            width: min(1180px, 90%);
+
+            margin: auto;
         }
 
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.05fr .95fr;
-            align-items: center;
-            gap: 70px;
+        section {
+
+            position: relative;
+
+            padding: 110px 0;
         }
 
-        .hero-tag {
+        .section-heading {
+
+            text-align: center;
+
+            max-width: 720px;
+
+            margin: 0 auto 55px;
+        }
+
+        .section-kicker {
+
             display: inline-flex;
+
             align-items: center;
-            gap: 9px;
 
-            padding: 9px 16px;
+            gap: 8px;
 
-            border: 1px solid var(--border);
-            border-radius: 100px;
+            padding: 7px 14px;
 
-            background: rgba(255,255,255,.55);
+            border-radius: 50px;
+
+            background: var(--light-pink);
 
             color: var(--dark-pink);
 
-            font-size: 13px;
+            font-size: .8rem;
+
             font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 15px;
         }
 
-        [data-theme="dark"] .hero-tag {
-            background: rgba(255,255,255,.05);
+        .section-heading h2 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: clamp(2rem, 4vw, 3.2rem);
+
+            line-height: 1.2;
+
+            margin-bottom: 15px;
         }
 
-        .hero-tag span {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #78d6a3;
-            box-shadow: 0 0 0 5px rgba(120,214,163,.15);
+        .section-heading p {
+            color: var(--muted);
         }
 
-        .hero h1 {
-            margin: 22px 0 15px;
 
-            font-family: "Playfair Display", serif;
-            font-size: clamp(48px, 7vw, 82px);
-            line-height: 1.02;
-            letter-spacing: -3px;
-        }
-
-        .gradient-text {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero-role {
-            min-height: 35px;
-
-            font-size: 20px;
-            font-weight: 600;
-
-            color: var(--dark-pink);
-        }
-
-        .typing-cursor {
-            animation: blink .8s infinite;
-        }
-
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
-
-        .hero-description {
-            max-width: 620px;
-            margin: 20px 0 30px;
-
-            color: var(--text-light);
-            font-size: 17px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
 
         .btn {
+
             display: inline-flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 10px;
 
-            min-height: 52px;
-            padding: 0 24px;
+            padding: 13px 22px;
+
+            border-radius: 50px;
 
             border: none;
-            border-radius: 14px;
-
-            font-size: 14px;
-            font-weight: 700;
 
             cursor: pointer;
+
+            font-weight: 700;
+
+            font-size: .9rem;
 
             transition: var(--transition);
         }
 
         .btn-primary {
+
             color: white;
+
             background: var(--gradient);
-            box-shadow: 0 15px 35px rgba(216,139,155,.25);
+
+            box-shadow:
+                0 12px 30px rgba(216,139,155,.25);
         }
 
         .btn-primary:hover {
+
             transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 20px 45px rgba(216,139,155,.35);
+
+            box-shadow:
+                0 18px 40px rgba(216,139,155,.35);
         }
 
         .btn-outline {
-            border: 1px solid var(--border);
-            color: var(--text);
-            background: var(--white);
+
+            color: var(--dark-pink);
+
+            background: transparent;
+
+            border: 1px solid rgba(185,103,123,.35);
         }
 
         .btn-outline:hover {
-            transform: translateY(-4px);
-            color: var(--dark-pink);
-            border-color: var(--pink);
-        }
 
-        /* =========================================================
-           HERO ILLUSTRATION
-           ========================================================= */
-
-        .hero-visual {
-            position: relative;
-            min-height: 500px;
-
-            display: grid;
-            place-items: center;
-        }
-
-        .hero-orbit {
-            position: absolute;
-
-            width: 390px;
-            height: 390px;
-
-            border: 1px solid rgba(216,139,155,.22);
-            border-radius: 50%;
-
-            animation: orbitRotate 15s linear infinite;
-        }
-
-        .hero-orbit::before,
-        .hero-orbit::after {
-            content: "";
-            position: absolute;
-
-            width: 14px;
-            height: 14px;
-
-            border-radius: 50%;
+            color: white;
 
             background: var(--gradient);
+
+            border-color: transparent;
+
+            transform: translateY(-4px);
         }
 
-        .hero-orbit::before {
-            top: 30px;
-            left: 70px;
+        .btn-small {
+
+            padding: 10px 16px;
+
+            font-size: .82rem;
         }
 
-        .hero-orbit::after {
-            bottom: 50px;
-            right: 35px;
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            padding-top: 150px;
         }
 
-        @keyframes orbitRotate {
-            to {
-                transform: rotate(360deg);
-            }
+        .hero-grid {
+
+            display: grid;
+
+            grid-template-columns: 1.05fr .95fr;
+
+            align-items: center;
+
+            gap: 70px;
         }
 
-        .developer-card {
+        .hero-content {
+
+            animation: heroUp .9s ease both;
+        }
+
+        .hero-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 8px 15px;
+
+            border-radius: 50px;
+
+            background: var(--light-pink);
+
+            color: var(--dark-pink);
+
+            font-size: .85rem;
+
+            margin-bottom: 22px;
+        }
+
+        .hero-badge span {
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #70b88b;
+
+            box-shadow: 0 0 0 5px rgba(112,184,139,.12);
+        }
+
+        .hero h1 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: clamp(3.2rem, 7vw, 6rem);
+
+            line-height: .95;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+
+            display: block;
+
+            background: var(--gradient);
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-role {
+
+            font-size: 1.25rem;
+
+            font-weight: 700;
+
+            margin-bottom: 15px;
+        }
+
+        .typing {
+
+            color: var(--dark-pink);
+        }
+
+        .hero-description {
+
+            color: var(--muted);
+
+            max-width: 620px;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+
             position: relative;
-            z-index: 2;
 
-            width: min(400px, 85vw);
-            min-height: 350px;
+            min-height: 500px;
 
-            padding: 30px;
+            display: flex;
 
-            border: 1px solid rgba(255,255,255,.6);
-            border-radius: 35px;
+            justify-content: center;
+
+            align-items: center;
+        }
+
+        .hero-card {
+
+            width: 390px;
+            height: 430px;
+
+            border-radius: 45px;
+
+            position: relative;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(255,255,255,.85),
-                    rgba(248,229,232,.65)
+                    rgba(255,255,255,.75),
+                    rgba(248,229,232,.72)
                 );
+
+            border: 1px solid rgba(255,255,255,.9);
+
+            box-shadow:
+                0 35px 80px rgba(185,103,123,.15);
 
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
 
-            box-shadow: var(--shadow-hover);
-
-            animation: floatingCard 5s ease-in-out infinite;
+            animation: floating 5s ease-in-out infinite;
         }
 
-        [data-theme="dark"] .developer-card {
+        body.dark .hero-card {
+
             background:
                 linear-gradient(
                     145deg,
-                    rgba(255,255,255,.08),
-                    rgba(216,139,155,.08)
+                    rgba(60,45,55,.8),
+                    rgba(42,34,50,.8)
                 );
         }
 
-        @keyframes floatingCard {
+        .hero-code-window {
+
+            width: 75%;
+
+            background: rgba(255,255,255,.75);
+
+            border-radius: 20px;
+
+            padding: 20px;
+
+            box-shadow: var(--shadow);
+        }
+
+        body.dark .hero-code-window {
+            background: rgba(20,18,22,.8);
+        }
+
+        .window-top {
+
+            display: flex;
+
+            gap: 6px;
+
+            margin-bottom: 18px;
+        }
+
+        .window-top span {
+
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: var(--pink);
+        }
+
+        .code-line {
+
+            height: 8px;
+
+            border-radius: 10px;
+
+            background: var(--light-pink);
+
+            margin: 12px 0;
+        }
+
+        .code-line:nth-child(2) {
+            width: 85%;
+        }
+
+        .code-line:nth-child(3) {
+            width: 65%;
+        }
+
+        .code-line:nth-child(4) {
+            width: 92%;
+        }
+
+        .code-line:nth-child(5) {
+            width: 55%;
+        }
+
+        .floating-icon {
+
+            position: absolute;
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,.85);
+
+            box-shadow: var(--shadow);
+
+            color: var(--dark-pink);
+
+            font-size: 1.2rem;
+
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        body.dark .floating-icon {
+            background: #282329;
+        }
+
+        .floating-icon.one {
+            top: 25px;
+            left: 15px;
+        }
+
+        .floating-icon.two {
+            right: 5px;
+            top: 100px;
+            animation-delay: -1s;
+        }
+
+        .floating-icon.three {
+            left: 20px;
+            bottom: 70px;
+            animation-delay: -2s;
+        }
+
+        .floating-icon.four {
+            right: 25px;
+            bottom: 30px;
+            animation-delay: -3s;
+        }
+
+        @keyframes floating {
+
             0%,100% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0) rotate(0);
             }
 
             50% {
@@ -1234,104 +1392,8 @@ $projectJson = json_encode(
             }
         }
 
-        .developer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .code-dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .code-dots span {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--pink);
-        }
-
-        .code-dots span:nth-child(2) {
-            background: var(--purple);
-        }
-
-        .code-dots span:nth-child(3) {
-            background: #9fd9b5;
-        }
-
-        .code-window {
-            margin-top: 30px;
-            padding: 24px;
-
-            border-radius: 20px;
-
-            background: rgba(255,255,255,.55);
-            border: 1px solid var(--border);
-
-            font-family: monospace;
-            font-size: 14px;
-        }
-
-        [data-theme="dark"] .code-window {
-            background: rgba(0,0,0,.15);
-        }
-
-        .code-line {
-            margin: 8px 0;
-        }
-
-        .code-pink {
-            color: var(--dark-pink);
-        }
-
-        .code-purple {
-            color: #9271c7;
-        }
-
-        .code-green {
-            color: #5d9f7c;
-        }
-
-        .floating-icon {
-            position: absolute;
-
-            width: 58px;
-            height: 58px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 18px;
-
-            background: var(--white);
-            color: var(--dark-pink);
-
-            box-shadow: var(--shadow);
-
-            animation: iconFloat 4s ease-in-out infinite;
-        }
-
-        .floating-icon.one {
-            top: 70px;
-            left: 30px;
-        }
-
-        .floating-icon.two {
-            right: 25px;
-            top: 120px;
-            color: #9071c5;
-            animation-delay: -1s;
-        }
-
-        .floating-icon.three {
-            left: 65px;
-            bottom: 70px;
-            color: #8fbd9d;
-            animation-delay: -2s;
-        }
-
         @keyframes iconFloat {
+
             0%,100% {
                 transform: translateY(0);
             }
@@ -1341,269 +1403,258 @@ $projectJson = json_encode(
             }
         }
 
-        /* =========================================================
-           SECTIONS
-           ========================================================= */
+        @keyframes heroUp {
 
-        section {
-            padding: 110px 0;
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .section-header {
-            max-width: 720px;
-            margin: 0 auto 55px;
-            text-align: center;
-        }
 
-        .section-label {
-            display: inline-block;
-
-            margin-bottom: 12px;
-
-            color: var(--dark-pink);
-
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(35px, 5vw, 52px);
-            line-height: 1.1;
-        }
-
-        .section-description {
-            margin-top: 15px;
-            color: var(--text-light);
-        }
-
-        /* =========================================================
-           REVEAL ANIMATIONS
-           ========================================================= */
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(35px);
-            transition:
-                opacity .8s ease,
-                transform .8s ease;
-        }
-
-        .reveal.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: .8s ease;
-        }
-
-        .slide-left.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: .8s ease;
-        }
-
-        .slide-right.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* =========================================================
+        /* =====================================================
            ABOUT
-           ========================================================= */
+        ===================================================== */
 
         .about-grid {
+
             display: grid;
+
             grid-template-columns: .85fr 1.15fr;
-            gap: 70px;
+
+            gap: 65px;
+
             align-items: center;
         }
 
         .profile-card {
+
             position: relative;
 
-            min-height: 480px;
-
-            display: grid;
-            place-items: center;
+            min-height: 430px;
 
             border-radius: 35px;
 
             background: var(--gradient-soft);
 
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
             overflow: hidden;
+
+            box-shadow: var(--shadow);
         }
 
-        .profile-card::before {
-            content: "";
-            position: absolute;
+        .profile-circle {
 
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
 
             border-radius: 50%;
 
-            background: var(--gradient);
+            display: flex;
 
-            opacity: .18;
-            filter: blur(30px);
-        }
+            justify-content: center;
+            align-items: center;
 
-        .profile-placeholder {
-            position: relative;
-            z-index: 2;
+            font-family: 'Playfair Display', serif;
 
-            width: 230px;
-            height: 230px;
+            font-size: 4rem;
 
-            display: grid;
-            place-items: center;
-
-            border-radius: 50%;
+            font-weight: 700;
 
             color: white;
 
-            font-family: "Playfair Display", serif;
-            font-size: 65px;
-            font-weight: 700;
-
             background: var(--gradient);
 
-            border: 10px solid rgba(255,255,255,.7);
+            box-shadow:
+                0 25px 60px rgba(185,103,123,.25);
+        }
 
-            box-shadow: 0 25px 60px rgba(185,103,123,.25);
+        .profile-decoration {
+
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            border: 1px solid rgba(185,103,123,.25);
+
+            border-radius: 50%;
+        }
+
+        .profile-decoration.one {
+            top: 25px;
+            left: 25px;
+        }
+
+        .profile-decoration.two {
+            bottom: -30px;
+            right: -30px;
+            width: 180px;
+            height: 180px;
         }
 
         .about-content h3 {
-            font-family: "Playfair Display", serif;
-            font-size: 35px;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 2rem;
+
             margin-bottom: 15px;
         }
 
         .about-content > p {
-            color: var(--text-light);
+
+            color: var(--muted);
+
             margin-bottom: 25px;
         }
 
-        .about-info {
+        .info-grid {
+
             display: grid;
+
             grid-template-columns: repeat(3, 1fr);
+
             gap: 12px;
-            margin-bottom: 30px;
+
+            margin-bottom: 25px;
         }
 
-        .info-box {
+        .info-item {
+
+            padding: 16px;
+
+            border-radius: 18px;
+
+            background: var(--white);
+
+            border: 1px solid var(--border);
+
+            box-shadow: 0 8px 25px rgba(75,58,61,.05);
+        }
+
+        .info-item small {
+
+            display: block;
+
+            color: var(--muted);
+
+            font-size: .72rem;
+
+            margin-bottom: 4px;
+        }
+
+        .info-item strong {
+            font-size: .86rem;
+        }
+
+        .about-features {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 12px;
+        }
+
+        .feature {
+
             padding: 18px;
 
-            border: 1px solid var(--border);
-            border-radius: 17px;
+            border-radius: 20px;
 
             background: var(--white);
-        }
-
-        .info-box small {
-            display: block;
-            margin-bottom: 5px;
-
-            color: var(--text-light);
-            font-size: 11px;
-        }
-
-        .info-box strong {
-            font-size: 14px;
-        }
-
-        .strengths {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
-
-        .strength {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-
-            padding: 15px;
 
             border: 1px solid var(--border);
-            border-radius: 15px;
-
-            background: var(--white);
 
             transition: var(--transition);
         }
 
-        .strength:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
+        .feature:hover {
+
+            transform: translateY(-6px);
+
+            box-shadow: var(--shadow-hover);
         }
 
-        .strength-icon {
-            width: 40px;
-            height: 40px;
-
-            display: grid;
-            place-items: center;
-
-            flex-shrink: 0;
-
-            border-radius: 12px;
+        .feature i {
 
             color: var(--dark-pink);
-            background: var(--light-pink);
+
+            font-size: 1.3rem;
+
+            margin-bottom: 8px;
         }
 
-        /* =========================================================
+        .feature h4 {
+            font-size: .9rem;
+        }
+
+
+        /* =====================================================
            SKILLS
-           ========================================================= */
+        ===================================================== */
 
         .skills-grid {
+
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
         }
 
         .skill-card {
-            padding: 28px;
 
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+            padding: 24px;
 
             background: var(--white);
 
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+
+            border-radius: 22px;
+
+            box-shadow: 0 10px 35px rgba(75,58,61,.05);
 
             transition: var(--transition);
         }
 
         .skill-card:hover {
+
             transform: translateY(-6px);
+
             box-shadow: var(--shadow-hover);
         }
 
-        .skill-header {
+        .skill-head {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
-            gap: 15px;
+
             margin-bottom: 12px;
         }
 
         .skill-name {
+
             display: flex;
+
             align-items: center;
-            gap: 11px;
+
+            gap: 10px;
+
             font-weight: 700;
         }
 
@@ -1612,106 +1663,63 @@ $projectJson = json_encode(
         }
 
         .skill-percent {
+
             color: var(--dark-pink);
+
             font-weight: 700;
+
+            font-size: .85rem;
         }
 
-        .skill-track {
-            width: 100%;
+        .skill-bar {
+
             height: 8px;
-            border-radius: 100px;
+
+            border-radius: 50px;
+
             background: var(--light-pink);
+
             overflow: hidden;
         }
 
         .skill-progress {
+
             width: 0;
+
             height: 100%;
 
-            border-radius: inherit;
+            border-radius: 50px;
 
             background: var(--gradient);
 
-            transition: width 1.5s cubic-bezier(.4,0,.2,1);
+            transition: width 1.5s ease;
         }
 
-        /* =========================================================
-           SERVICES
-           ========================================================= */
 
-        .services {
-            background: var(--gradient-soft);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .service-card {
-            padding: 35px 28px;
-
-            border: 1px solid var(--border);
-            border-radius: 25px;
-
-            background: var(--white);
-
-            transition: var(--transition);
-        }
-
-        .service-card:hover {
-            transform: translateY(-9px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .service-icon {
-            width: 58px;
-            height: 58px;
-
-            display: grid;
-            place-items: center;
-
-            margin-bottom: 20px;
-
-            border-radius: 18px;
-
-            color: white;
-            background: var(--gradient);
-
-            font-size: 20px;
-        }
-
-        .service-card h3 {
-            margin-bottom: 10px;
-            font-family: "Playfair Display", serif;
-            font-size: 24px;
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        /* =========================================================
+        /* =====================================================
            MODULES
-           ========================================================= */
+        ===================================================== */
 
         .modules-grid {
+
             display: grid;
+
             grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
+
+            gap: 25px;
         }
 
         .module-card {
+
             position: relative;
 
-            padding: 32px;
+            padding: 30px;
 
-            border: 1px solid var(--border);
             border-radius: 28px;
 
             background: var(--white);
+
+            border: 1px solid var(--border);
 
             box-shadow: var(--shadow);
 
@@ -1721,631 +1729,482 @@ $projectJson = json_encode(
         }
 
         .module-card::before {
-            content: "";
+
+            content: '';
 
             position: absolute;
+
             top: 0;
             left: 0;
+            right: 0;
 
-            width: 100%;
             height: 4px;
 
             background: var(--gradient);
         }
 
+        .module-card::after {
+
+            content: '';
+
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            border-radius: 50%;
+
+            background: var(--light-pink);
+
+            right: -60px;
+            top: -60px;
+
+            opacity: .5;
+        }
+
         .module-card:hover {
-            transform: translateY(-7px);
+
+            transform: translateY(-8px);
+
             box-shadow: var(--shadow-hover);
         }
 
         .module-top {
+
             display: flex;
+
             align-items: flex-start;
+
             justify-content: space-between;
-            gap: 20px;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
         }
 
-        .module-icon {
+        .module-number {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
             width: 58px;
             height: 58px;
 
-            display: grid;
-            place-items: center;
-
-            flex-shrink: 0;
-
             border-radius: 18px;
 
-            background: var(--gradient-soft);
-            color: var(--dark-pink);
+            color: white;
 
-            font-size: 21px;
-        }
+            background: var(--gradient);
 
-        .module-code {
-            display: inline-block;
-
-            margin-bottom: 7px;
-
-            padding: 5px 10px;
-
-            border-radius: 8px;
-
-            background: var(--light-pink);
-            color: var(--dark-pink);
-
-            font-size: 11px;
             font-weight: 800;
+
+            box-shadow:
+                0 10px 25px rgba(216,139,155,.25);
         }
 
-        .module-title {
-            font-family: "Playfair Display", serif;
-            font-size: 24px;
-            line-height: 1.2;
+        .module-icon {
+
+            color: var(--dark-pink);
+
+            font-size: 1.5rem;
         }
 
-        .module-description {
-            margin: 18px 0;
+        .module-card h3 {
 
-            color: var(--text-light);
-            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+
+            font-size: 1.45rem;
+
+            line-height: 1.3;
+
+            margin-bottom: 10px;
+        }
+
+        .module-card > p {
+
+            color: var(--muted);
+
+            font-size: .9rem;
+
+            margin-bottom: 18px;
         }
 
         .topics {
+
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 7px;
 
             margin-bottom: 25px;
         }
 
         .topic {
+
             padding: 6px 10px;
 
-            border-radius: 8px;
+            border-radius: 50px;
 
-            background: var(--cream);
+            background: var(--light-purple);
 
-            border: 1px solid var(--border);
+            color: var(--text);
 
-            font-size: 11px;
-            color: var(--text-light);
+            font-size: .72rem;
+
+            font-weight: 600;
         }
 
-        /* =========================
-           MODULE WORKSHOPS
-           ========================= */
-
-        .module-workshops {
-            margin-top: 22px;
-            padding-top: 22px;
+        .module-projects {
 
             border-top: 1px solid var(--border);
+
+            padding-top: 20px;
         }
 
-        .workshop-heading {
+        .module-projects-title {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             margin-bottom: 14px;
         }
 
-        .workshop-heading h4 {
-            font-size: 14px;
+        .module-projects-title h4 {
+
+            font-size: .9rem;
         }
 
-        .workshop-count {
-            font-size: 11px;
-            font-weight: 700;
+        .atelier-count {
+
+            font-size: .72rem;
+
             color: var(--dark-pink);
+
+            background: var(--light-pink);
+
+            padding: 5px 9px;
+
+            border-radius: 50px;
         }
 
-        .workshop-list {
+        .atelier-list {
+
             display: grid;
+
             gap: 10px;
         }
 
-        .workshop-item {
+        .atelier-item {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
-            gap: 12px;
+
+            gap: 15px;
 
             padding: 13px;
 
-            border: 1px solid var(--border);
-            border-radius: 14px;
+            border-radius: 16px;
 
             background: var(--cream);
+
+            border: 1px solid var(--border);
 
             transition: var(--transition);
         }
 
-        .workshop-item:hover {
-            transform: translateX(4px);
-            border-color: var(--pink);
+        .atelier-item:hover {
+
+            transform: translateX(5px);
+
+            border-color: rgba(216,139,155,.4);
         }
 
-        .workshop-info {
+        .atelier-info {
+
             min-width: 0;
         }
 
-        .workshop-label {
+        .atelier-label {
+
             display: block;
 
             color: var(--dark-pink);
 
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
+            font-size: .68rem;
 
-        .workshop-name {
-            display: block;
-
-            margin-top: 2px;
-
-            font-size: 13px;
             font-weight: 700;
 
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+        }
+
+        .atelier-info strong {
+
+            display: block;
+
+            font-size: .85rem;
+
             white-space: nowrap;
+
             overflow: hidden;
+
             text-overflow: ellipsis;
         }
 
         .atelier-btn {
+
             flex-shrink: 0;
 
             display: inline-flex;
+
             align-items: center;
+
             gap: 6px;
 
-            padding: 8px 11px;
+            padding: 9px 13px;
 
-            border: none;
-            border-radius: 9px;
+            border-radius: 50px;
 
-            color: white;
             background: var(--gradient);
 
-            font-size: 10px;
-            font-weight: 700;
+            color: white;
 
-            cursor: pointer;
+            font-size: .72rem;
+
+            font-weight: 700;
 
             transition: var(--transition);
         }
 
         .atelier-btn:hover {
-            transform: scale(1.06);
-            box-shadow: 0 8px 20px rgba(216,139,155,.25);
+
+            transform: scale(1.05);
+
+            box-shadow:
+                0 8px 20px rgba(216,139,155,.25);
         }
 
-        .module-footer {
-            margin-top: 22px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
+        /* =====================================================
+           SERVICES
+        ===================================================== */
 
-        .module-project-count {
-            color: var(--text-light);
-            font-size: 12px;
-        }
+        .services-grid {
 
-        .module-project-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-
-            padding: 11px 15px;
-
-            border-radius: 11px;
-
-            color: var(--dark-pink);
-            background: var(--light-pink);
-
-            font-size: 12px;
-            font-weight: 700;
-
-            transition: var(--transition);
-        }
-
-        .module-project-btn:hover {
-            color: white;
-            background: var(--gradient);
-            transform: translateY(-2px);
-        }
-
-        /* =========================================================
-           PROJECTS
-           ========================================================= */
-
-        .projects-section {
-            background: var(--gradient-soft);
-        }
-
-        .filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 9px;
-
-            margin-bottom: 35px;
-        }
-
-        .filter-btn {
-            padding: 10px 16px;
-
-            border: 1px solid var(--border);
-            border-radius: 100px;
-
-            background: var(--white);
-            color: var(--text-light);
-
-            font-size: 12px;
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition: var(--transition);
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            color: white;
-            background: var(--gradient);
-            border-color: transparent;
-            transform: translateY(-2px);
-        }
-
-        .projects-grid {
             display: grid;
+
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+
+            gap: 22px;
         }
 
-        .project-card {
-            overflow: hidden;
+        .service-card {
 
-            border: 1px solid var(--border);
-            border-radius: 24px;
+            padding: 32px;
+
+            border-radius: 26px;
 
             background: var(--white);
 
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+
+            text-align: center;
 
             transition: var(--transition);
         }
 
-        .project-card:hover {
+        .service-card:hover {
+
             transform: translateY(-8px);
+
             box-shadow: var(--shadow-hover);
         }
 
-        .project-card.hidden {
-            display: none;
-        }
+        .service-icon {
 
-        .project-image {
-            position: relative;
-            height: 210px;
-            overflow: hidden;
-        }
+            width: 70px;
+            height: 70px;
 
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            margin: 0 auto 18px;
 
-            transition: transform .7s ease;
-        }
-
-        .project-card:hover .project-image img {
-            transform: scale(1.08);
-        }
-
-        .project-overlay {
-            position: absolute;
-            inset: 0;
+            border-radius: 22px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
-            background: rgba(75,58,61,.35);
+            color: white;
 
-            opacity: 0;
-
-            transition: var(--transition);
-        }
-
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-
-        .project-view {
-            width: 50px;
-            height: 50px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 50%;
-
-            color: var(--dark-pink);
-            background: white;
-
-            border: none;
-
-            cursor: pointer;
-
-            transition: var(--transition);
-        }
-
-        .project-view:hover {
-            transform: scale(1.1);
-        }
-
-        .project-body {
-            padding: 23px;
-        }
-
-        .project-module {
-            display: inline-block;
-
-            margin-bottom: 9px;
-
-            padding: 5px 9px;
-
-            border-radius: 7px;
-
-            background: var(--light-pink);
-            color: var(--dark-pink);
-
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-        .project-body h3 {
-            margin-bottom: 8px;
-
-            font-family: "Playfair Display", serif;
-            font-size: 22px;
-        }
-
-        .project-body p {
-            color: var(--text-light);
-            font-size: 13px;
-
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .project-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-top: 18px;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-
-            color: var(--dark-pink);
-
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        /* =========================================================
-           TIMELINE
-           ========================================================= */
-
-        .timeline {
-            max-width: 850px;
-            margin: auto;
-
-            position: relative;
-        }
-
-        .timeline::before {
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-            bottom: 0;
-            left: 50%;
-
-            width: 2px;
-
-            background: var(--light-pink);
-
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-
-            width: 50%;
-
-            padding: 0 35px 45px;
-        }
-
-        .timeline-item:nth-child(even) {
-            margin-left: 50%;
-        }
-
-        .timeline-dot {
-            position: absolute;
-
-            top: 0;
-
-            width: 17px;
-            height: 17px;
-
-            border-radius: 50%;
+            font-size: 1.5rem;
 
             background: var(--gradient);
-
-            box-shadow:
-                0 0 0 7px var(--soft-pink);
         }
 
-        .timeline-item:nth-child(odd) .timeline-dot {
-            right: -8px;
+        .service-card h3 {
+
+            font-family: 'Playfair Display', serif;
+
+            margin-bottom: 8px;
         }
 
-        .timeline-item:nth-child(even) .timeline-dot {
-            left: -8px;
+        .service-card p {
+
+            color: var(--muted);
+
+            font-size: .9rem;
         }
 
-        .timeline-card {
-            padding: 25px;
 
-            border: 1px solid var(--border);
-            border-radius: 20px;
-
-            background: var(--white);
-
-            box-shadow: var(--shadow);
-        }
-
-        .timeline-card span {
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--dark-pink);
-        }
-
-        .timeline-card h3 {
-            margin: 6px 0;
-            font-family: "Playfair Display", serif;
-            font-size: 21px;
-        }
-
-        .timeline-card p {
-            color: var(--text-light);
-            font-size: 13px;
-        }
-
-        /* =========================================================
+        /* =====================================================
            CONTACT
-           ========================================================= */
+        ===================================================== */
 
         .contact-grid {
+
             display: grid;
+
             grid-template-columns: .75fr 1.25fr;
-            gap: 35px;
+
+            gap: 30px;
         }
 
-        .contact-info {
+        .contact-info,
+        .contact-form-card {
+
             padding: 35px;
 
             border-radius: 28px;
 
-            color: white;
+            background: var(--white);
 
-            background: var(--gradient);
+            border: 1px solid var(--border);
 
-            box-shadow: var(--shadow-hover);
+            box-shadow: var(--shadow);
         }
 
-        .contact-info h3 {
-            font-family: "Playfair Display", serif;
-            font-size: 31px;
-            margin-bottom: 12px;
+        .contact-info h3,
+        .contact-form-card h3 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 1.7rem;
+
+            margin-bottom: 10px;
         }
 
         .contact-info > p {
-            color: rgba(255,255,255,.8);
-            margin-bottom: 30px;
-            font-size: 14px;
+
+            color: var(--muted);
+
+            margin-bottom: 25px;
         }
 
         .contact-item {
+
             display: flex;
+
             align-items: center;
+
             gap: 14px;
 
-            margin-bottom: 19px;
+            margin-bottom: 17px;
         }
 
-        .contact-item-icon {
-            width: 43px;
-            height: 43px;
+        .contact-icon {
 
-            display: grid;
-            place-items: center;
+            flex-shrink: 0;
 
-            border-radius: 12px;
+            width: 45px;
+            height: 45px;
 
-            background: rgba(255,255,255,.15);
+            border-radius: 14px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            background: var(--light-pink);
+
+            color: var(--dark-pink);
         }
 
         .contact-item small {
+
             display: block;
-            color: rgba(255,255,255,.7);
-            font-size: 10px;
+
+            color: var(--muted);
+
+            font-size: .7rem;
         }
 
         .contact-item strong {
-            font-size: 13px;
+
+            font-size: .84rem;
+
+            word-break: break-word;
         }
 
         .socials {
+
             display: flex;
+
             gap: 9px;
-            margin-top: 28px;
+
+            margin-top: 25px;
         }
 
         .social {
+
             width: 42px;
             height: 42px;
 
-            display: grid;
-            place-items: center;
+            border-radius: 50%;
 
-            border-radius: 12px;
+            display: flex;
 
-            background: rgba(255,255,255,.15);
+            justify-content: center;
+            align-items: center;
+
+            background: var(--light-purple);
+
+            color: var(--text);
 
             transition: var(--transition);
         }
 
         .social:hover {
-            background: white;
-            color: var(--dark-pink);
-            transform: translateY(-4px);
-        }
 
-        .contact-form-wrapper {
-            padding: 35px;
+            transform: translateY(-5px);
 
-            border: 1px solid var(--border);
-            border-radius: 28px;
+            color: white;
 
-            background: var(--white);
-
-            box-shadow: var(--shadow);
+            background: var(--gradient);
         }
 
         .form-grid {
+
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 17px;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
         }
 
         .form-group {
-            margin-bottom: 17px;
+            margin-bottom: 15px;
         }
 
         .form-group.full {
@@ -2353,139 +2212,149 @@ $projectJson = json_encode(
         }
 
         .form-group label {
+
             display: block;
 
-            margin-bottom: 7px;
+            font-size: .78rem;
 
-            font-size: 12px;
             font-weight: 700;
+
+            margin-bottom: 7px;
         }
 
-        .form-control {
+        .form-group input,
+        .form-group textarea {
+
             width: 100%;
 
-            padding: 14px 16px;
-
             border: 1px solid var(--border);
-            border-radius: 13px;
+
+            border-radius: 15px;
+
+            padding: 13px 15px;
 
             outline: none;
 
-            background: var(--cream);
             color: var(--text);
+
+            background: var(--cream);
 
             transition: var(--transition);
         }
 
-        .form-control:focus {
-            border-color: var(--pink);
-            box-shadow: 0 0 0 4px rgba(216,139,155,.10);
-        }
+        .form-group textarea {
 
-        textarea.form-control {
-            min-height: 150px;
             resize: vertical;
+
+            min-height: 145px;
         }
 
-        .alert {
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            border-color: var(--pink);
+
+            box-shadow:
+                0 0 0 4px rgba(216,139,155,.10);
+        }
+
+        .form-alert {
+
             padding: 14px 17px;
+
+            border-radius: 15px;
+
             margin-bottom: 20px;
 
-            border-radius: 13px;
-
-            font-size: 13px;
+            font-size: .85rem;
         }
 
-        .alert-success {
-            color: #347555;
-            background: #e9f8ef;
-            border: 1px solid #bde8cb;
+        .form-error {
+
+            background: #fff0f0;
+
+            color: #a53e3e;
+
+            border: 1px solid #ffd1d1;
         }
 
-        .alert-error {
-            color: #a13e4f;
-            background: #fff0f3;
-            border: 1px solid #f1b8c3;
+        .form-success {
+
+            background: #edf9f0;
+
+            color: #347246;
+
+            border: 1px solid #c8ebd1;
+
+            animation: successPop .5s ease;
         }
 
-        .alert-error ul {
-            padding-left: 18px;
+        @keyframes successPop {
+
+            from {
+                opacity: 0;
+                transform: scale(.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        /* =========================================================
+
+        /* =====================================================
            FOOTER
-           ========================================================= */
+        ===================================================== */
 
         footer {
+
             padding: 35px 0;
 
             border-top: 1px solid var(--border);
-
-            background: var(--white);
         }
 
-        .footer-inner {
+        .footer-content {
+
             display: flex;
-            align-items: center;
+
             justify-content: space-between;
+
+            align-items: center;
+
             gap: 20px;
         }
 
-        .footer-brand {
-            font-family: "Playfair Display", serif;
-            font-size: 20px;
-            font-weight: 700;
+        .footer-brand strong {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 1.2rem;
         }
 
-        .footer-brand span {
-            display: block;
+        .footer-brand p {
 
-            margin-top: 3px;
+            color: var(--muted);
 
-            color: var(--text-light);
-
-            font-family: "DM Sans", sans-serif;
-            font-size: 11px;
-            font-weight: 400;
+            font-size: .78rem;
         }
 
         .copyright {
-            color: var(--text-light);
-            font-size: 11px;
-            text-align: center;
+
+            color: var(--muted);
+
+            font-size: .75rem;
+
+            text-align: right;
         }
 
-        .footer-socials {
-            display: flex;
-            gap: 8px;
-        }
 
-        .footer-social {
-            width: 38px;
-            height: 38px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 10px;
-
-            background: var(--light-pink);
-            color: var(--dark-pink);
-
-            transition: var(--transition);
-        }
-
-        .footer-social:hover {
-            color: white;
-            background: var(--gradient);
-            transform: translateY(-3px);
-        }
-
-        /* =========================================================
+        /* =====================================================
            BACK TO TOP
-           ========================================================= */
+        ===================================================== */
 
         #backTop {
+
             position: fixed;
 
             right: 25px;
@@ -2494,31 +2363,38 @@ $projectJson = json_encode(
             width: 48px;
             height: 48px;
 
-            display: grid;
-            place-items: center;
-
             border: none;
-            border-radius: 15px;
 
-            color: white;
+            border-radius: 50%;
+
             background: var(--gradient);
 
-            box-shadow: var(--shadow);
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
 
             cursor: pointer;
 
             opacity: 0;
+
             visibility: hidden;
+
             transform: translateY(20px);
 
             transition: var(--transition);
 
-            z-index: 500;
+            z-index: 900;
         }
 
         #backTop.show {
+
             opacity: 1;
+
             visibility: visible;
+
             transform: translateY(0);
         }
 
@@ -2526,242 +2402,72 @@ $projectJson = json_encode(
             transform: translateY(-5px);
         }
 
-        /* =========================================================
-           MODAL
-           ========================================================= */
 
-        .modal {
-            position: fixed;
-            inset: 0;
+        /* =====================================================
+           REVEAL ANIMATIONS
+        ===================================================== */
 
-            z-index: 5000;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 25px;
-
-            background: rgba(45, 31, 37, .65);
-
-            backdrop-filter: blur(10px);
+        .reveal {
 
             opacity: 0;
-            visibility: hidden;
 
-            transition: .3s ease;
+            transform: translateY(35px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s ease;
         }
 
-        .modal.show {
+        .reveal.show {
+
             opacity: 1;
-            visibility: visible;
+
+            transform: translateY(0);
         }
 
-        .modal-box {
-            width: min(900px, 100%);
-            max-height: 90vh;
+        .slide-left {
 
-            overflow-y: auto;
+            opacity: 0;
 
-            border-radius: 28px;
+            transform: translateX(-40px);
 
-            background: var(--white);
-
-            box-shadow: 0 30px 100px rgba(0,0,0,.25);
-
-            transform: translateY(30px) scale(.97);
-
-            transition: .35s ease;
+            transition: .8s ease;
         }
 
-        .modal.show .modal-box {
-            transform: translateY(0) scale(1);
+        .slide-left.show {
+
+            opacity: 1;
+
+            transform: translateX(0);
         }
 
-        .modal-image {
-            height: 280px;
-            overflow: hidden;
+        .slide-right {
+
+            opacity: 0;
+
+            transform: translateX(40px);
+
+            transition: .8s ease;
         }
 
-        .modal-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .slide-right.show {
+
+            opacity: 1;
+
+            transform: translateX(0);
         }
 
-        .modal-content {
-            padding: 30px;
-        }
 
-        .modal-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .modal-header h2 {
-            font-family: "Playfair Display", serif;
-            font-size: 32px;
-            line-height: 1.2;
-        }
-
-        .modal-close {
-            width: 40px;
-            height: 40px;
-
-            flex-shrink: 0;
-
-            display: grid;
-            place-items: center;
-
-            border: 1px solid var(--border);
-            border-radius: 50%;
-
-            background: var(--cream);
-            color: var(--text);
-
-            cursor: pointer;
-        }
-
-        .modal-module {
-            display: inline-block;
-
-            margin: 9px 0 15px;
-
-            padding: 6px 10px;
-
-            border-radius: 8px;
-
-            background: var(--light-pink);
-            color: var(--dark-pink);
-
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .modal-description {
-            color: var(--text-light);
-            margin-bottom: 22px;
-        }
-
-        .modal-section {
-            margin-top: 22px;
-        }
-
-        .modal-section h4 {
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .modal-list {
-            padding-left: 20px;
-            color: var(--text-light);
-            font-size: 13px;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tech {
-            padding: 7px 11px;
-
-            border-radius: 9px;
-
-            color: var(--dark-pink);
-            background: var(--light-pink);
-
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .modal-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-
-            margin-top: 28px;
-        }
-
-        /* =========================================================
+        /* =====================================================
            MOBILE
-           ========================================================= */
+        ===================================================== */
 
-        @media (max-width: 1100px) {
-
-            .hero-grid {
-                gap: 40px;
-            }
-
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .modules-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 850px) {
-
-            .nav-links {
-                position: fixed;
-
-                top: 76px;
-                left: 20px;
-                right: 20px;
-
-                display: none;
-                flex-direction: column;
-                align-items: stretch;
-
-                padding: 15px;
-
-                border: 1px solid var(--border);
-                border-radius: 20px;
-
-                background: rgba(255,250,247,.95);
-                backdrop-filter: blur(20px);
-
-                box-shadow: var(--shadow-hover);
-            }
-
-            [data-theme="dark"] .nav-links {
-                background: rgba(23,20,26,.95);
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links a {
-                padding: 13px;
-                border-radius: 10px;
-            }
-
-            .nav-links a:hover {
-                background: var(--light-pink);
-            }
-
-            .nav-links a::after {
-                display: none;
-            }
-
-            .menu-btn {
-                display: grid;
-            }
+        @media (max-width: 1000px) {
 
             .hero-grid,
             .about-grid,
             .contact-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .hero {
-                padding-top: 130px;
             }
 
             .hero-content {
@@ -2785,139 +2491,110 @@ $projectJson = json_encode(
                 text-align: center;
             }
 
-            .strengths {
-                text-align: left;
-            }
-
-            .timeline::before {
-                left: 10px;
-            }
-
-            .timeline-item,
-            .timeline-item:nth-child(even) {
-                width: 100%;
-                margin-left: 0;
-                padding-left: 40px;
-                padding-right: 0;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-dot,
-            .timeline-item:nth-child(even) .timeline-dot {
-                left: 2px;
-                right: auto;
-            }
-
-            .timeline-card {
+            .info-grid,
+            .about-features {
                 text-align: left;
             }
         }
 
-        @media (max-width: 650px) {
+        @media (max-width: 800px) {
 
-            .container {
-                width: min(100% - 28px, 1180px);
+            .nav-links {
+
+                position: absolute;
+
+                top: calc(100% + 10px);
+
+                left: 0;
+                right: 0;
+
+                padding: 15px;
+
+                border-radius: 25px;
+
+                background: var(--white);
+
+                border: 1px solid var(--border);
+
+                box-shadow: var(--shadow);
+
+                display: none;
+
+                flex-direction: column;
+
+                align-items: stretch;
             }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 12px 15px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .modules-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .copyright {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
 
             section {
                 padding: 80px 0;
             }
 
-            .nav-container {
-                gap: 10px;
-            }
-
-            .logo {
-                font-size: 18px;
-            }
-
-            .logo-mark {
-                width: 38px;
-                height: 38px;
+            .hero {
+                padding-top: 130px;
             }
 
             .hero h1 {
-                font-size: 48px;
-                letter-spacing: -2px;
-            }
-
-            .hero-role {
-                font-size: 17px;
-            }
-
-            .hero-description {
-                font-size: 15px;
+                font-size: 3.1rem;
             }
 
             .hero-visual {
-                min-height: 390px;
+                min-height: 360px;
             }
 
-            .hero-orbit {
-                width: 310px;
-                height: 310px;
+            .hero-card {
+
+                width: 290px;
+                height: 330px;
+
+                border-radius: 35px;
             }
 
-            .developer-card {
-                min-height: 300px;
-                padding: 22px;
+            .hero-code-window {
+                width: 75%;
             }
 
             .floating-icon {
-                width: 48px;
-                height: 48px;
+                width: 45px;
+                height: 45px;
+
+                border-radius: 14px;
             }
 
-            .floating-icon.one {
-                left: 0;
-            }
-
-            .floating-icon.two {
-                right: 0;
-            }
-
-            .about-info {
-                grid-template-columns: 1fr;
-            }
-
-            .strengths {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid,
-            .services-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .module-card {
-                padding: 23px;
-            }
-
-            .module-top {
-                gap: 10px;
-            }
-
-            .module-title {
-                font-size: 21px;
-            }
-
-            .workshop-item {
-                align-items: flex-start;
-            }
-
-            .workshop-name {
-                white-space: normal;
-            }
-
-            .module-footer {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .module-project-btn {
-                justify-content: center;
-            }
-
+            .info-grid,
+            .about-features,
             .form-grid {
                 grid-template-columns: 1fr;
             }
@@ -2926,264 +2603,273 @@ $projectJson = json_encode(
                 grid-column: auto;
             }
 
-            .contact-form-wrapper,
-            .contact-info {
-                padding: 24px;
+            .profile-card {
+                min-height: 340px;
             }
 
-            .footer-inner {
-                flex-direction: column;
-                text-align: center;
+            .profile-circle {
+
+                width: 190px;
+                height: 190px;
+
+                font-size: 3rem;
             }
 
-            .modal {
-                padding: 12px;
-            }
-
-            .modal-image {
-                height: 210px;
-            }
-
-            .modal-content {
+            .module-card {
                 padding: 22px;
             }
 
-            .modal-header h2 {
-                font-size: 25px;
+            .atelier-item {
+                align-items: flex-start;
+            }
+
+            .atelier-btn {
+                padding: 8px 10px;
+            }
+
+            .contact-info,
+            .contact-form-card {
+                padding: 24px;
+            }
+
+            .navbar {
+                padding: 9px 12px;
             }
         }
 
-        /* =========================================================
+        @media (max-width: 400px) {
+
+            .hero h1 {
+                font-size: 2.65rem;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .atelier-item {
+                flex-direction: column;
+            }
+
+            .atelier-btn {
+                width: 100%;
+
+                justify-content: center;
+            }
+        }
+
+
+        /* =====================================================
            REDUCED MOTION
-           ========================================================= */
+        ===================================================== */
 
         @media (prefers-reduced-motion: reduce) {
 
             *,
             *::before,
             *::after {
-                scroll-behavior: auto !important;
-                animation-duration: .01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: .01ms !important;
-            }
 
-            .reveal,
-            .slide-left,
-            .slide-right {
-                opacity: 1;
-                transform: none;
+                animation-duration: .01ms !important;
+
+                animation-iteration-count: 1 !important;
+
+                scroll-behavior: auto !important;
+
+                transition-duration: .01ms !important;
             }
         }
 
     </style>
+
 </head>
+
 
 <body>
 
-<!-- =========================================================
+<!-- =====================================================
      LOADER
-     ========================================================= -->
+===================================================== -->
 
 <div id="loader">
+
     <div class="loader-content">
-        <div class="loader-logo">DK</div>
-        <div class="loader-text">DOUAE KARMOUN</div>
-        <div class="loader-bar">
-            <span></span>
+
+        <div class="loader-logo">
+            DK
         </div>
+
+        <p>DOUAE KARMOUN</p>
+
     </div>
+
 </div>
 
-<!-- =========================================================
-     BACKGROUND
-     ========================================================= -->
 
-<div class="background-decoration">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-</div>
+<!-- BACKGROUND -->
 
-<div id="particles"></div>
+<div class="blob blob-one"></div>
+<div class="blob blob-two"></div>
 
-<!-- =========================================================
+<div class="particles" id="particles"></div>
+
+
+<!-- =====================================================
      NAVBAR
-     ========================================================= -->
+===================================================== -->
 
-<header class="navbar" id="navbar">
+<header id="header">
 
-    <div class="container nav-container">
+    <nav class="navbar">
 
         <a href="#accueil" class="logo">
-            <span class="logo-mark">DK</span>
-            <span>Douae Karmoun</span>
+            DOUAE.
         </a>
 
-        <nav>
-            <ul class="nav-links" id="navLinks">
+        <div class="nav-links" id="navLinks">
 
-                <li>
-                    <a href="#accueil" class="active">Accueil</a>
-                </li>
+            <a href="#accueil">Accueil</a>
 
-                <li>
-                    <a href="#apropos">À propos</a>
-                </li>
+            <a href="#about">À propos</a>
 
-                <li>
-                    <a href="#competences">Compétences</a>
-                </li>
+            <a href="#skills">Compétences</a>
 
-                <li>
-                    <a href="#modules">Modules</a>
-                </li>
+            <a href="#modules">Modules</a>
 
-                <li>
-                    <a href="#projets">Projets</a>
-                </li>
+            <a href="#contact">Contact</a>
 
-                <li>
-                    <a href="#contact">Contact</a>
-                </li>
-
-            </ul>
-        </nav>
+        </div>
 
         <div class="nav-actions">
 
             <button
-                class="theme-btn"
-                id="themeBtn"
+                class="icon-btn"
+                id="themeToggle"
                 aria-label="Changer le thème">
+
                 <i class="fa-solid fa-moon"></i>
+
             </button>
 
             <button
-                class="menu-btn"
-                id="menuBtn"
+                class="icon-btn menu-toggle"
+                id="menuToggle"
                 aria-label="Menu">
+
                 <i class="fa-solid fa-bars"></i>
+
             </button>
 
         </div>
 
-    </div>
+    </nav>
 
 </header>
 
-<!-- =========================================================
+
+<!-- =====================================================
      HERO
-     ========================================================= -->
+===================================================== -->
 
 <main>
 
 <section class="hero" id="accueil">
 
-    <div class="container hero-grid">
+    <div class="container">
 
-        <div class="hero-content">
+        <div class="hero-grid">
 
-            <span class="hero-tag reveal">
-                <span></span>
-                Disponible pour de nouveaux projets
-            </span>
+            <div class="hero-content">
 
-            <h1 class="reveal">
-                DOUAE
-                <br>
-                <span class="gradient-text">KARMOUN</span>
-            </h1>
+                <div class="hero-badge">
 
-            <div class="hero-role reveal">
-                <span id="typing"></span>
-                <span class="typing-cursor">|</span>
-            </div>
+                    <span></span>
 
-            <p class="hero-description reveal">
-                Bienvenue sur mon portfolio. Découvrez mon parcours,
-                mes compétences et les projets que j'ai réalisés au cours
-                de ma formation en développement web.
-            </p>
-
-            <div class="hero-buttons reveal">
-
-                <a href="#projets" class="btn btn-primary">
-                    <i class="fa-solid fa-folder-open"></i>
-                    Découvrir mes projets
-                </a>
-
-                <a href="#contact" class="btn btn-outline">
-                    <i class="fa-regular fa-paper-plane"></i>
-                    Me contacter
-                </a>
-
-            </div>
-
-        </div>
-
-        <div class="hero-visual reveal">
-
-            <div class="hero-orbit"></div>
-
-            <div class="floating-icon one">
-                <i class="fa-brands fa-js"></i>
-            </div>
-
-            <div class="floating-icon two">
-                <i class="fa-brands fa-php"></i>
-            </div>
-
-            <div class="floating-icon three">
-                <i class="fa-solid fa-database"></i>
-            </div>
-
-            <div class="developer-card">
-
-                <div class="developer-top">
-
-                    <div class="code-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-
-                    <i class="fa-solid fa-code"></i>
+                    Disponible pour apprendre et créer
 
                 </div>
 
-                <div class="code-window">
+                <h1>
+                    DOUAE
+                    <span>KARMOUN</span>
+                </h1>
 
-                    <div class="code-line">
-                        <span class="code-purple">&lt;developer&gt;</span>
+                <div class="hero-role">
+
+                    Stagiaire en développement web
+
+                    <span class="typing" id="typing"></span>
+
+                </div>
+
+                <p class="hero-description">
+
+                    Bienvenue sur mon portfolio.
+                    Découvrez mon parcours, mes compétences et les projets
+                    que j'ai réalisés au cours de ma formation en développement web.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#modules"
+                       class="btn btn-primary">
+
+                        <i class="fa-solid fa-folder-open"></i>
+
+                        Découvrir mes ateliers
+
+                    </a>
+
+                    <a href="#contact"
+                       class="btn btn-outline">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        Me contacter
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-visual">
+
+                <div class="hero-card">
+
+                    <div class="hero-code-window">
+
+                        <div class="window-top">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                        <div class="code-line"></div>
+                        <div class="code-line"></div>
+                        <div class="code-line"></div>
+                        <div class="code-line"></div>
+
                     </div>
 
-                    <div class="code-line">
-                        &nbsp;&nbsp;
-                        <span class="code-pink">name</span> =
-                        <span class="code-green">"Douae"</span>
+
+                    <div class="floating-icon one">
+                        <i class="fa-brands fa-html5"></i>
                     </div>
 
-                    <div class="code-line">
-                        &nbsp;&nbsp;
-                        <span class="code-pink">role</span> =
-                        <span class="code-green">"Web Developer"</span>
+                    <div class="floating-icon two">
+                        <i class="fa-brands fa-js"></i>
                     </div>
 
-                    <div class="code-line">
-                        &nbsp;&nbsp;
-                        <span class="code-pink">skills</span> =
-                        <span class="code-green">"HTML, CSS, JS, PHP"</span>
+                    <div class="floating-icon three">
+                        <i class="fa-brands fa-php"></i>
                     </div>
 
-                    <div class="code-line">
-                        &nbsp;&nbsp;
-                        <span class="code-pink">database</span> =
-                        <span class="code-green">"MySQL"</span>
-                    </div>
-
-                    <div class="code-line">
-                        <span class="code-purple">&lt;/developer&gt;</span>
+                    <div class="floating-icon four">
+                        <i class="fa-solid fa-database"></i>
                     </div>
 
                 </div>
@@ -3196,103 +2882,135 @@ $projectJson = json_encode(
 
 </section>
 
-<!-- =========================================================
-     ABOUT
-     ========================================================= -->
 
-<section id="apropos">
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section id="about">
 
     <div class="container">
 
-        <div class="section-header reveal">
-            <span class="section-label">À propos</span>
-            <h2 class="section-title">
-                Un profil <span class="gradient-text">créatif</span> et passionné
+        <div class="section-heading reveal">
+
+            <div class="section-kicker">
+                <i class="fa-regular fa-heart"></i>
+                À propos
+            </div>
+
+            <h2>
+                Quelques mots sur moi
             </h2>
 
-            <p class="section-description">
-                Une jeune développeuse web motivée par la technologie,
-                la programmation et la création de solutions modernes.
+            <p>
+                Une jeune développeuse web motivée, créative et ambitieuse.
             </p>
+
         </div>
+
 
         <div class="about-grid">
 
             <div class="profile-card slide-left">
 
-                <div class="profile-placeholder">
+                <div class="profile-decoration one"></div>
+                <div class="profile-decoration two"></div>
+
+                <div class="profile-circle">
                     DK
                 </div>
 
             </div>
 
+
             <div class="about-content slide-right">
 
                 <h3>
-                    Bonjour, je suis Douae 👋
+                    DOUAE KARMOUN
                 </h3>
 
                 <p>
-                    Je suis une stagiaire en développement web, motivée,
-                    créative et ambitieuse. J'aime découvrir les nouvelles
-                    technologies, apprendre la programmation et créer
-                    des sites web et applications modernes.
+
+                    Je suis une stagiaire en développement web,
+                    passionnée par la technologie, la programmation
+                    et la création de sites et applications modernes.
+
+                    J'aime apprendre de nouvelles technologies,
+                    résoudre des problèmes et transformer une idée
+                    en une solution web claire et fonctionnelle.
+
                 </p>
 
-                <div class="about-info">
 
-                    <div class="info-box">
+                <div class="info-grid">
+
+                    <div class="info-item">
+
                         <small>Nom</small>
+
                         <strong>DOUAE KARMOUN</strong>
+
                     </div>
 
-                    <div class="info-box">
+                    <div class="info-item">
+
                         <small>Statut</small>
+
                         <strong>Stagiaire</strong>
+
                     </div>
 
-                    <div class="info-box">
+                    <div class="info-item">
+
                         <small>Domaine</small>
+
                         <strong>Développement Web</strong>
+
                     </div>
 
                 </div>
 
-                <div class="strengths">
 
-                    <div class="strength">
-                        <div class="strength-icon">
-                            <i class="fa-solid fa-list-check"></i>
-                        </div>
-                        <span>Gestion de projet</span>
+                <div class="about-features">
+
+                    <div class="feature">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                        <h4>Gestion de projet</h4>
+
                     </div>
 
-                    <div class="strength">
-                        <div class="strength-icon">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        </div>
-                        <span>Créativité</span>
+                    <div class="feature">
+
+                        <i class="fa-solid fa-palette"></i>
+
+                        <h4>Créativité</h4>
+
                     </div>
 
-                    <div class="strength">
-                        <div class="strength-icon">
-                            <i class="fa-solid fa-puzzle-piece"></i>
-                        </div>
-                        <span>Problem solving</span>
+                    <div class="feature">
+
+                        <i class="fa-solid fa-puzzle-piece"></i>
+
+                        <h4>Problem solving</h4>
+
                     </div>
 
-                    <div class="strength">
-                        <div class="strength-icon">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <span>Développement web</span>
+                    <div class="feature">
+
+                        <i class="fa-solid fa-code"></i>
+
+                        <h4>Développement web</h4>
+
                     </div>
 
-                    <div class="strength">
-                        <div class="strength-icon">
-                            <i class="fa-solid fa-microchip"></i>
-                        </div>
-                        <span>Nouvelles technologies</span>
+                    <div class="feature">
+
+                        <i class="fa-solid fa-rocket"></i>
+
+                        <h4>Nouvelles technologies</h4>
+
                     </div>
 
                 </div>
@@ -3305,72 +3023,78 @@ $projectJson = json_encode(
 
 </section>
 
-<!-- =========================================================
-     SKILLS
-     ========================================================= -->
 
-<section id="competences">
+<!-- =====================================================
+     SKILLS
+===================================================== -->
+
+<section id="skills">
 
     <div class="container">
 
-        <div class="section-header reveal">
+        <div class="section-heading reveal">
 
-            <span class="section-label">
+            <div class="section-kicker">
+                <i class="fa-solid fa-star"></i>
                 Compétences
-            </span>
+            </div>
 
-            <h2 class="section-title">
-                Mes compétences <span class="gradient-text">techniques</span>
+            <h2>
+                Mes compétences
             </h2>
 
-            <p class="section-description">
-                Les technologies et compétences développées au cours
-                de ma formation.
+            <p>
+                Les principales compétences développées durant ma formation.
             </p>
 
         </div>
+
 
         <div class="skills-grid">
 
             <?php
 
             $skills = [
-                ['Gestion de projet', 82, 'fa-list-check'],
-                ['Méthodes agiles', 78, 'fa-people-group'],
-                ['Bases de données', 80, 'fa-database'],
-                ['HTML / CSS', 92, 'fa-code'],
-                ['JavaScript', 82, 'fa-js'],
-                ['Front-End', 88, 'fa-desktop'],
-                ['Back-End', 80, 'fa-server'],
-                ['PHP', 78, 'fa-php'],
-                ['MySQL', 82, 'fa-database'],
-                ['Cloud / Cloud Native', 65, 'fa-cloud'],
-                ['Communication professionnelle', 85, 'fa-comments']
+                ['Gestion de projet', 'fa-list-check', 85],
+                ['Méthodes agiles', 'fa-arrows-rotate', 80],
+                ['Bases de données', 'fa-database', 82],
+                ['HTML / CSS', 'fa-code', 92],
+                ['JavaScript', 'fa-brands fa-js', 82],
+                ['Front-End', 'fa-display', 86],
+                ['Back-End', 'fa-server', 80],
+                ['PHP', 'fa-brands fa-php', 82],
+                ['MySQL', 'fa-database', 84],
+                ['Cloud / Cloud Native', 'fa-cloud', 68],
+                ['Communication professionnelle', 'fa-comments', 88]
             ];
 
             foreach ($skills as $skill):
+
             ?>
 
                 <div class="skill-card reveal">
 
-                    <div class="skill-header">
+                    <div class="skill-head">
 
                         <div class="skill-name">
-                            <i class="fa-solid <?= e($skill[2]) ?>"></i>
+
+                            <i class="fa-solid <?= e($skill[1]) ?>"></i>
+
                             <?= e($skill[0]) ?>
+
                         </div>
 
                         <span class="skill-percent">
-                            <?= e($skill[1]) ?>%
+                            <?= $skill[2] ?>%
                         </span>
 
                     </div>
 
-                    <div class="skill-track">
+                    <div class="skill-bar">
 
                         <div
                             class="skill-progress"
-                            data-progress="<?= e($skill[1]) ?>">
+                            data-progress="<?= $skill[2] ?>%">
                         </div>
 
                     </div>
@@ -3385,135 +3109,67 @@ $projectJson = json_encode(
 
 </section>
 
-<!-- =========================================================
-     SERVICES
-     ========================================================= -->
 
-<section class="services">
-
-    <div class="container">
-
-        <div class="section-header reveal">
-
-            <span class="section-label">
-                Ce que je peux réaliser
-            </span>
-
-            <h2 class="section-title">
-                Des solutions <span class="gradient-text">web modernes</span>
-            </h2>
-
-        </div>
-
-        <div class="services-grid">
-
-            <div class="service-card reveal">
-
-                <div class="service-icon">
-                    <i class="fa-solid fa-window-maximize"></i>
-                </div>
-
-                <h3>Sites vitrines</h3>
-
-                <p>
-                    Création de sites modernes, élégants et responsive
-                    adaptés aux différents appareils.
-                </p>
-
-            </div>
-
-            <div class="service-card reveal">
-
-                <div class="service-icon">
-                    <i class="fa-solid fa-laptop-code"></i>
-                </div>
-
-                <h3>Applications web</h3>
-
-                <p>
-                    Développement d'applications web avec Front-End,
-                    Back-End et bases de données.
-                </p>
-
-            </div>
-
-            <div class="service-card reveal">
-
-                <div class="service-icon">
-                    <i class="fa-solid fa-mobile-screen"></i>
-                </div>
-
-                <h3>Responsive Design</h3>
-
-                <p>
-                    Interfaces adaptées aux ordinateurs, tablettes
-                    et smartphones.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================================================
+<!-- =====================================================
      MODULES
-     ========================================================= -->
+===================================================== -->
 
 <section id="modules">
 
     <div class="container">
 
-        <div class="section-header reveal">
+        <div class="section-heading reveal">
 
-            <span class="section-label">
+            <div class="section-kicker">
+
+                <i class="fa-solid fa-book-open"></i>
+
                 Formation
-            </span>
 
-            <h2 class="section-title">
-                Mes <span class="gradient-text">modules</span>
+            </div>
+
+            <h2>
+                Mes modules
             </h2>
 
-            <p class="section-description">
-                Découvrez les modules de ma formation et les ateliers
-                réalisés dans chaque module.
+            <p>
+
+                Retrouvez les différents modules de ma formation
+                ainsi que les ateliers réalisés.
+
             </p>
 
         </div>
+
 
         <div class="modules-grid">
 
             <?php foreach ($modules as $module): ?>
 
-                <article
-                    class="module-card reveal"
-                    id="<?= e(strtolower($module['id'])) ?>">
+                <article class="module-card reveal">
 
                     <div class="module-top">
 
-                        <div>
+                        <div class="module-number">
 
-                            <span class="module-code">
-                                <?= e($module['id']) ?>
-                            </span>
-
-                            <h3 class="module-title">
-                                <?= e($module['title']) ?>
-                            </h3>
+                            <?= e($module['id']) ?>
 
                         </div>
 
-                        <div class="module-icon">
-                            <i class="fa-solid <?= e($module['icon']) ?>"></i>
-                        </div>
+                        <i class="<?= e($module['icon']) ?> module-icon"></i>
 
                     </div>
 
-                    <p class="module-description">
+
+                    <h3>
+                        <?= e($module['title']) ?>
+                    </h3>
+
+
+                    <p>
                         <?= e($module['description']) ?>
                     </p>
+
 
                     <div class="topics">
 
@@ -3527,64 +3183,62 @@ $projectJson = json_encode(
 
                     </div>
 
-                    <!-- ATELIERS -->
-                    <div class="module-workshops">
 
-                        <div class="workshop-heading">
+                    <div class="module-projects">
+
+                        <div class="module-projects-title">
 
                             <h4>
                                 <i class="fa-solid fa-folder-open"></i>
-                                Ateliers réalisés
+                                Ateliers
                             </h4>
 
-                            <span class="workshop-count">
-                                <?= count($module['projects']) ?> ateliers
+                            <span class="atelier-count">
+
+                                <?= count($module['projects']) ?>
+                                ateliers
+
                             </span>
 
                         </div>
 
-                        <div class="workshop-list">
 
-                            <?php foreach ($module['projects'] as $projectIndex => $project): ?>
+                        <div class="atelier-list">
 
-                                <?php
+                            <?php foreach ($module['projects'] as $project): ?>
 
-                                $globalProjectIndex = 0;
+                                <div class="atelier-item">
 
-                                foreach ($allProjects as $index => $globalProject) {
-                                    if (
-                                        $globalProject['module'] === $module['id'] &&
-                                        $globalProject['name'] === $project['name']
-                                    ) {
-                                        $globalProjectIndex = $index;
-                                        break;
-                                    }
-                                }
+                                    <div class="atelier-info">
 
-                                ?>
-
-                                <div class="workshop-item">
-
-                                    <div class="workshop-info">
-
-                                        <span class="workshop-label">
+                                        <span class="atelier-label">
                                             <?= e($project['atelier']) ?>
                                         </span>
 
-                                        <span class="workshop-name">
+                                        <strong>
                                             <?= e($project['name']) ?>
-                                        </span>
+                                        </strong>
 
                                     </div>
 
-                                    <button
-                                        class="atelier-btn open-project"
-                                        data-index="<?= e($globalProjectIndex) ?>">
+
+                                    <!--
+                                        LIEN DIRECT VERS TON PDF
+                                        Remplace simplement le fichier
+                                        dans le dossier /pdf/
+                                    -->
+
+                                    <a
+                                        href="<?= e($project['pdf']) ?>"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="atelier-btn">
+
+                                        <i class="fa-solid fa-file-pdf"></i>
 
                                         Voir l'atelier
-                                        <i class="fa-solid fa-arrow-right"></i>
 
-                                    </button>
+                                    </a>
 
                                 </div>
 
@@ -3594,25 +3248,6 @@ $projectJson = json_encode(
 
                     </div>
 
-                    <div class="module-footer">
-
-                        <span class="module-project-count">
-                            <i class="fa-solid fa-diagram-project"></i>
-                            <?= count($module['projects']) ?> projets disponibles
-                        </span>
-
-                        <a
-                            href="#projets"
-                            class="module-project-btn filter-module"
-                            data-module="<?= e($module['id']) ?>">
-
-                            Voir les projets
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </a>
-
-                    </div>
-
                 </article>
 
             <?php endforeach; ?>
@@ -3623,232 +3258,94 @@ $projectJson = json_encode(
 
 </section>
 
-<!-- =========================================================
-     PROJECTS GALLERY
-     ========================================================= -->
 
-<section class="projects-section" id="projets">
-
-    <div class="container">
-
-        <div class="section-header reveal">
-
-            <span class="section-label">
-                Portfolio
-            </span>
-
-            <h2 class="section-title">
-                Mes <span class="gradient-text">projets</span>
-            </h2>
-
-            <p class="section-description">
-                Explorez mes différents ateliers et projets réalisés
-                durant ma formation.
-            </p>
-
-        </div>
-
-        <div class="filters reveal">
-
-            <button
-                class="filter-btn active"
-                data-filter="all">
-                Tous
-            </button>
-
-            <?php foreach ($modules as $module): ?>
-
-                <button
-                    class="filter-btn"
-                    data-filter="<?= e($module['id']) ?>">
-
-                    <?= e($module['id']) ?>
-
-                </button>
-
-            <?php endforeach; ?>
-
-        </div>
-
-        <div class="projects-grid" id="projectsGrid">
-
-            <?php foreach ($allProjects as $index => $project): ?>
-
-                <article
-                    class="project-card reveal"
-                    data-module="<?= e($project['module']) ?>">
-
-                    <div class="project-image">
-
-                        <img
-                            src="<?= e($project['image']) ?>"
-                            alt="<?= e($project['name']) ?>"
-                            loading="lazy">
-
-                        <div class="project-overlay">
-
-                            <button
-                                class="project-view open-project"
-                                data-index="<?= e($index) ?>"
-                                aria-label="Voir le projet">
-
-                                <i class="fa-solid fa-eye"></i>
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="project-body">
-
-                        <span class="project-module">
-                            <?= e($project['module']) ?>
-                        </span>
-
-                        <h3>
-                            <?= e($project['name']) ?>
-                        </h3>
-
-                        <p>
-                            <?= e($project['description']) ?>
-                        </p>
-
-                        <div class="project-footer">
-
-                            <span class="project-link">
-                                <?= e($project['atelier']) ?>
-                            </span>
-
-                            <button
-                                class="project-link open-project"
-                                data-index="<?= e($index) ?>"
-                                style="border:none;background:none;cursor:pointer;">
-
-                                Voir
-                                <i class="fa-solid fa-arrow-right"></i>
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            <?php endforeach; ?>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================================================
-     PARCOURS / TIMELINE
-     ========================================================= -->
+<!-- =====================================================
+     SERVICES
+===================================================== -->
 
 <section>
 
     <div class="container">
 
-        <div class="section-header reveal">
+        <div class="section-heading reveal">
 
-            <span class="section-label">
-                Parcours
-            </span>
+            <div class="section-kicker">
 
-            <h2 class="section-title">
-                Mon <span class="gradient-text">parcours</span>
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                Ce que je peux réaliser
+
+            </div>
+
+            <h2>
+                Création web
             </h2>
+
+            <p>
+                Des solutions modernes, responsives et adaptées aux besoins.
+            </p>
 
         </div>
 
-        <div class="timeline">
 
-            <div class="timeline-item slide-left">
+        <div class="services-grid">
 
-                <div class="timeline-dot"></div>
+            <div class="service-card reveal">
 
-                <div class="timeline-card">
+                <div class="service-icon">
 
-                    <span>FORMATION</span>
-
-                    <h3>
-                        Développement Web
-                    </h3>
-
-                    <p>
-                        Formation orientée vers la création de sites
-                        et applications web modernes.
-                    </p>
+                    <i class="fa-solid fa-window-maximize"></i>
 
                 </div>
+
+                <h3>
+                    Sites vitrines
+                </h3>
+
+                <p>
+                    Création de sites modernes et responsives
+                    pour présenter une entreprise, une activité ou un projet.
+                </p>
 
             </div>
 
-            <div class="timeline-item slide-right">
 
-                <div class="timeline-dot"></div>
+            <div class="service-card reveal">
 
-                <div class="timeline-card">
+                <div class="service-icon">
 
-                    <span>PROJETS</span>
-
-                    <h3>
-                        Ateliers M201 – M208
-                    </h3>
-
-                    <p>
-                        Réalisation de plusieurs ateliers pratiques
-                        en Front-End, Back-End, bases de données,
-                        gestion de projet et communication.
-                    </p>
+                    <i class="fa-solid fa-laptop-code"></i>
 
                 </div>
+
+                <h3>
+                    Applications web
+                </h3>
+
+                <p>
+                    Développement d’applications web avec
+                    Front-End, Back-End et bases de données.
+                </p>
 
             </div>
 
-            <div class="timeline-item slide-left">
 
-                <div class="timeline-dot"></div>
+            <div class="service-card reveal">
 
-                <div class="timeline-card">
+                <div class="service-icon">
 
-                    <span>PROJET DE SYNTHÈSE</span>
-
-                    <h3>
-                        Application Web complète
-                    </h3>
-
-                    <p>
-                        Mise en pratique des compétences acquises
-                        à travers un projet web intégrant plusieurs
-                        technologies.
-                    </p>
+                    <i class="fa-solid fa-mobile-screen"></i>
 
                 </div>
 
-            </div>
+                <h3>
+                    Responsive Design
+                </h3>
 
-            <div class="timeline-item slide-right">
-
-                <div class="timeline-dot"></div>
-
-                <div class="timeline-card">
-
-                    <span>OBJECTIF</span>
-
-                    <h3>
-                        Évoluer dans le développement web
-                    </h3>
-
-                    <p>
-                        Continuer à apprendre, développer mes compétences
-                        et découvrir de nouvelles technologies.
-                    </p>
-
-                </div>
+                <p>
+                    Interfaces adaptées aux ordinateurs,
+                    tablettes et smartphones.
+                </p>
 
             </div>
 
@@ -3858,88 +3355,120 @@ $projectJson = json_encode(
 
 </section>
 
-<!-- =========================================================
+
+<!-- =====================================================
      CONTACT
-     ========================================================= -->
+===================================================== -->
 
 <section id="contact">
 
     <div class="container">
 
-        <div class="section-header reveal">
+        <div class="section-heading reveal">
 
-            <span class="section-label">
+            <div class="section-kicker">
+
+                <i class="fa-regular fa-paper-plane"></i>
+
                 Contact
-            </span>
 
-            <h2 class="section-title">
-                Parlons de votre <span class="gradient-text">projet</span>
+            </div>
+
+            <h2>
+                Parlons ensemble
             </h2>
 
-            <p class="section-description">
-                Une question, une idée ou simplement envie d'échanger ?
-                N'hésitez pas à me contacter.
+            <p>
+                Une question, une idée ou un projet ?
+                N’hésitez pas à me contacter.
             </p>
 
         </div>
+
 
         <div class="contact-grid">
 
             <div class="contact-info slide-left">
 
                 <h3>
-                    Restons en contact
+                    Mes coordonnées
                 </h3>
 
                 <p>
-                    Je suis toujours intéressée par de nouveaux projets,
-                    de nouvelles expériences et opportunités d'apprentissage.
+                    Vous pouvez me contacter directement
+                    à travers les informations suivantes.
                 </p>
 
+
                 <div class="contact-item">
 
-                    <div class="contact-item-icon">
-                        <i class="fa-solid fa-envelope"></i>
+                    <div class="contact-icon">
+
+                        <i class="fa-regular fa-envelope"></i>
+
                     </div>
 
                     <div>
+
                         <small>Email</small>
-                        <strong><?= e($config['email']) ?></strong>
+
+                        <strong>
+                            <?= e($config['email']) ?>
+                        </strong>
+
                     </div>
 
                 </div>
 
+
                 <div class="contact-item">
 
-                    <div class="contact-item-icon">
+                    <div class="contact-icon">
+
                         <i class="fa-solid fa-phone"></i>
+
                     </div>
 
                     <div>
+
                         <small>Téléphone</small>
-                        <strong><?= e($config['phone']) ?></strong>
+
+                        <strong>
+                            <?= e($config['phone']) ?>
+                        </strong>
+
                     </div>
 
                 </div>
+
 
                 <div class="contact-item">
 
-                    <div class="contact-item-icon">
+                    <div class="contact-icon">
+
                         <i class="fa-solid fa-location-dot"></i>
+
                     </div>
 
                     <div>
+
                         <small>Localisation</small>
-                        <strong><?= e($config['country']) ?></strong>
+
+                        <strong>
+                            <?= e($config['country']) ?>
+                        </strong>
+
                     </div>
 
                 </div>
+
 
                 <div class="socials">
 
                     <a
                         href="<?= e($config['github']) ?>"
                         target="_blank"
+                        rel="noopener"
                         class="social"
                         aria-label="GitHub">
 
@@ -3950,6 +3479,7 @@ $projectJson = json_encode(
                     <a
                         href="<?= e($config['linkedin']) ?>"
                         target="_blank"
+                        rel="noopener"
                         class="social"
                         aria-label="LinkedIn">
 
@@ -3960,6 +3490,7 @@ $projectJson = json_encode(
                     <a
                         href="<?= e($config['instagram']) ?>"
                         target="_blank"
+                        rel="noopener"
                         class="social"
                         aria-label="Instagram">
 
@@ -3971,11 +3502,35 @@ $projectJson = json_encode(
 
             </div>
 
-            <div class="contact-form-wrapper slide-right">
+
+            <div class="contact-form-card slide-right">
+
+                <h3>
+                    Envoyer un message
+                </h3>
+
+
+                <?php if (!empty($formErrors)): ?>
+
+                    <div class="form-alert form-error">
+
+                        <?php foreach ($formErrors as $error): ?>
+
+                            <div>
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <?= e($error) ?>
+                            </div>
+
+                        <?php endforeach; ?>
+
+                    </div>
+
+                <?php endif; ?>
+
 
                 <?php if ($formSuccess): ?>
 
-                    <div class="alert alert-success" id="formSuccess">
+                    <div class="form-alert form-success">
 
                         <i class="fa-solid fa-circle-check"></i>
 
@@ -3985,30 +3540,6 @@ $projectJson = json_encode(
 
                 <?php endif; ?>
 
-                <?php if (!empty($formErrors)): ?>
-
-                    <div class="alert alert-error">
-
-                        <strong>
-                            <i class="fa-solid fa-circle-exclamation"></i>
-                            Attention
-                        </strong>
-
-                        <ul>
-
-                            <?php foreach ($formErrors as $error): ?>
-
-                                <li>
-                                    <?= e($error) ?>
-                                </li>
-
-                            <?php endforeach; ?>
-
-                        </ul>
-
-                    </div>
-
-                <?php endif; ?>
 
                 <form
                     method="POST"
@@ -4021,76 +3552,79 @@ $projectJson = json_encode(
                         <div class="form-group">
 
                             <label for="name">
-                                Nom *
+                                Nom
                             </label>
 
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
-                                class="form-control"
                                 placeholder="Votre nom"
+                                value="<?= e($name ?? '') ?>"
                                 required>
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label for="email">
-                                Email *
+                                Email
                             </label>
 
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
-                                class="form-control"
                                 placeholder="votre@email.com"
+                                value="<?= e($email ?? '') ?>"
                                 required>
 
                         </div>
 
+
                         <div class="form-group full">
 
                             <label for="subject">
-                                Sujet *
+                                Sujet
                             </label>
 
                             <input
                                 type="text"
                                 id="subject"
                                 name="subject"
-                                class="form-control"
-                                placeholder="Sujet de votre message"
+                                placeholder="Sujet du message"
+                                value="<?= e($subject ?? '') ?>"
                                 required>
 
                         </div>
 
+
                         <div class="form-group full">
 
                             <label for="message">
-                                Message *
+                                Message
                             </label>
 
                             <textarea
                                 id="message"
                                 name="message"
-                                class="form-control"
                                 placeholder="Écrivez votre message..."
-                                required></textarea>
+                                required><?= e($message ?? '') ?></textarea>
 
                         </div>
 
                     </div>
+
 
                     <button
                         type="submit"
                         name="contact_submit"
                         class="btn btn-primary">
 
-                        <i class="fa-solid fa-paper-plane"></i>
+                        <i class="fa-regular fa-paper-plane"></i>
 
-                        Envoyer le message
+                        Envoyer
 
                     </button>
 
@@ -4106,58 +3640,36 @@ $projectJson = json_encode(
 
 </main>
 
-<!-- =========================================================
+
+<!-- =====================================================
      FOOTER
-     ========================================================= -->
+===================================================== -->
 
 <footer>
 
-    <div class="container footer-inner">
+    <div class="container">
 
-        <div class="footer-brand">
+        <div class="footer-content">
 
-            DOUAE KARMOUN
+            <div class="footer-brand">
 
-            <span>
-                Stagiaire en développement web
-            </span>
+                <strong>
+                    DOUAE KARMOUN
+                </strong>
 
-        </div>
+                <p>
+                    Stagiaire en développement web
+                </p>
 
-        <div class="copyright">
+            </div>
 
-            DOUAE KARMOUN © 2026 — All Rights Reserved
 
-        </div>
+            <div class="copyright">
 
-        <div class="footer-socials">
+                DOUAE KARMOUN © 2026 —
+                All Rights Reserved
 
-            <a
-                href="<?= e($config['github']) ?>"
-                target="_blank"
-                class="footer-social">
-
-                <i class="fa-brands fa-github"></i>
-
-            </a>
-
-            <a
-                href="<?= e($config['linkedin']) ?>"
-                target="_blank"
-                class="footer-social">
-
-                <i class="fa-brands fa-linkedin-in"></i>
-
-            </a>
-
-            <a
-                href="<?= e($config['instagram']) ?>"
-                target="_blank"
-                class="footer-social">
-
-                <i class="fa-brands fa-instagram"></i>
-
-            </a>
+            </div>
 
         </div>
 
@@ -4165,9 +3677,8 @@ $projectJson = json_encode(
 
 </footer>
 
-<!-- =========================================================
-     BACK TO TOP
-     ========================================================= -->
+
+<!-- BACK TO TOP -->
 
 <button
     id="backTop"
@@ -4177,206 +3688,67 @@ $projectJson = json_encode(
 
 </button>
 
-<!-- =========================================================
-     PROJECT MODAL
-     ========================================================= -->
-
-<div
-    class="modal"
-    id="projectModal"
-    aria-hidden="true">
-
-    <div class="modal-box">
-
-        <div class="modal-image">
-
-            <img
-                id="modalImage"
-                src=""
-                alt="Projet">
-
-        </div>
-
-        <div class="modal-content">
-
-            <div class="modal-header">
-
-                <div>
-
-                    <span
-                        class="modal-module"
-                        id="modalModule">
-                    </span>
-
-                    <h2 id="modalTitle">
-                        Projet
-                    </h2>
-
-                </div>
-
-                <button
-                    class="modal-close"
-                    id="modalClose"
-                    aria-label="Fermer">
-
-                    <i class="fa-solid fa-xmark"></i>
-
-                </button>
-
-            </div>
-
-            <p
-                class="modal-description"
-                id="modalDescription">
-            </p>
-
-            <div class="modal-section">
-
-                <h4>
-                    <i class="fa-solid fa-bullseye"></i>
-                    Objectifs
-                </h4>
-
-                <ul
-                    class="modal-list"
-                    id="modalObjectives">
-                </ul>
-
-            </div>
-
-            <div class="modal-section">
-
-                <h4>
-                    <i class="fa-solid fa-code"></i>
-                    Technologies
-                </h4>
-
-                <div
-                    class="tech-list"
-                    id="modalTechnologies">
-                </div>
-
-            </div>
-
-            <div class="modal-section">
-
-                <h4>
-                    <i class="fa-solid fa-star"></i>
-                    Compétences acquises
-                </h4>
-
-                <div
-                    class="tech-list"
-                    id="modalSkills">
-                </div>
-
-            </div>
-
-            <div class="modal-actions">
-
-                <a
-                    href="#"
-                    target="_blank"
-                    class="btn btn-primary"
-                    id="modalProjectLink">
-
-                    <i class="fa-solid fa-eye"></i>
-                    Voir le projet
-
-                </a>
-
-                <a
-                    href="#"
-                    target="_blank"
-                    class="btn btn-outline"
-                    id="modalGithubLink">
-
-                    <i class="fa-brands fa-github"></i>
-                    GitHub
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =========================================================
-     JAVASCRIPT
-     ========================================================= -->
 
 <script>
 
-    /* =========================================================
-       PROJECT DATA FROM PHP
-       ========================================================= */
-
-    const projects = <?= $projectJson ?: '[]' ?>;
-
-    /* =========================================================
+    /* =====================================================
        LOADER
-       ========================================================= */
+    ===================================================== */
 
-    window.addEventListener("load", () => {
+    window.addEventListener('load', function () {
 
-        setTimeout(() => {
+        setTimeout(function () {
 
-            document
-                .getElementById("loader")
-                .classList.add("hide");
+            document.getElementById('loader')
+                .classList.add('hide');
 
-            document.body.classList.add("loaded");
-
-        }, 900);
+        }, 700);
 
     });
 
-    /* =========================================================
+
+    /* =====================================================
        PARTICLES
-       ========================================================= */
+    ===================================================== */
 
-    const particlesContainer =
-        document.getElementById("particles");
+    const particles = document.getElementById('particles');
 
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; i < 25; i++) {
 
-        const particle =
-            document.createElement("span");
+        const particle = document.createElement('span');
 
-        particle.className = "particle";
+        particle.className = 'particle';
 
         particle.style.left =
-            Math.random() * 100 + "%";
-
-        particle.style.animationDuration =
-            (8 + Math.random() * 15) + "s";
+            Math.random() * 100 + '%';
 
         particle.style.animationDelay =
-            (-Math.random() * 15) + "s";
+            Math.random() * 8 + 's';
+
+        particle.style.animationDuration =
+            (6 + Math.random() * 8) + 's';
 
         particle.style.width =
-            (3 + Math.random() * 5) + "px";
+            (3 + Math.random() * 4) + 'px';
 
         particle.style.height =
             particle.style.width;
 
-        particlesContainer.appendChild(particle);
+        particles.appendChild(particle);
     }
 
-    /* =========================================================
+
+    /* =====================================================
        TYPING EFFECT
-       ========================================================= */
+    ===================================================== */
 
     const typingElement =
-        document.getElementById("typing");
+        document.getElementById('typing');
 
     const words = [
-        "Web Developer",
-        "Student",
-        "Creative"
+        ' | Web Developer',
+        ' | Student',
+        ' | Creative'
     ];
 
     let wordIndex = 0;
@@ -4385,21 +3757,18 @@ $projectJson = json_encode(
 
     function typeEffect() {
 
-        const currentWord =
-            words[wordIndex];
+        const currentWord = words[wordIndex];
 
         if (!deleting) {
 
             typingElement.textContent =
-                currentWord.substring(0, charIndex + 1);
+                currentWord.substring(0, charIndex++);
 
-            charIndex++;
-
-            if (charIndex === currentWord.length) {
+            if (charIndex > currentWord.length) {
 
                 deleting = true;
 
-                setTimeout(typeEffect, 1500);
+                setTimeout(typeEffect, 1300);
 
                 return;
             }
@@ -4407,185 +3776,180 @@ $projectJson = json_encode(
         } else {
 
             typingElement.textContent =
-                currentWord.substring(0, charIndex - 1);
+                currentWord.substring(0, charIndex--);
 
-            charIndex--;
-
-            if (charIndex === 0) {
+            if (charIndex < 0) {
 
                 deleting = false;
 
                 wordIndex =
                     (wordIndex + 1) % words.length;
+
+                charIndex = 0;
             }
         }
 
         setTimeout(
             typeEffect,
-            deleting ? 60 : 100
+            deleting ? 50 : 90
         );
     }
 
     typeEffect();
 
-    /* =========================================================
-       NAVBAR SCROLL
-       ========================================================= */
 
-    const navbar =
-        document.getElementById("navbar");
+    /* =====================================================
+       NAVBAR SCROLL
+    ===================================================== */
+
+    const header =
+        document.getElementById('header');
 
     const backTop =
-        document.getElementById("backTop");
+        document.getElementById('backTop');
 
-    function handleScroll() {
+    window.addEventListener('scroll', function () {
 
-        if (window.scrollY > 50) {
+        if (window.scrollY > 40) {
 
-            navbar.classList.add("scrolled");
+            header.classList.add('scrolled');
 
         } else {
 
-            navbar.classList.remove("scrolled");
-
+            header.classList.remove('scrolled');
         }
+
 
         if (window.scrollY > 500) {
 
-            backTop.classList.add("show");
+            backTop.classList.add('show');
 
         } else {
 
-            backTop.classList.remove("show");
-
-        }
-
-    }
-
-    window.addEventListener(
-        "scroll",
-        handleScroll
-    );
-
-    handleScroll();
-
-    /* =========================================================
-       MOBILE MENU
-       ========================================================= */
-
-    const menuBtn =
-        document.getElementById("menuBtn");
-
-    const navLinks =
-        document.getElementById("navLinks");
-
-    menuBtn.addEventListener("click", () => {
-
-        navLinks.classList.toggle("open");
-
-        const icon =
-            menuBtn.querySelector("i");
-
-        if (navLinks.classList.contains("open")) {
-
-            icon.className =
-                "fa-solid fa-xmark";
-
-        } else {
-
-            icon.className =
-                "fa-solid fa-bars";
-
+            backTop.classList.remove('show');
         }
 
     });
 
-    document.querySelectorAll(".nav-links a")
-        .forEach(link => {
 
-            link.addEventListener("click", () => {
+    /* =====================================================
+       BACK TO TOP
+    ===================================================== */
 
-                navLinks.classList.remove("open");
+    backTop.addEventListener('click', function () {
 
-                menuBtn.querySelector("i").className =
-                    "fa-solid fa-bars";
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+    });
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    const menuToggle =
+        document.getElementById('menuToggle');
+
+    const navLinks =
+        document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', function () {
+
+        navLinks.classList.toggle('active');
+
+        const icon =
+            menuToggle.querySelector('i');
+
+        if (navLinks.classList.contains('active')) {
+
+            icon.className =
+                'fa-solid fa-xmark';
+
+        } else {
+
+            icon.className =
+                'fa-solid fa-bars';
+        }
+
+    });
+
+
+    document.querySelectorAll('.nav-links a')
+        .forEach(function (link) {
+
+            link.addEventListener('click', function () {
+
+                navLinks.classList.remove('active');
+
+                menuToggle.querySelector('i')
+                    .className =
+                    'fa-solid fa-bars';
 
             });
 
         });
 
-    /* =========================================================
-       ACTIVE NAVIGATION
-       ========================================================= */
 
-    const sections =
-        document.querySelectorAll("section[id]");
+    /* =====================================================
+       DARK MODE
+    ===================================================== */
 
-    const navigationLinks =
-        document.querySelectorAll(".nav-links a");
+    const themeToggle =
+        document.getElementById('themeToggle');
 
-    const sectionObserver =
-        new IntersectionObserver(
-            entries => {
+    const savedTheme =
+        localStorage.getItem('portfolio-theme');
 
-                entries.forEach(entry => {
+    if (savedTheme === 'dark') {
 
-                    if (entry.isIntersecting) {
+        document.body.classList.add('dark');
 
-                        navigationLinks.forEach(link => {
+        themeToggle.innerHTML =
+            '<i class="fa-solid fa-sun"></i>';
+    }
 
-                            link.classList.remove("active");
+    themeToggle.addEventListener('click', function () {
 
-                            if (
-                                link.getAttribute("href") ===
-                                "#" + entry.target.id
-                            ) {
+        document.body.classList.toggle('dark');
 
-                                link.classList.add("active");
+        const dark =
+            document.body.classList.contains('dark');
 
-                            }
-
-                        });
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: .35
-            }
+        localStorage.setItem(
+            'portfolio-theme',
+            dark ? 'dark' : 'light'
         );
 
-    sections.forEach(section => {
-
-        sectionObserver.observe(section);
+        themeToggle.innerHTML = dark
+            ? '<i class="fa-solid fa-sun"></i>'
+            : '<i class="fa-solid fa-moon"></i>';
 
     });
 
-    /* =========================================================
-       REVEAL ANIMATIONS
-       ========================================================= */
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
 
     const revealElements =
         document.querySelectorAll(
-            ".reveal, .slide-left, .slide-right"
+            '.reveal, .slide-left, .slide-right'
         );
 
     const revealObserver =
         new IntersectionObserver(
-            entries => {
+            function (entries, observer) {
 
-                entries.forEach(entry => {
+                entries.forEach(function (entry) {
 
                     if (entry.isIntersecting) {
 
-                        entry.target.classList.add("show");
+                        entry.target.classList.add('show');
 
-                        revealObserver.unobserve(
-                            entry.target
-                        );
-
+                        observer.unobserve(entry.target);
                     }
 
                 });
@@ -4596,24 +3960,25 @@ $projectJson = json_encode(
             }
         );
 
-    revealElements.forEach(element => {
+    revealElements.forEach(function (element) {
 
         revealObserver.observe(element);
 
     });
 
-    /* =========================================================
+
+    /* =====================================================
        SKILL BARS
-       ========================================================= */
+    ===================================================== */
 
     const skillBars =
-        document.querySelectorAll(".skill-progress");
+        document.querySelectorAll('.skill-progress');
 
     const skillObserver =
         new IntersectionObserver(
-            entries => {
+            function (entries, observer) {
 
-                entries.forEach(entry => {
+                entries.forEach(function (entry) {
 
                     if (entry.isIntersecting) {
 
@@ -4621,461 +3986,138 @@ $projectJson = json_encode(
                             entry.target.dataset.progress;
 
                         entry.target.style.width =
-                            progress + "%";
+                            progress;
 
-                        skillObserver.unobserve(
-                            entry.target
-                        );
-
+                        observer.unobserve(entry.target);
                     }
 
                 });
 
             },
             {
-                threshold: .5
+                threshold: .4
             }
         );
 
-    skillBars.forEach(bar => {
+    skillBars.forEach(function (bar) {
 
         skillObserver.observe(bar);
 
     });
 
-    /* =========================================================
-       FILTER PROJECTS
-       ========================================================= */
 
-    const filterButtons =
-        document.querySelectorAll(".filter-btn");
+    /* =====================================================
+       CONTACT FORM VALIDATION
+    ===================================================== */
 
-    const projectCards =
-        document.querySelectorAll(".project-card");
+    const contactForm =
+        document.getElementById('contactForm');
 
-    function filterProjects(filter) {
+    contactForm.addEventListener('submit', function (event) {
 
-        projectCards.forEach(card => {
+        const name =
+            document.getElementById('name');
 
-            const module =
-                card.dataset.module;
+        const email =
+            document.getElementById('email');
 
-            if (
-                filter === "all" ||
-                module === filter
-            ) {
+        const subject =
+            document.getElementById('subject');
 
-                card.classList.remove("hidden");
+        const message =
+            document.getElementById('message');
 
-            } else {
+        let valid = true;
 
-                card.classList.add("hidden");
+        [name, email, subject, message]
+            .forEach(function (input) {
 
-            }
+                input.style.borderColor = '';
 
-        });
+            });
 
-        filterButtons.forEach(button => {
 
-            button.classList.toggle(
-                "active",
-                button.dataset.filter === filter
+        if (name.value.trim() === '') {
+
+            name.style.borderColor = '#d66';
+
+            valid = false;
+        }
+
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email.value.trim())) {
+
+            email.style.borderColor = '#d66';
+
+            valid = false;
+        }
+
+
+        if (subject.value.trim() === '') {
+
+            subject.style.borderColor = '#d66';
+
+            valid = false;
+        }
+
+
+        if (message.value.trim().length < 10) {
+
+            message.style.borderColor = '#d66';
+
+            valid = false;
+        }
+
+
+        if (!valid) {
+
+            event.preventDefault();
+
+            alert(
+                'Veuillez vérifier les informations du formulaire.'
             );
 
-        });
-
-    }
-
-    filterButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            filterProjects(
-                button.dataset.filter
-            );
-
-        });
+        }
 
     });
 
-    /* =========================================================
-       MODULE DIRECT BUTTONS
-       ========================================================= */
 
-    document.querySelectorAll(".filter-module")
-        .forEach(button => {
+    /* =====================================================
+       SMOOTH SCROLL
+    ===================================================== */
 
-            button.addEventListener("click", event => {
+    document.querySelectorAll('a[href^="#"]')
+        .forEach(function (anchor) {
+
+            anchor.addEventListener('click', function (event) {
+
+                const targetId =
+                    this.getAttribute('href');
+
+                if (
+                    targetId === '#' ||
+                    !document.querySelector(targetId)
+                ) {
+                    return;
+                }
 
                 event.preventDefault();
 
-                const module =
-                    button.dataset.module;
-
-                filterProjects(module);
-
-                document
-                    .getElementById("projets")
+                document.querySelector(targetId)
                     .scrollIntoView({
-                        behavior: "smooth"
+                        behavior: 'smooth',
+                        block: 'start'
                     });
 
             });
 
         });
 
-    /* =========================================================
-       PROJECT MODAL
-       ========================================================= */
-
-    const modal =
-        document.getElementById("projectModal");
-
-    const modalClose =
-        document.getElementById("modalClose");
-
-    const modalImage =
-        document.getElementById("modalImage");
-
-    const modalTitle =
-        document.getElementById("modalTitle");
-
-    const modalModule =
-        document.getElementById("modalModule");
-
-    const modalDescription =
-        document.getElementById("modalDescription");
-
-    const modalObjectives =
-        document.getElementById("modalObjectives");
-
-    const modalTechnologies =
-        document.getElementById("modalTechnologies");
-
-    const modalSkills =
-        document.getElementById("modalSkills");
-
-    const modalProjectLink =
-        document.getElementById("modalProjectLink");
-
-    const modalGithubLink =
-        document.getElementById("modalGithubLink");
-
-    function openProject(index) {
-
-        const project =
-            projects[index];
-
-        if (!project) return;
-
-        modalImage.src =
-            project.image;
-
-        modalImage.alt =
-            project.name;
-
-        modalTitle.textContent =
-            project.name;
-
-        modalModule.textContent =
-            project.module + " — " +
-            project.atelier;
-
-        modalDescription.textContent =
-            project.description;
-
-        modalObjectives.innerHTML =
-            project.objectives
-                .map(item => `<li>${escapeHtml(item)}</li>`)
-                .join("");
-
-        modalTechnologies.innerHTML =
-            project.technologies
-                .map(item => `<span class="tech">${escapeHtml(item)}</span>`)
-                .join("");
-
-        modalSkills.innerHTML =
-            project.skills
-                .map(item => `<span class="tech">${escapeHtml(item)}</span>`)
-                .join("");
-
-        modalProjectLink.href =
-            project.link;
-
-        modalGithubLink.href =
-            project.github;
-
-        modal.classList.add("show");
-
-        modal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-        document.body.style.overflow =
-            "hidden";
-
-    }
-
-    function closeProject() {
-
-        modal.classList.remove("show");
-
-        modal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        document.body.style.overflow =
-            "";
-
-    }
-
-    document.querySelectorAll(".open-project")
-        .forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                openProject(
-                    Number(button.dataset.index)
-                );
-
-            });
-
-        });
-
-    modalClose.addEventListener(
-        "click",
-        closeProject
-    );
-
-    modal.addEventListener(
-        "click",
-        event => {
-
-            if (event.target === modal) {
-
-                closeProject();
-
-            }
-
-        }
-    );
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (event.key === "Escape") {
-
-                closeProject();
-
-            }
-
-        }
-    );
-
-    /* =========================================================
-       HTML ESCAPE FOR MODAL
-       ========================================================= */
-
-    function escapeHtml(value) {
-
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
-
-    /* =========================================================
-       DARK MODE
-       ========================================================= */
-
-    const themeBtn =
-        document.getElementById("themeBtn");
-
-    const savedTheme =
-        localStorage.getItem("douae-theme");
-
-    if (savedTheme === "dark") {
-
-        document.documentElement
-            .setAttribute(
-                "data-theme",
-                "dark"
-            );
-
-        themeBtn.innerHTML =
-            '<i class="fa-solid fa-sun"></i>';
-
-    }
-
-    themeBtn.addEventListener("click", () => {
-
-        const isDark =
-            document.documentElement
-                .getAttribute("data-theme") ===
-            "dark";
-
-        if (isDark) {
-
-            document.documentElement
-                .removeAttribute("data-theme");
-
-            localStorage.removeItem(
-                "douae-theme"
-            );
-
-            themeBtn.innerHTML =
-                '<i class="fa-solid fa-moon"></i>';
-
-        } else {
-
-            document.documentElement
-                .setAttribute(
-                    "data-theme",
-                    "dark"
-                );
-
-            localStorage.setItem(
-                "douae-theme",
-                "dark"
-            );
-
-            themeBtn.innerHTML =
-                '<i class="fa-solid fa-sun"></i>';
-
-        }
-
-    });
-
-    /* =========================================================
-       BACK TO TOP
-       ========================================================= */
-
-    backTop.addEventListener(
-        "click",
-        () => {
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-    );
-
-    /* =========================================================
-       CONTACT FORM CLIENT VALIDATION
-       ========================================================= */
-
-    const contactForm =
-        document.getElementById("contactForm");
-
-    contactForm.addEventListener(
-        "submit",
-        event => {
-
-            const name =
-                document.getElementById("name");
-
-            const email =
-                document.getElementById("email");
-
-            const subject =
-                document.getElementById("subject");
-
-            const message =
-                document.getElementById("message");
-
-            let valid = true;
-
-            [name, email, subject, message]
-                .forEach(input => {
-
-                    input.style.borderColor = "";
-
-                });
-
-            if (name.value.trim().length < 2) {
-
-                name.style.borderColor =
-                    "#d66d80";
-
-                valid = false;
-
-            }
-
-            const emailRegex =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!emailRegex.test(email.value.trim())) {
-
-                email.style.borderColor =
-                    "#d66d80";
-
-                valid = false;
-
-            }
-
-            if (subject.value.trim().length < 3) {
-
-                subject.style.borderColor =
-                    "#d66d80";
-
-                valid = false;
-
-            }
-
-            if (message.value.trim().length < 10) {
-
-                message.style.borderColor =
-                    "#d66d80";
-
-                valid = false;
-
-            }
-
-            if (!valid) {
-
-                event.preventDefault();
-
-                const firstInvalid =
-                    document.querySelector(
-                        '.form-control[style*="border-color"]'
-                    );
-
-                if (firstInvalid) {
-
-                    firstInvalid.focus();
-
-                }
-
-            }
-
-        }
-    );
-
-    /* =========================================================
-       SUCCESS MESSAGE ANIMATION
-       ========================================================= */
-
-    const successMessage =
-        document.getElementById("formSuccess");
-
-    if (successMessage) {
-
-        successMessage.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }
-
 </script>
 
 </body>
+
 </html>
