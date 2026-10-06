@@ -8,12 +8,12 @@
 $site = [
     "name"      => "DOUAE KARMOUN",
     "title"     => "Stagiaire en développement web",
-    "email"     => "douae.karmoun@example.com",
-    "phone"     => "+212 6 00 00 00 00",
+    "email"     => "karmoundouae2007@gmail.vom",
+    "phone"     => "+212 6 98 65 80 64",
     "location"  => "Morocco",
     "github"    => "https://github.com/",
     "linkedin"  => "https://www.linkedin.com/",
-    "instagram" => "https://www.instagram.com/"
+    "instagram" => "https://www.instagram.com/km_duae?stkn=ZGd4N3Y1ZDJ4amZn"
 ];
 
 function e($value) {
