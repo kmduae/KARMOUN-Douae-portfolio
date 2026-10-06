@@ -57,7 +57,7 @@ $modules = [
                 'objectives' => 'Analyser les besoins du client et préparer les différentes étapes du projet.',
                 'technologies' => 'HTML, CSS, JavaScript, PHP, MySQL',
                 'skills' => 'Analyse, conception, organisation et préparation de projet',
-                'pdf' => 'agence.pdf'
+                'pdf' => 'docs/agence.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
@@ -66,7 +66,7 @@ $modules = [
                 'objectives' => 'Identifier les besoins et organiser la structure générale du site.',
                 'technologies' => 'HTML, CSS, JavaScript',
                 'skills' => 'Cahier des charges, wireframe et organisation',
-                'pdf' => 'figmaa.pdf'
+                'pdf' => 'docs/figmaa.pdf'
             ]
         ]
     ],
