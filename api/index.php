@@ -12,12 +12,12 @@ session_start();
 $config = [
     'name'       => 'DOUAE KARMOUN',
     'role'       => 'Stagiaire en développement web',
-    'email'      => 'douae.karmoun@example.com',
-    'phone'      => '+212 6 00 00 00 00',
+    'email'      => 'karmoundouae2007@gmail.com',
+    'phone'      => '+212 6 98 65 80 64',
     'country'    => 'Morocco',
     'github'     => 'https://github.com/',
     'linkedin'   => 'https://www.linkedin.com/',
-    'instagram'  => 'https://www.instagram.com/'
+    'instagram'  => 'https://www.instagram.com/km_duae?stkn=ZGd4N3Y1ZDJ4amZn'
 ];
 
 /*
@@ -57,16 +57,16 @@ $modules = [
                 'objectives' => 'Analyser les besoins du client et préparer les différentes étapes du projet.',
                 'technologies' => 'HTML, CSS, JavaScript, PHP, MySQL',
                 'skills' => 'Analyse, conception, organisation et préparation de projet',
-                'pdf' => 'pdf/M201_Atelier_1.pdf'
+                'file' => 'agence.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'Site vitrine professionnel',
+                'name' => 'Figma',
                 'description' => 'Préparation d’un site vitrine moderne pour une entreprise.',
                 'objectives' => 'Identifier les besoins et organiser la structure générale du site.',
                 'technologies' => 'HTML, CSS, JavaScript',
                 'skills' => 'Cahier des charges, wireframe et organisation',
-                'pdf' => 'pdf/M201_Atelier_2.pdf'
+                'file' => 'figmaa.pdf'
             ]
         ]
     ],
@@ -90,7 +90,7 @@ $modules = [
                 'objectives' => 'Comprendre les rôles, les tâches et les différentes étapes d’un projet agile.',
                 'technologies' => 'Trello, GitHub, Documentation',
                 'skills' => 'Travail en équipe, Scrum, organisation',
-                'pdf' => 'pdf/M202_Atelier_1.pdf'
+                'file' => 'pdf/M202_Atelier_1.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
@@ -99,7 +99,7 @@ $modules = [
                 'objectives' => 'Découper le projet en tâches et suivre son avancement.',
                 'technologies' => 'Trello, GitHub',
                 'skills' => 'Planification, communication et gestion des tâches',
-                'pdf' => 'pdf/M202_Atelier_2.pdf'
+                'file' => 'pdf/M202_Atelier_2.pdf'
             ]
         ]
     ],
@@ -124,7 +124,7 @@ $modules = [
                 'objectives' => 'Créer les tables, les relations et manipuler les données avec SQL.',
                 'technologies' => 'MySQL, SQL',
                 'skills' => 'Base de données, requêtes SQL, relations',
-                'pdf' => 'pdf/M203_Atelier_1.pdf'
+                'file' => 'pdf/M203_Atelier_1.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
@@ -133,7 +133,7 @@ $modules = [
                 'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
                 'technologies' => 'MySQL, SQL',
                 'skills' => 'Modélisation, SELECT, INSERT, UPDATE, DELETE',
-                'pdf' => 'pdf/M203_Atelier_2.pdf'
+                'file' => 'pdf/M203_Atelier_2.pdf'
             ]
         ]
     ],
@@ -158,7 +158,7 @@ $modules = [
                 'objectives' => 'Créer une interface responsive avec des interactions JavaScript.',
                 'technologies' => 'HTML, CSS, JavaScript, Bootstrap',
                 'skills' => 'Responsive Design, DOM, événements JavaScript',
-                'pdf' => 'pdf/M204_Atelier_1.pdf'
+                'file' => 'pdf/M204_Atelier_1.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
@@ -167,7 +167,7 @@ $modules = [
                 'objectives' => 'Afficher les informations dans une interface organisée et interactive.',
                 'technologies' => 'HTML, CSS, JavaScript, Bootstrap',
                 'skills' => 'UI Design, JavaScript, responsive design',
-                'pdf' => 'pdf/M204_Atelier_2.pdf'
+                'file' => 'pdf/M204_Atelier_2.pdf'
             ]
         ]
     ],
@@ -192,7 +192,7 @@ $modules = [
                 'objectives' => 'Comprendre le fonctionnement d’une application PHP connectée à MySQL.',
                 'technologies' => 'PHP, MySQL, HTML, CSS',
                 'skills' => 'CRUD, PHP, SQL, formulaires',
-                'pdf' => 'pdf/M205_Atelier_1.pdf'
+                'file' => 'pdf/M205_Atelier_1.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
@@ -201,7 +201,7 @@ $modules = [
                 'objectives' => 'Créer une application complète avec formulaires et base de données.',
                 'technologies' => 'PHP, MySQL, HTML, CSS, JavaScript',
                 'skills' => 'PHP, PDO, MySQL, validation des formulaires',
-                'pdf' => 'pdf/M205_Atelier_2.pdf'
+                'file' => 'pdf/M205_Atelier_2.pdf'
             ]
         ]
     ],
@@ -226,7 +226,7 @@ $modules = [
                 'objectives' => 'Comprendre les principes de base du Cloud et du déploiement.',
                 'technologies' => 'HTML, CSS, JavaScript, PHP',
                 'skills' => 'Déploiement, environnement web et services Cloud',
-                'pdf' => 'pdf/M206_Atelier_1.pdf'
+                'file' => 'pdf/M206_Atelier_1.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
@@ -235,7 +235,7 @@ $modules = [
                 'objectives' => 'Découvrir les étapes nécessaires pour rendre une application accessible en ligne.',
                 'technologies' => 'Git, GitHub, Hosting',
                 'skills' => 'Déploiement, versioning et configuration',
-                'pdf' => 'pdf/M206_Atelier_2.pdf'
+                'file' => 'pdf/M206_Atelier_2.pdf'
             ]
         ]
     ],
@@ -262,7 +262,7 @@ $modules = [
                 'objectives' => 'Mettre en pratique les compétences Front-End, Back-End et base de données.',
                 'technologies' => 'HTML, CSS, JavaScript, PHP, MySQL',
                 'skills' => 'Gestion complète d’un projet web',
-                'pdf' => 'pdf/M207_Atelier_1.pdf'
+                'file' => 'pdf/M207_Atelier_1.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
@@ -271,7 +271,7 @@ $modules = [
                 'objectives' => 'Concevoir, développer et présenter une application web fonctionnelle.',
                 'technologies' => 'HTML, CSS, JavaScript, PHP, MySQL',
                 'skills' => 'Analyse, développement, base de données et présentation',
-                'pdf' => 'pdf/M207_Atelier_2.pdf'
+                'file' => 'pdf/M207_Atelier_2.pdf'
             ]
         ]
     ],
@@ -297,7 +297,7 @@ $modules = [
                 'objectives' => 'Apprendre à présenter un sujet clairement devant un public.',
                 'technologies' => 'PowerPoint, Canva',
                 'skills' => 'Communication, présentation et prise de parole',
-                'pdf' => 'pdf/M208_Atelier_1.pdf'
+                'file' => 'pdf/M208_Atelier_1.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
@@ -306,7 +306,7 @@ $modules = [
                 'objectives' => 'Se préparer à la recherche d’un stage ou d’un emploi.',
                 'technologies' => 'Canva, Word',
                 'skills' => 'CV, communication et entretien professionnel',
-                'pdf' => 'pdf/M208_Atelier_2.pdf'
+                'file' => 'pdf/M208_Atelier_2.pdf'
             ]
         ]
     ]
