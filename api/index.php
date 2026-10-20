@@ -85,7 +85,7 @@ $modules = [
         'projects' => [
             [
                 'atelier' => 'Atelier 1',
-                'name' => 'Gestion de projet Scrum',
+                'name' => 'Planification d’un projet web',
                 'description' => 'Mise en place d’une organisation de projet selon Scrum.',
                 'objectives' => 'Comprendre les rôles, les tâches et les différentes étapes d’un projet agile.',
                 'technologies' => 'Trello, GitHub, Documentation',
@@ -94,7 +94,7 @@ $modules = [
             ],
             [
                 'atelier' => 'Atelier 2',
-                'name' => 'Planification d’un projet web',
+                'name' => 'Gestion de projet : Agile et scrum',
                 'description' => 'Création d’un planning pour organiser le développement d’une application.',
                 'objectives' => 'Découper le projet en tâches et suivre son avancement.',
                 'technologies' => 'Trello, GitHub',
