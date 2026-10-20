@@ -102,7 +102,7 @@ $modules = [
                 'pdf' => 'docs/scrum.pdf'
             ],[
                 'atelier' => 'Atelier 4',
-                'name' => 'Gestion de projet : Agile et scrum',
+                'name' => 'Github : Travail collaboratif',
                 'description' => 'Création d’un planning pour organiser le développement d’une application.',
                 'objectives' => 'Découper le projet en tâches et suivre son avancement.',
                 'technologies' => 'Trello, GitHub',
