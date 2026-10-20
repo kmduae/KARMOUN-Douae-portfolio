@@ -99,7 +99,7 @@ $modules = [
                 'objectives' => 'Découper le projet en tâches et suivre son avancement.',
                 'technologies' => 'Trello, GitHub',
                 'skills' => 'Planification, communication et gestion des tâches',
-                'pdf' => 'pdf/M202_Atelier_2.pdf'
+                'pdf' => 'docs/scrum.pdf'
             ]
         ]
     ],
