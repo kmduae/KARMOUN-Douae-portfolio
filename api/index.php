@@ -100,6 +100,14 @@ $modules = [
                 'technologies' => 'Trello, GitHub',
                 'skills' => 'Planification, communication et gestion des tâches',
                 'pdf' => 'docs/scrum.pdf'
+            ],[
+                'atelier' => 'Atelier 4',
+                'name' => 'Gestion de projet : Agile et scrum',
+                'description' => 'Création d’un planning pour organiser le développement d’une application.',
+                'objectives' => 'Découper le projet en tâches et suivre son avancement.',
+                'technologies' => 'Trello, GitHub',
+                'skills' => 'Github : Travail collaboratif',
+                'pdf' => 'https://atelier-eta-blond.vercel.app'
             ]
         ]
     ],
