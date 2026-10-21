@@ -108,6 +108,15 @@ $modules = [
                 'technologies' => 'Trello, GitHub',
                 'skills' => 'Github : Travail collaboratif',
                 'pdf' => 'https://atelier-eta-blond.vercel.app'
+            ],
+            [
+                'atelier' => 'Atelier 5',
+                'name' => 'Examen de fin de module',
+                'description' => 'Création d’un planning pour organiser le développement d’une application.',
+                'objectives' => 'Découper le projet en tâches et suivre son avancement.',
+                'technologies' => 'Trello, GitHub',
+                'skills' => 'Github : Travail collaboratif',
+                'pdf' => 'docs/efm.pdf'
             ]
         ]
     ],
