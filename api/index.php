@@ -120,7 +120,7 @@ $modules = [
             ],
             [
                 'atelier' => 'Atelier 6',
-                'name' => 'Examen de fin de module',
+                'name' => 'Atelier 6',
                 'description' => 'Création d’un planning pour organiser le développement d’une application.',
                 'objectives' => 'Découper le projet en tâches et suivre son avancement.',
                 'technologies' => 'Trello, GitHub',
