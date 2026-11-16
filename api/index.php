@@ -120,7 +120,7 @@ $modules = [
             ],
             [
                 'atelier' => 'Atelier 6',
-                'name' => 'Atelier 6',
+                'name' => 'PHP, MySQL Aiven, Cloudinary et Vercel',
                 'description' => 'Création d’un planning pour organiser le développement d’une application.',
                 'objectives' => 'Découper le projet en tâches et suivre son avancement.',
                 'technologies' => 'Trello, GitHub',
@@ -129,7 +129,7 @@ $modules = [
             ],
             [
                 'atelier' => 'Atelier 7',
-                'name' => 'Atelier 7',
+                'name' => 'GitLab CI/CD + SonarQube Cloud',
                 'description' => 'Création d’un planning pour organiser le développement d’une application.',
                 'objectives' => 'Découper le projet en tâches et suivre son avancement.',
                 'technologies' => 'Trello, GitHub',
@@ -154,7 +154,7 @@ $modules = [
         'projects' => [
             [
                 'atelier' => 'Atelier 1',
-                'name' => 'Gestion des employés',
+                'name' => 'SQL Complet – Requêtes, Calculs, Optimisation et Sécurité',
                 'description' => 'Création d’une base de données permettant de gérer des employés.',
                 'objectives' => 'Créer les tables, les relations et manipuler les données avec SQL.',
                 'technologies' => 'MySQL, SQL',
