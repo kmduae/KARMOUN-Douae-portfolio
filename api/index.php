@@ -126,6 +126,15 @@ $modules = [
                 'technologies' => 'Trello, GitHub',
                 'skills' => 'Github : Travail collaboratif',
                 'pdf' => 'https://atelier-6-lilac.vercel.app'
+            ],
+            [
+                'atelier' => 'Atelier 7',
+                'name' => 'Atelier 7',
+                'description' => 'Création d’un planning pour organiser le développement d’une application.',
+                'objectives' => 'Découper le projet en tâches et suivre son avancement.',
+                'technologies' => 'Trello, GitHub',
+                'skills' => 'Github : Travail collaboratif',
+                'pdf' => 'docs/at7.pdf'
             ]
         ]
     ],
@@ -150,7 +159,7 @@ $modules = [
                 'objectives' => 'Créer les tables, les relations et manipuler les données avec SQL.',
                 'technologies' => 'MySQL, SQL',
                 'skills' => 'Base de données, requêtes SQL, relations',
-                'pdf' => 'pdf/M203_Atelier_1.pdf'
+                'pdf' => 'docs/sql1.pdf'
             ],
             [
                 'atelier' => 'Atelier 2',
