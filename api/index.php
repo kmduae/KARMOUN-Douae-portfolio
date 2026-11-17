@@ -163,7 +163,7 @@ $modules = [
             ],
             [
                 'atelier' => 'Atelier 3',
-                'name' => 'Gestion des tâches',
+                'name' => 'Gestion d’un Centre de Formation ',
                 'description' => 'Base de données permettant de gérer les tâches d’un projet.',
                 'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
                 'technologies' => 'MySQL, SQL',
@@ -172,13 +172,22 @@ $modules = [
             ],
                         [
                 'atelier' => 'Atelier 4',
-                'name' => 'Gestion des tâches',
+                'name' => 'Les Curseurs en MySQL',
                 'description' => 'Base de données permettant de gérer les tâches d’un projet.',
                 'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
                 'technologies' => 'MySQL, SQL',
                 'skills' => 'Modélisation, SELECT, INSERT, UPDATE, DELETE',
-                'pdf' => 'docs/atl4sql.pdf'
-            ]
+                'pdf' => 'docs/rapport_atelier4.pdf'
+            ],
+                        [
+                'atelier' => 'Atelier 5',
+                'name' => 'My SQL ',
+                'description' => 'Base de données permettant de gérer les tâches d’un projet.',
+                'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
+                'technologies' => 'MySQL, SQL',
+                'skills' => 'Modélisation, SELECT, INSERT, UPDATE, DELETE',
+                'pdf' => 'docs/atl5sql.pdf'
+            ],
         ]
     ],
 
