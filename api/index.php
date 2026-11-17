@@ -188,6 +188,16 @@ $modules = [
                 'skills' => 'Modélisation, SELECT, INSERT, UPDATE, DELETE',
                 'pdf' => 'docs/atl5sql.pdf'
             ],
+                    [
+                'atelier' => 'Atelier 7',
+                'name' => 'Programmation avancée en SQL',
+                'description' => 'Base de données permettant de gérer les tâches d’un projet.',
+                'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
+                'technologies' => 'MySQL, SQL',
+                'skills' => 'Modélisation, SELECT, INSERT, UPDATE, DELETE',
+                'pdf' => 'docs/atl7sql.pdf'
+            ],
+
         ]
     ],
 
