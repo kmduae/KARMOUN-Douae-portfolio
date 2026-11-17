@@ -162,7 +162,16 @@ $modules = [
                 'pdf' => 'docs/sql1.pdf'
             ],
             [
-                'atelier' => 'Atelier 2',
+                'atelier' => 'Atelier 3',
+                'name' => 'Gestion des tâches',
+                'description' => 'Base de données permettant de gérer les tâches d’un projet.',
+                'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
+                'technologies' => 'MySQL, SQL',
+                'skills' => 'Modélisation, SELECT, INSERT, UPDATE, DELETE',
+                'pdf' => 'docs/at3sql.pdf'
+            ],
+                        [
+                'atelier' => 'Atelier 4',
                 'name' => 'Gestion des tâches',
                 'description' => 'Base de données permettant de gérer les tâches d’un projet.',
                 'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
