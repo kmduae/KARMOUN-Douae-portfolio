@@ -177,7 +177,7 @@ $modules = [
                 'objectives' => 'Créer une structure de données cohérente et effectuer différentes requêtes.',
                 'technologies' => 'MySQL, SQL',
                 'skills' => 'Modélisation, SELECT, INSERT, UPDATE, DELETE',
-                'pdf' => 'pdf/M203_Atelier_2.pdf'
+                'pdf' => 'docs/atl4sql.pdf'
             ]
         ]
     ],
